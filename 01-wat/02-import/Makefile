@@ -2,7 +2,7 @@
 
 build: import.wasm
 	
-import.wasm:
+import.wasm: import.wat
 	wat2wasm import.wat -o import.wasm
 
 .PHONY: clean run

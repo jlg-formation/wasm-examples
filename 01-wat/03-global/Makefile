@@ -2,7 +2,7 @@
 
 build: global.wasm
 	
-global.wasm:
+global.wasm: global.wat
 	wat2wasm global.wat -o global.wasm
 
 .PHONY: clean run
