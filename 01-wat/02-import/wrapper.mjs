@@ -21,17 +21,15 @@ const importObject = {
   },
 };
 
-(async () => {
-  // Load the WASM file and instantiate it.
-  const bytes = await readFile(__dirname + "/import.wasm");
-  const {
-    instance: {
-      exports: { tan },
-    },
-  } = await WebAssembly.instantiate(bytes, importObject);
+// Load the WASM file and instantiate it.
+const bytes = await readFile(__dirname + "/import.wasm");
+const {
+  instance: {
+    exports: { tan },
+  },
+} = await WebAssembly.instantiate(bytes, importObject);
 
-  // this should log the tan(PI/3)
-  console.log("tan(pi/3) = ");
-  // @ts-ignore
-  tan(Math.PI / 3);
-})();
+// this should log the tan(PI/3)
+console.log("tan(pi/3) = ");
+// @ts-ignore
+tan(Math.PI / 3);
