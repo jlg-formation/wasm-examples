@@ -1,11 +1,11 @@
 (module
     (import "console" "log" (func $log (param i32)))
     (func (export "loop") (param $start i32) (param $end i32)
-        (local $i i32) ;; create a local variable named $var
-        (local.set $i (local.get $start))  ;; set $var to 10
+        (local $i i32) ;; create a local variable named $i
+        (local.set $i (local.get $start))  ;; set $i to $start
         (
             loop $my_loop
-            ;; print $i
+            ;; log $i
             local.get $i
             call $log
 
