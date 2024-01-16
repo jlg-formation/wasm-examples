@@ -5,6 +5,9 @@ const instance = await createModule({
   print: (str) => {
     console.log("stdout: ", str);
   },
+  preRun: (instance) => {
+    instance.ENV.FOO = "BAR";
+  },
 });
 
 const test1 = () => {
