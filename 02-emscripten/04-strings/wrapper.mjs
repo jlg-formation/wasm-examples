@@ -9,6 +9,7 @@ const repeatTwice = (source, max) => {
   instance._repeatTwice(destinationPtr, max, sourcePtr);
   const destination = instance.UTF8ToString(destinationPtr, max);
   instance._free(destinationPtr);
+  instance._free(sourcePtr);
   return destination;
 };
 
