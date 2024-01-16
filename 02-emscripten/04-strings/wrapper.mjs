@@ -3,9 +3,6 @@ import createModule from "./dist/mylib.mjs";
 
 const instance = await createModule({});
 
-const source = "Hello";
-const max = 256;
-
 const repeatTwice = (source, max) => {
   const sourcePtr = instance.stringToNewUTF8(source);
   const destinationPtr = instance._malloc(max);
