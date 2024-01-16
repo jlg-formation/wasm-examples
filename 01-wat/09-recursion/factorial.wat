@@ -11,7 +11,7 @@
         (local.get $input)
         i32.const 1
         i32.sub ;; n-1
-        call $factorial ;; (n-1)!
+        call $factorial ;; (n-1)! the recursion is here
         i32.mul ;; n*((n-1)!)
     )
 )
