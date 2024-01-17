@@ -3,6 +3,7 @@
   (import "js" "table" (table 2 funcref))
   (func $pi (result f32) f32.const 3.14)
   (func $e (result f32) f32.const 2.71)
+  (func $gold (export "gold") (result f32) f32.const 1.618)
   (elem (i32.const 0) $pi $e)
 
   (func (export "callByIndex") (param $i i32) (result f32)

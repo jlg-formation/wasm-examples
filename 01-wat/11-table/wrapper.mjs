@@ -18,6 +18,8 @@ console.log("table.length: ", table.length);
 console.log("table.get(0);: ", table.get(0)());
 console.log("table.get(1);: ", table.get(1)());
 
+table.set(1, instance.exports.gold);
+
 // @ts-ignore
 console.log("callByIndex(0);: ", instance.exports.callByIndex(0));
 // @ts-ignore
