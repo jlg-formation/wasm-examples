@@ -1,4 +1,3 @@
-import assert from "node:assert";
 import { readFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { fileURLToPath } from "url";
