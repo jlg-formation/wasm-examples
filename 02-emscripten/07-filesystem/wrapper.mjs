@@ -1,4 +1,3 @@
-import { equal } from "assert";
 import createModule from "./dist/mylib.mjs";
 
 const instance = await createModule({
