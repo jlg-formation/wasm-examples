@@ -1,5 +1,12 @@
-// The entry file of your WebAssembly module.
+class Vector {
+  constructor(public x: f64, public y: f64) {}
 
-export function add(a: i32, b: i32): i32 {
-  return a + b;
+  module(): f64 {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+}
+
+export function module(x: f64, y: f64): f64 {
+  const v = new Vector(x, y);
+  return v.module();
 }
