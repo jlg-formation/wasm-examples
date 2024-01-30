@@ -1,4 +1,5 @@
-import assert from "assert";
-import { add } from "../build/debug.js";
-assert.strictEqual(add(1, 2), 3);
-console.log("ok");
+import { a, myArray } from "../build/debug.js";
+
+console.log("a: ", a.value);
+const myTypedArray = new Uint32Array(myArray.value);
+console.log("myTypedArray[0]: ", myTypedArray[0]);
