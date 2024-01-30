@@ -8,5 +8,6 @@ class Vector {
 
 export function module(x: f64, y: f64): f64 {
   const v = new Vector(x, y);
-  return v.module();
+  const result: f64 = v.module();
+  return result;
 }
