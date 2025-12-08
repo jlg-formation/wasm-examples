@@ -1,19 +1,20 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+# Image Node prête pour Codespaces (Node + npm + tools)
+FROM mcr.microsoft.com/devcontainers/javascript-node:22
 
 # Éviter les questions interactives
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Mise à jour et installation de wabt (wat2wasm)
+# Installation de wabt (wat2wasm, wasm2wat, etc.)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       wabt \
       ca-certificates \
-      git \
-      build-essential \
+      vim \
       curl \
-      vim && \
+      git \
+      build-essential && \
     rm -rf /var/lib/apt/lists/*
 
-# Utilisateur devcontainers standard
+# L'image utilise déjà l'utilisateur "vscode"
 USER vscode
 WORKDIR /workspaces

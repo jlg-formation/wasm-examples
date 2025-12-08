@@ -1,12 +1,11 @@
 {
-  "name": "wat2wasm-dev",
+  "name": "wat2wasm-node-dev",
   "build": {
     "dockerfile": "Dockerfile"
   },
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vscode.cpptools",
         "ms-vscode.vscode-typescript-next"
       ]
     }
