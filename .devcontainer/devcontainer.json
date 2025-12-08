@@ -1,8 +1,6 @@
 {
   "name": "wat2wasm-node-dev",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -10,5 +8,5 @@
       ]
     }
   },
-  "remoteUser": "vscode"
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y wabt"
 }
