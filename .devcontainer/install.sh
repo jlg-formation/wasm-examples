@@ -10,7 +10,9 @@ sudo apt-get install -y \
   build-essential \
   cmake \
   python3 \
-  python3-pip
+  python3-pip \
+  curl \
+  git
 
 echo "🔧 Installing Emscripten SDK (emsdk)..."
 if [ ! -d /opt/emsdk ]; then
@@ -23,6 +25,20 @@ cd /opt/emsdk
 ./emsdk install latest
 ./emsdk activate latest
 
+# Add env to future terminals
 echo "source /opt/emsdk/emsdk_env.sh" >> ~/.bashrc
 
-echo "✅ Installation complete."
+echo "🔧 Installing Rust via rustup..."
+# Install rustup if missing
+if ! command -v rustup >/dev/null 2>&1 ; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+fi
+
+# Ensure Rust is in PATH (for current terminal)
+source ~/.cargo/env
+
+echo "🔧 Installing useful Rust WASM targets..."
+rustup target add wasm32-unknown-unknown
+rustup target add wasm32-wasi || true
+
+echo "🎉 Installation complete!"
