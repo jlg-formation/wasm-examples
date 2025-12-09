@@ -7,8 +7,14 @@
       "extensions": [
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "whtouche.vscode-js-console-utils"
-      ]
+        "whtouche.vscode-js-console-utils",
+        "mhutchie.git-graph"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "files.eol": "\n"
+      }
     }
   },
 
