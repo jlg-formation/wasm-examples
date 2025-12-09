@@ -1,0 +1,2 @@
+# Pour éviter les problèmes de fin de ligne entre différents systèmes d'exploitation
+* text=auto eol=lf
