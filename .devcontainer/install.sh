@@ -40,7 +40,7 @@ fi
 
 echo "🔧 Installing useful Rust WASM targets..."
 rustup target add wasm32-unknown-unknown
-rustup target add wasm32-wasi || true
+rustup target add wasm32-wasip1
 
 echo "🔧 Installing Wasmtime..."
 # Prefer official installer so we have a recent version
@@ -48,12 +48,9 @@ if ! command -v wasmtime >/dev/null 2>&1 ; then
   curl https://wasmtime.dev/install.sh -sSf | bash
 fi
 
-# Add Wasmtime to PATH for current shell and future shells
+# Add Wasmtime to PATH for current shell
 if [ -d "$HOME/.wasmtime/bin" ]; then
   export PATH="$HOME/.wasmtime/bin:$PATH"
-  if ! grep -q '.wasmtime/bin' "$HOME/.bashrc" 2>/dev/null; then
-    echo 'export PATH="$HOME/.wasmtime/bin:$PATH"' >> "$HOME/.bashrc"
-  fi
 fi
 
 echo "🎉 Installation complete!"
