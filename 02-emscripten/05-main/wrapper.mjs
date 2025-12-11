@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { equal } from "assert";
 import createModule from "./dist/mylib.mjs";
 
@@ -20,6 +21,10 @@ const test1 = () => {
   const { argv, argc } = makeMainArgs(["truc", "bidule"]);
   const result = instance._main(argc, argv);
   // free
+  for (let i = 0; i < argc; i++) {
+    const cstr = instance.getValue(argv + i * 4, "i32");
+    instance._free(cstr);
+  }
   instance._free(argv);
   console.log("result: ", result);
   equal(result, 123);
