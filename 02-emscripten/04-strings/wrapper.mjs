@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { equal } from "assert";
 import createModule from "./dist/mylib.mjs";
 

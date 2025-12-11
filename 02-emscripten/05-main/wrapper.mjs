@@ -19,6 +19,8 @@ const makeMainArgs = (array) => {
 const test1 = () => {
   const { argv, argc } = makeMainArgs(["truc", "bidule"]);
   const result = instance._main(argc, argv);
+  // free
+  instance._free(argv);
   console.log("result: ", result);
   equal(result, 123);
 };
