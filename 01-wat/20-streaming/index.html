@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WebAssembly.instantiateStreaming Demo</title>
+    <style>
+      body {
+        font-family: system-ui;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 1rem;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      .success {
+        color: green;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WebAssembly.instantiateStreaming</h1>
+    <p>
+      Cette page démontre l'utilisation de
+      <code>instantiateStreaming</code> dans un navigateur.
+    </p>
+
+    <h2>Résultats</h2>
+    <pre id="output">Chargement...</pre>
+
+    <h2>Code</h2>
+    <pre>
+const { instance } = await WebAssembly.instantiateStreaming(
+    fetch("streaming.wasm")
+);
+
+const result = instance.exports.add(10, 32);
+console.log(result); // 42
+    </pre>
+
+    <script type="module">
+      const output = document.getElementById("output");
+
+      try {
+        // Méthode streaming - compile pendant le téléchargement
+        const start = performance.now();
+        const { instance } = await WebAssembly.instantiateStreaming(
+          fetch("streaming.wasm")
+        );
+        const end = performance.now();
+
+        const { add, getAnswer } = instance.exports;
+
+        let text = `✅ Module chargé avec instantiateStreaming\n`;
+        text += `⏱️  Temps: ${(end - start).toFixed(3)} ms\n\n`;
+        text += `Tests:\n`;
+        text += `  add(10, 32) = ${add(10, 32)}\n`;
+        text += `  getAnswer() = ${getAnswer()}\n`;
+
+        output.textContent = text;
+        output.className = "success";
+      } catch (error) {
+        output.textContent = `❌ Erreur: ${error.message}\n\n`;
+        output.textContent += `Assurez-vous que:\n`;
+        output.textContent += `1. Le serveur est lancé (make serve)\n`;
+        output.textContent += `2. Le fichier streaming.wasm existe (make build)\n`;
+        output.className = "error";
+      }
+    </script>
+  </body>
+</html>

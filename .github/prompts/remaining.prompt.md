@@ -68,21 +68,52 @@ Pour une question sans exemple :
 
 - Utilise les chemins relatifs depuis la racine du repo
 - Une question peut être couverte par plusieurs exemples
-- Propose des noms d'exemples cohérents avec la convention existante (numérotation)
 - Le fichier doit être en Markdown valide
+
+### Numérotation des exemples (CRITIQUE)
+
+Chaque dossier a sa **propre numérotation indépendante**. Les préfixes `NN-` doivent être **uniques au sein de chaque dossier**.
+
+#### Procédure obligatoire AVANT de créer un exemple :
+
+1. **Liste les fichiers/dossiers existants** du dossier cible avec `ls`
+2. **Identifie le numéro maximum** déjà utilisé (ex: si max = 17, prochain = 18)
+3. **Vérifie aussi le plan** `/remaining-examples.plan.md` pour les numéros réservés non encore créés
+4. **Utilise le numéro suivant** le plus élevé entre fichiers réels et plan
+
+#### Exemples de calcul :
+
+```
+01-wat/ contient: 01-export/, ..., 15-identifiers/, 16-sandbox/, 17-performance/
+→ Prochain numéro disponible : 18
+
+docs/ contient: 01-w3c.md, 02-bytecode.md, ..., 07-security.md
+→ Prochain numéro disponible : 08
+```
+
+#### Format de numérotation :
+
+- Dossiers d'exemples : `NN-slug/` (ex: `18-strings/`, `19-bigint/`)
+- Documentation : `NN-slug.md` (ex: `08-vscode-extensions.md`)
+
+#### Mise à jour du plan :
+
+Quand tu crées un exemple, **mets à jour le plan** avec le numéro réellement utilisé (pas celui initialement proposé s'il a changé).
 
 ## Types de contenus à créer
 
 Selon la nature de la question non couverte, propose le type de contenu approprié :
 
-| Type de question                | Contenu à créer | Exemple de chemin               |
-| ------------------------------- | --------------- | ------------------------------- |
-| Concept pratique WAT            | Exemple de code | `01-wat/16-strings/`            |
-| Concept pratique Emscripten     | Exemple de code | `02-emscripten/08-cmake/`       |
-| Concept pratique AssemblyScript | Exemple de code | `04-assemblyscript/04-arrays/`  |
-| Notion théorique/historique     | Documentation   | `docs/01-wasm-history.md`       |
-| Configuration/Installation      | Guide           | `docs/02-emscripten-install.md` |
-| Outils externes (VS Code, etc.) | Documentation   | `docs/03-vscode-extensions.md`  |
+| Type de question                | Contenu à créer | Exemple de format (NN = prochain numéro) |
+| ------------------------------- | --------------- | ---------------------------------------- |
+| Concept pratique WAT            | Exemple de code | `01-wat/NN-<slug>/`                      |
+| Concept pratique Emscripten     | Exemple de code | `02-emscripten/NN-<slug>/`               |
+| Concept pratique AssemblyScript | Exemple de code | `04-assemblyscript/NN-<slug>/`           |
+| Notion théorique/historique     | Documentation   | `docs/NN-<slug>.md`                      |
+| Configuration/Installation      | Guide           | `docs/NN-<slug>.md`                      |
+| Outils externes (VS Code, etc.) | Documentation   | `docs/NN-<slug>.md`                      |
+
+⚠️ **Important** : `NN` doit être calculé dynamiquement (voir section Numérotation).
 
 ## Principes de création des exemples
 
