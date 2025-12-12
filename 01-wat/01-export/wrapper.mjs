@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 const bytes = await readFile(__dirname + "/add.wasm");
 const obj = await WebAssembly.instantiate(bytes);
 
-const { integerAdd, floatAdd } = obj.instance.exports;
+const { integerAdd, floatAdd, integer64Add } = obj.instance.exports;
 
 const test1 = () => {
   const a = 12;
@@ -40,6 +40,16 @@ const test3 = () => {
   equal(result, a + b);
 };
 
+const test4 = () => {
+  const a = 13n;
+  const b = 25n;
+  // @ts-ignore
+  const result = integer64Add(a, b);
+  console.log(`${a} + ${b} = ${result}`);
+  equal(result, a + b);
+};
+
 test1();
 test2();
 test3();
+test4();

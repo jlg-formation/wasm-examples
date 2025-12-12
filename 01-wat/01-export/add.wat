@@ -8,4 +8,10 @@
         local.get $b
         f64.add
     )
+
+    (func $interger64_add (export "integer64Add") (param $a i64) (param $b i64) (result i64)
+        local.get $a
+        local.get $b
+        i64.add
+    )
 )
