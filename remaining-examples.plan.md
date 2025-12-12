@@ -83,17 +83,17 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | 9   | runtime_q9  | WASI filesystem               | ✅        | `03-wasi/01-hello/`            | -                           |
 | 10  | runtime_q10 | Gestion erreurs               | ✅        | `01-wat/21-error-handling/`    | -                           |
 | 11  | runtime_q11 | memory.buffer                 | ✅        | `01-wat/05-memory/wrapper.mjs` | -                           |
-| 12  | runtime_q12 | memory.grow()                 | ❌        | -                              | `01-wat/22-memory-grow/`    |
+| 12  | runtime_q12 | memory.grow()                 | ✅        | `01-wat/22-memory-grow/`       | -                           |
 | 13  | runtime_q13 | importObject                  | ✅        | `01-wat/02-import/wrapper.mjs` | -                           |
-| 14  | runtime_q14 | Passer string à WASM          | ❌        | -                              | `01-wat/23-strings/`        |
-| 15  | runtime_q15 | WebAssembly.validate()        | ❌        | -                              | `01-wat/24-validate/`       |
+| 14  | runtime_q14 | Passer string à WASM          | ✅        | `01-wat/23-strings/`           | -                           |
+| 15  | runtime_q15 | WebAssembly.validate()        | ✅        | `01-wat/24-validate/`          | -                           |
 | 16  | runtime_q16 | WebAssembly.Table()           | ✅        | `01-wat/11-table/wrapper.mjs`  | -                           |
 | 17  | runtime_q17 | instantiateStreaming avantage | ✅        | `01-wat/20-streaming/`         | -                           |
 | 18  | runtime_q18 | BigInt pour i64               | ❌        | -                              | `01-wat/25-bigint/`         |
 | 19  | runtime_q19 | Wasmer                        | ✅        | `docs/09-wasm-runtimes.md`     | -                           |
 | 20  | runtime_q20 | Vérifier support WASM         | ❌        | -                              | `01-wat/26-feature-detect/` |
 
-**Résumé Chapitre 3:** 15/20 couverts (75%)
+**Résumé Chapitre 3:** 18/20 couverts (90%)
 
 ---
 
@@ -190,11 +190,11 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | -------------------- | -------- | ------- | ----------- |
 | 1. Introduction WASM | 20       | 20      | 100%        |
 | 2. Langage WAT       | 20       | 20      | 100%        |
-| 3. Runtimes & API JS | 15       | 20      | 75%         |
+| 3. Runtimes & API JS | 18       | 20      | 90%         |
 | 4. AssemblyScript    | 8        | 20      | 40%         |
 | 5. Emscripten        | 10       | 20      | 50%         |
 | 6. Portage librairie | 5        | 20      | 25%         |
-| **TOTAL**            | **78**   | **120** | **65%**     |
+| **TOTAL**            | **81**   | **120** | **68%**     |
 
 ---
 
@@ -202,8 +202,8 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 
 ### Haute priorité (concepts fondamentaux)
 
-1. **`01-wat/23-strings/`** - Passage de chaînes de caractères entre JS et WASM
-2. **`01-wat/22-memory-grow/`** - Croissance dynamique de la mémoire
+1. ~~**`01-wat/23-strings/`** - Passage de chaînes de caractères entre JS et WASM~~ ✅
+2. ~~**`01-wat/22-memory-grow/`** - Croissance dynamique de la mémoire~~ ✅
 3. ~~**`01-wat/20-streaming/`** - Utilisation de `instantiateStreaming`~~ ✅
 4. ~~**`01-wat/21-error-handling/`** - Gestion des erreurs CompileError/LinkError/RuntimeError~~ ✅
 5. **`01-wat/25-bigint/`** - Utilisation des BigInt pour i64
