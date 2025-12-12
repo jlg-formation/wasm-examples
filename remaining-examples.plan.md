@@ -12,28 +12,28 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 
 ## Chapitre 1 : Introduction à WASM (j1-matin-intro)
 
-| #   | ID  | Question QCM                                | Couvert ? | Exemple existant                 | Exemple à créer               |
-| --- | --- | ------------------------------------------- | --------- | -------------------------------- | ----------------------------- |
-| 1   | q1  | Avantage de WASM pour les calculs intensifs | ✅        | `01-wat/01-export/`              | -                             |
-| 2   | q2  | Organisation W3C standardisation            | ✅        | `docs/01-w3c-standardisation.md` | -                             |
-| 3   | q3  | Signification de WASI                       | ✅        | `03-wasi/01-hello/`              | -                             |
-| 4   | q4  | Outil wat2wasm (WABT)                       | ✅        | `01-wat/*/Makefile`              | -                             |
-| 5   | q5  | Bytecode Alliance                           | ✅        | `docs/01-bytecode-alliance.md`   | -                             |
-| 6   | q6  | Sécurité sandbox                            | ✅        | `01-wat/16-sandbox/`             | -                             |
-| 7   | q7  | Portabilité des modules                     | ✅        | Tous les exemples                | -                             |
-| 8   | q8  | Format fichier .wasm                        | ✅        | `01-wat/01-export/`              | -                             |
-| 9   | q9  | Runtimes hors navigateur                    | ✅        | `03-wasi/01-hello/`              | -                             |
-| 10  | q10 | Problématique historique JS                 | ✅        | `docs/01-wasm-history.md`        | -                             |
-| 11  | q11 | Structure binaire module                    | ✅        | `01-wat/13-export-section/`      | -                             |
-| 12  | q12 | Isolation mémoire                           | ✅        | `01-wat/05-memory/`              | -                             |
-| 13  | q13 | Spécification Core                          | ✅        | `docs/01-wasm-core-spec.md`      | -                             |
-| 14  | q14 | Format de compilation cible                 | ✅        | `02-emscripten/02-library/`      | -                             |
-| 15  | q15 | asm.js prédécesseur                         | ✅        | `docs/01-asmjs-history.md`       | -                             |
-| 16  | q16 | Temps de démarrage WASM                     | ❌        | -                                | Benchmark exemple             |
-| 17  | q17 | Applications bénéficiaires                  | ❌        | -                                | `01-wat/16-performance-demo/` |
-| 18  | q18 | Accès DOM via JS                            | ✅        | `01-wat/02-import/`              | -                             |
-| 19  | q19 | Sécurité sandbox JS                         | ❌        | -                                | `docs/01-wasm-security.md`    |
-| 20  | q20 | Magic number 0x00 61 73 6D                  | ❌        | -                                | `01-wat/16-binary-format/`    |
+| #   | ID  | Question QCM                                | Couvert ? | Exemple existant                 | Exemple à créer            |
+| --- | --- | ------------------------------------------- | --------- | -------------------------------- | -------------------------- |
+| 1   | q1  | Avantage de WASM pour les calculs intensifs | ✅        | `01-wat/01-export/`              | -                          |
+| 2   | q2  | Organisation W3C standardisation            | ✅        | `docs/01-w3c-standardisation.md` | -                          |
+| 3   | q3  | Signification de WASI                       | ✅        | `03-wasi/01-hello/`              | -                          |
+| 4   | q4  | Outil wat2wasm (WABT)                       | ✅        | `01-wat/*/Makefile`              | -                          |
+| 5   | q5  | Bytecode Alliance                           | ✅        | `docs/01-bytecode-alliance.md`   | -                          |
+| 6   | q6  | Sécurité sandbox                            | ✅        | `01-wat/16-sandbox/`             | -                          |
+| 7   | q7  | Portabilité des modules                     | ✅        | Tous les exemples                | -                          |
+| 8   | q8  | Format fichier .wasm                        | ✅        | `01-wat/01-export/`              | -                          |
+| 9   | q9  | Runtimes hors navigateur                    | ✅        | `03-wasi/01-hello/`              | -                          |
+| 10  | q10 | Problématique historique JS                 | ✅        | `docs/01-wasm-history.md`        | -                          |
+| 11  | q11 | Structure binaire module                    | ✅        | `01-wat/13-export-section/`      | -                          |
+| 12  | q12 | Isolation mémoire                           | ✅        | `01-wat/05-memory/`              | -                          |
+| 13  | q13 | Spécification Core                          | ✅        | `docs/01-wasm-core-spec.md`      | -                          |
+| 14  | q14 | Format de compilation cible                 | ✅        | `02-emscripten/02-library/`      | -                          |
+| 15  | q15 | asm.js prédécesseur                         | ✅        | `docs/01-asmjs-history.md`       | -                          |
+| 16  | q16 | Temps de démarrage WASM                     | ✅        | `docs/01-wasm-startup-time.md`   | -                          |
+| 17  | q17 | Applications bénéficiaires                  | ✅        | `01-wat/16-performance-demo/`    | -                          |
+| 18  | q18 | Accès DOM via JS                            | ✅        | `01-wat/02-import/`              | -                          |
+| 19  | q19 | Sécurité sandbox JS                         | ✅        | `docs/01-wasm-security.md`       | -                          |
+| 20  | q20 | Magic number 0x00 61 73 6D                  | ❌        | -                                | `01-wat/16-binary-format/` |
 
 **Résumé Chapitre 1:** 9/20 couverts (45%)
 
