@@ -1,0 +1,1320 @@
+# FILE: /dist/qcm-wasm.yaml
+
+title: "QCM sur WebAssembly"
+
+chapters:
+  - id: "j1-matin-intro"
+    title: "Jour 1 – Matin : Introduction à WASM"
+    questions:
+      - id: "q1"
+        question: "Quel est le principal avantage de WebAssembly par rapport à JavaScript pour les calculs intensifs ?"
+        answers:
+          - "WebAssembly permet une exécution de code binaire proche des performances natives"
+          - "WebAssembly remplace totalement JavaScript dans les navigateurs modernes"
+          - "WebAssembly offre une meilleure gestion des événements DOM"
+          - "WebAssembly simplifie la syntaxe des fonctions asynchrones"
+        correct: 0
+        explanation: "WebAssembly exécute du code binaire précompilé, ce qui permet des performances proches du natif, particulièrement pour les calculs intensifs."
+
+      - id: "q2"
+        question: "Quelle organisation est responsable de la standardisation de WebAssembly ?"
+        answers:
+          - "ECMA International qui gère également JavaScript"
+          - "Le consortium W3C en collaboration avec les principaux éditeurs de navigateurs"
+          - "La fondation Mozilla exclusivement"
+          - "L'organisation ISO via son comité technique dédié au web"
+        correct: 1
+        explanation: "WebAssembly est un standard W3C, développé en collaboration avec les principaux éditeurs de navigateurs (Google, Mozilla, Microsoft, Apple)."
+
+      - id: "q3"
+        question: "Que signifie l'acronyme WASI dans l'écosystème WebAssembly ?"
+        answers:
+          - "WebAssembly Secure Integration pour la sécurité des modules"
+          - "WebAssembly System Interface permettant l'accès aux ressources système"
+          - "WebAssembly Standard Implementation définissant les spécifications"
+          - "WebAssembly Simplified Instructions pour optimiser le bytecode"
+        correct: 1
+        explanation: "WASI (WebAssembly System Interface) est une interface système standardisée permettant aux modules WASM d'accéder aux ressources système de manière portable et sécurisée."
+
+      - id: "q4"
+        question: "Quel outil permet de convertir un fichier WAT (format texte) en WASM (format binaire) ?"
+        answers:
+          - "La commande wasm2wat qui effectue la conversion textuelle"
+          - "L'outil wat2wasm fourni par le WebAssembly Binary Toolkit"
+          - "Le compilateur emcc d'Emscripten directement"
+          - "L'extension WebAssembly de Visual Studio Code"
+        correct: 1
+        explanation: "wat2wasm est l'outil du WebAssembly Binary Toolkit (WABT) qui compile le format texte WAT vers le format binaire WASM."
+
+      - id: "q5"
+        question: "Quelle est la Bytecode Alliance dans l'écosystème WebAssembly ?"
+        answers:
+          - "Un groupe de travail W3C dédié à la spécification du bytecode"
+          - "Une alliance d'entreprises et d'organisations promouvant des standards ouverts pour WASM et WASI"
+          - "Un consortium de navigateurs définissant les tests de conformité"
+          - "Une organisation académique de recherche sur la compilation"
+        correct: 1
+        explanation: "La Bytecode Alliance est une alliance industrielle (Mozilla, Fastly, Intel, Microsoft, etc.) qui développe des standards ouverts et des implémentations de référence pour WebAssembly et WASI."
+
+      - id: "q6"
+        question: "Comment la sécurité est-elle assurée dans l'exécution d'un module WebAssembly dans le navigateur ?"
+        answers:
+          - "Par signature cryptographique obligatoire de tous les modules"
+          - "Par exécution dans un environnement sandboxé avec accès mémoire contrôlé"
+          - "Par analyse statique du code source avant compilation"
+          - "Par validation manuelle des modules par les équipes de sécurité du navigateur"
+        correct: 1
+        explanation: "WebAssembly s'exécute dans un environnement sandboxé isolé, avec une mémoire linéaire bornée et des accès contrôlés, garantissant la sécurité sans compromettre les performances."
+
+      - id: "q7"
+        question: "Quelle caractéristique décrit le mieux la portabilité de WebAssembly ?"
+        answers:
+          - "Les modules WASM fonctionnent uniquement sur les navigateurs Chromium"
+          - "Un même module binaire peut s'exécuter sur différentes plateformes et navigateurs"
+          - "La portabilité est limitée aux systèmes d'exploitation 64 bits"
+          - "Les modules doivent être recompilés pour chaque environnement cible"
+        correct: 1
+        explanation: "WebAssembly est conçu pour être portable : un même fichier binaire .wasm peut s'exécuter sur tous les navigateurs majeurs et runtimes compatibles sans recompilation."
+
+      - id: "q8"
+        question: "Quel est le format de fichier d'un module WebAssembly compilé ?"
+        answers:
+          - "Un fichier texte avec l'extension .wat contenant des S-expressions"
+          - "Un fichier binaire avec l'extension .wasm contenant du bytecode"
+          - "Un fichier JSON avec l'extension .wasm décrivant les instructions"
+          - "Un fichier exécutable natif avec l'extension .exe ou .elf"
+        correct: 1
+        explanation: "Un module WebAssembly compilé est un fichier binaire avec l'extension .wasm, contenant du bytecode portable pouvant être exécuté par n'importe quel runtime compatible."
+
+      - id: "q9"
+        question: "Quel runtime permet d'exécuter des modules WebAssembly en dehors du navigateur ?"
+        answers:
+          - "Uniquement V8, le moteur JavaScript de Chrome"
+          - "Des runtimes comme wasmtime, wasmer ou wasm3 permettent cette exécution"
+          - "Exclusivement Node.js avec son module WebAssembly natif"
+          - "Aucun runtime ne permet l'exécution hors navigateur actuellement"
+        correct: 1
+        explanation: "Plusieurs runtimes autonomes (wasmtime, wasmer, wasm3) permettent d'exécuter des modules WASM hors navigateur, notamment pour des applications serveur ou embarquées."
+
+      - id: "q10"
+        question: "Quelle problématique historique du web WebAssembly vise-t-il principalement à résoudre ?"
+        answers:
+          - "Le manque de support des animations CSS dans les anciens navigateurs"
+          - "Les limitations de performance de JavaScript pour les applications intensives"
+          - "L'absence de standardisation des API de stockage local"
+          - "Les problèmes de compatibilité des polices web entre navigateurs"
+        correct: 1
+        explanation: "WebAssembly a été créé pour pallier les limitations de performance de JavaScript, notamment pour les jeux, la CAO, le traitement vidéo et autres applications nécessitant des calculs intensifs."
+
+      - id: "q11"
+        question: "Quelle est la structure de base d'un module WebAssembly au niveau binaire ?"
+        answers:
+          - "Un fichier texte structuré en sections JSON avec métadonnées"
+          - "Un format binaire organisé en sections (types, imports, fonctions, mémoire, exports)"
+          - "Un bytecode Java compatible avec la JVM standard"
+          - "Un fichier compressé contenant du code machine natif"
+        correct: 1
+        explanation: "Un module WASM binaire est structuré en sections distinctes : types, imports, fonctions, tables, mémoire, globals, exports, code, etc., permettant un parsing et une validation efficaces."
+
+      - id: "q12"
+        question: "Comment WebAssembly garantit-il l'isolation mémoire entre un module et son environnement hôte ?"
+        answers:
+          - "Par chiffrement AES de toutes les données en mémoire"
+          - "Par l'utilisation d'une mémoire linéaire bornée accessible uniquement via des indices validés"
+          - "Par exécution dans un processus système séparé"
+          - "Par virtualisation matérielle du CPU"
+        correct: 1
+        explanation: "WebAssembly utilise une mémoire linéaire (ArrayBuffer) avec des bornes vérifiées à chaque accès, empêchant tout débordement ou accès à la mémoire de l'hôte."
+
+      - id: "q13"
+        question: "Quel est le rôle principal de la spécification WebAssembly Core ?"
+        answers:
+          - "Définir les API JavaScript pour interagir avec les modules"
+          - "Décrire le format binaire, le jeu d'instructions et la sémantique d'exécution"
+          - "Spécifier les interfaces système WASI"
+          - "Standardiser les outils de compilation comme Emscripten"
+        correct: 1
+        explanation: "La spécification Core définit le format binaire (.wasm), le format textuel (.wat), le jeu d'instructions, les types et la sémantique d'exécution du standard WebAssembly."
+
+      - id: "q14"
+        question: "Pourquoi dit-on que WebAssembly est un format de compilation cible plutôt qu'un langage de programmation ?"
+        answers:
+          - "Parce qu'il ne peut être exécuté que sur des processeurs spécifiques"
+          - "Parce qu'il est conçu pour être généré par des compilateurs depuis des langages de haut niveau"
+          - "Parce qu'il ne supporte que les types numériques simples"
+          - "Parce qu'il nécessite une machine virtuelle Java pour fonctionner"
+        correct: 1
+        explanation: "WebAssembly est une cible de compilation : on n'écrit généralement pas directement en WASM, mais on compile depuis C, C++, Rust, Go, etc. vers ce format portable."
+
+      - id: "q15"
+        question: "Quelle technologie WebAssembly a-t-il remplacée comme solution de calcul performant dans les navigateurs ?"
+        answers:
+          - "Les applets Java qui étaient utilisées pour les applications interactives"
+          - "asm.js, un sous-ensemble optimisable de JavaScript développé par Mozilla"
+          - "ActiveX de Microsoft pour les composants natifs"
+          - "Flash Player d'Adobe pour les applications multimédias"
+        correct: 1
+        explanation: "WebAssembly est l'évolution d'asm.js, un sous-ensemble de JavaScript optimisable développé par Mozilla, qui a prouvé la viabilité d'exécuter du code compilé dans le navigateur."
+
+      - id: "q16"
+        question: "Quel avantage offre le temps de démarrage de WebAssembly par rapport à JavaScript ?"
+        answers:
+          - "WebAssembly ne nécessite aucun téléchargement car il est intégré au navigateur"
+          - "Le format binaire compact permet un parsing et une compilation plus rapides que le parsing JS"
+          - "WebAssembly s'exécute avant le chargement de la page HTML"
+          - "Le code WASM est mis en cache indéfiniment sans expiration"
+        correct: 1
+        explanation: "Le format binaire de WASM est conçu pour un décodage rapide en un seul passage, permettant une compilation et un démarrage plus rapides que le parsing du code source JavaScript."
+
+      - id: "q17"
+        question: "Quel type d'applications bénéficie le plus de l'utilisation de WebAssembly ?"
+        answers:
+          - "Les sites web statiques avec principalement du contenu textuel"
+          - "Les applications nécessitant des calculs intensifs comme les jeux 3D, l'édition vidéo ou la CAO"
+          - "Les formulaires web avec validation côté client"
+          - "Les pages de documentation avec navigation simple"
+        correct: 1
+        explanation: "WebAssembly excelle pour les applications CPU-intensives : jeux 3D, traitement d'images/vidéo, CAO, simulation physique, cryptographie, où les performances natives sont cruciales."
+
+      - id: "q18"
+        question: "Comment un module WebAssembly accède-t-il aux API du navigateur comme le DOM ?"
+        answers:
+          - "Directement via des instructions WASM natives pour manipuler le DOM"
+          - "Indirectement via des fonctions JavaScript importées qui servent de pont"
+          - "Par des appels système WASI dédiés aux navigateurs"
+          - "En incluant une copie du moteur de rendu dans le module"
+        correct: 1
+        explanation: "WebAssembly n'a pas d'accès direct au DOM. Il doit importer des fonctions JavaScript qui servent d'interface pour interagir avec les API web du navigateur."
+
+      - id: "q19"
+        question: "Quelle garantie de sécurité WebAssembly offre-t-il concernant l'exécution de code non fiable ?"
+        answers:
+          - "Tout code WASM est automatiquement signé par une autorité de certification"
+          - "Le code s'exécute dans la même sandbox que JavaScript avec les mêmes restrictions de sécurité"
+          - "WebAssembly désactive automatiquement les fonctionnalités dangereuses du processeur"
+          - "Un antivirus intégré analyse le bytecode avant exécution"
+        correct: 1
+        explanation: "WebAssembly s'exécute dans la même sandbox que JavaScript, respectant la same-origin policy et les autres mécanismes de sécurité du navigateur."
+
+      - id: "q20"
+        question: "Quel est le nombre magique (magic number) qui identifie un fichier binaire WebAssembly valide ?"
+        answers:
+          - "Les quatre octets 0x7F 0x45 0x4C 0x46 identifiant le format ELF"
+          - "Les quatre octets 0x00 0x61 0x73 0x6D correspondant à '\\0asm' en ASCII"
+          - "Les quatre octets 0x4D 0x5A qui identifient les exécutables Windows"
+          - "Les quatre octets 0x89 0x50 0x4E 0x47 utilisés par le format PNG"
+        correct: 1
+        explanation: "Tout fichier WASM valide commence par les octets 0x00 0x61 0x73 0x6D ('\\0asm'), suivis du numéro de version, permettant une identification rapide du format."
+
+  - id: "j1-aprem-wat"
+    title: "Jour 1 – Après-midi : Le langage textuel WAT"
+    questions:
+      - id: "wat_q1"
+        question: "Quelle est la caractéristique principale du format WAT par rapport au format WASM ?"
+        answers:
+          - "WAT est un format textuel lisible par l'humain, tandis que WASM est binaire"
+          - "WAT est plus performant à l'exécution que le format WASM binaire"
+          - "WAT ne peut décrire que des fonctions simples sans paramètres"
+          - "WAT est le format utilisé uniquement pour le débogage en production"
+        correct: 0
+        explanation: "WAT (WebAssembly Text Format) est la représentation textuelle lisible de WASM, utilisant des S-expressions, facilitant l'écriture, la lecture et le débogage de modules."
+
+      - id: "wat_q2"
+        question: "Comment déclare-t-on une fonction exportée nommée 'add' avec deux paramètres i32 en WAT ?"
+        answers:
+          - '(func (export "add") (param i32 i32) (result i32) ...)'
+          - "(function add (params i32, i32) (returns i32) ...)"
+          - "(def add [i32 i32] -> i32 ...)"
+          - "(export func add (i32 i32) : i32 ...)"
+        correct: 0
+        explanation: 'En WAT, on utilise (func (export "name") (param types) (result type) body) pour déclarer et exporter une fonction en une seule déclaration.'
+
+      - id: "wat_q3"
+        question: "Quel est le modèle d'exécution utilisé par WebAssembly pour évaluer les instructions ?"
+        answers:
+          - "Un modèle basé sur une pile (stack machine) où les opérandes sont empilées/dépilées"
+          - "Un modèle basé sur des registres comme les processeurs x86 modernes"
+          - "Un modèle basé sur des variables nommées avec affectation directe"
+          - "Un modèle basé sur le passage de messages entre fonctions"
+        correct: 0
+        explanation: "WebAssembly utilise une machine à pile : les instructions consomment des valeurs depuis la pile et y poussent leurs résultats."
+
+      - id: "wat_q4"
+        question: "Comment déclare-t-on une mémoire linéaire d'une page (64 Ko) en WAT ?"
+        answers:
+          - "(memory 1)"
+          - "(mem 64kb)"
+          - "(linear-memory (size 1))"
+          - "(alloc memory 65536)"
+        correct: 0
+        explanation: "La déclaration (memory 1) crée une mémoire linéaire d'une page (64 Ko par page). On peut aussi spécifier un maximum : (memory 1 10)."
+
+      - id: "wat_q5"
+        question: "Quelle instruction WAT permet de charger un entier 32 bits depuis la mémoire linéaire ?"
+        answers:
+          - "i32.load"
+          - "memory.get i32"
+          - "load32"
+          - "mem.read_i32"
+        correct: 0
+        explanation: "L'instruction i32.load consomme une adresse depuis la pile et pousse la valeur 32 bits lue à cette adresse mémoire."
+
+      - id: "wat_q6"
+        question: "Comment importe-t-on une fonction 'log' depuis un module JavaScript nommé 'console' en WAT ?"
+        answers:
+          - '(import "console" "log" (func $log (param i32)))'
+          - '(require "console.log" as $log (i32))'
+          - "(use console::log func (param i32))"
+          - '(extern func $log from "console.log" (i32))'
+        correct: 0
+        explanation: 'La syntaxe (import "module" "name" (func $alias (signature))) permet d''importer des fonctions depuis l''environnement hôte JavaScript.'
+
+      - id: "wat_q7"
+        question: "Quelle est la syntaxe correcte pour une boucle infinie en WAT ?"
+        answers:
+          - "(loop $boucle ... (br $boucle))"
+          - "(while true ... )"
+          - "(forever $boucle ...)"
+          - "(repeat ... until false)"
+        correct: 0
+        explanation: "En WAT, (loop $label ...) définit un bloc de boucle. L'instruction (br $label) effectue un saut vers le début de la boucle, créant une itération."
+
+      - id: "wat_q8"
+        question: "Que se passe-t-il lorsqu'une instruction 'unreachable' est exécutée en WebAssembly ?"
+        answers:
+          - "Une trap est déclenchée, interrompant immédiatement l'exécution du module"
+          - "L'instruction est ignorée et l'exécution continue normalement"
+          - "Le module est rechargé depuis le début avec un état réinitialisé"
+          - "Une valeur nulle est retournée à la fonction appelante"
+        correct: 0
+        explanation: "L'instruction unreachable déclenche une trap (piège), une erreur d'exécution qui interrompt immédiatement le module WASM."
+
+      - id: "wat_q9"
+        question: "Comment déclare-t-on une variable globale mutable initialisée à 42 en WAT ?"
+        answers:
+          - "(global $compteur (mut i32) (i32.const 42))"
+          - "(var global $compteur i32 = 42)"
+          - "(define-global $compteur mutable 42)"
+          - "(global mutable $compteur (init 42))"
+        correct: 0
+        explanation: "La syntaxe (global $name (mut type) (init)) déclare une globale mutable. Sans 'mut', la globale serait immutable."
+
+      - id: "wat_q10"
+        question: "Quelle est la différence entre les blocs 'block' et 'loop' en WAT ?"
+        answers:
+          - "'br' vers un block saute à la fin du bloc, tandis que 'br' vers un loop saute au début"
+          - "'block' ne peut contenir que des expressions, 'loop' accepte des instructions"
+          - "'loop' s'exécute toujours au moins deux fois, 'block' une seule fois"
+          - "'block' est déprécié en faveur de 'loop' dans les versions récentes"
+        correct: 0
+        explanation: "Un br vers un label de block saute après le bloc (sortie), tandis qu'un br vers un label de loop saute au début du bloc (répétition)."
+
+      - id: "wat_q11"
+        question: "Quelle extension VS Code est recommandée pour le développement en WAT ?"
+        answers:
+          - "L'extension WebAssembly de la marketplace VS Code offrant coloration syntaxique et validation"
+          - "L'extension JavaScript standard qui inclut le support WAT nativement"
+          - "L'extension C/C++ de Microsoft avec le plugin WAT activé"
+          - "Aucune extension n'existe, VS Code supporte WAT nativement"
+        correct: 0
+        explanation: "Des extensions comme 'WebAssembly' ou 'wat' de la marketplace VS Code offrent la coloration syntaxique, l'autocomplétion et la validation pour les fichiers WAT."
+
+      - id: "wat_q12"
+        question: "Comment effectue-t-on une addition de deux entiers i32 en WAT ?"
+        answers:
+          - "En empilant les deux valeurs puis en utilisant l'instruction i32.add"
+          - "En utilisant la syntaxe (add i32 valeur1 valeur2) directement"
+          - "En appelant la fonction intrinsèque __wasm_add(a, b)"
+          - "En déclarant une variable résultat puis en affectant a + b"
+        correct: 0
+        explanation: "WebAssembly est une machine à pile : on empile les opérandes avec i32.const, puis i32.add consomme les deux valeurs du sommet et pousse le résultat."
+
+      - id: "wat_q13"
+        question: "Quelle instruction permet de stocker une valeur i32 à une adresse mémoire en WAT ?"
+        answers:
+          - "i32.store avec l'adresse et la valeur sur la pile"
+          - "memory.set avec trois paramètres (adresse, valeur, type)"
+          - "store32 suivi de l'adresse entre parenthèses"
+          - "mem.write(adresse, valeur) comme appel de fonction"
+        correct: 0
+        explanation: "L'instruction i32.store consomme une adresse et une valeur depuis la pile, puis écrit la valeur 32 bits à l'adresse spécifiée dans la mémoire linéaire."
+
+      - id: "wat_q14"
+        question: "Quelle est la fonction de l'instruction 'br_if' en WAT ?"
+        answers:
+          - "Effectuer un saut conditionnel vers un label si la valeur au sommet de la pile est non nulle"
+          - "Créer une boucle conditionnelle qui s'exécute tant que la condition est vraie"
+          - "Déclarer une instruction if-else avec plusieurs branches possibles"
+          - "Interrompre l'exécution du module si une condition d'erreur est détectée"
+        correct: 0
+        explanation: "br_if effectue un branchement conditionnel : elle dépile une valeur i32 et saute vers le label spécifié uniquement si cette valeur est non nulle."
+
+      - id: "wat_q15"
+        question: "Comment retourne-t-on une valeur depuis une fonction WAT ?"
+        answers:
+          - "La valeur au sommet de la pile à la fin de la fonction est automatiquement retournée"
+          - "En utilisant explicitement l'instruction 'return valeur' avec la valeur"
+          - "En affectant la valeur à une variable spéciale nommée $result"
+          - "En appelant la fonction intrinsèque __wasm_return(valeur)"
+        correct: 0
+        explanation: "En WAT, la valeur de retour est simplement la valeur restante sur la pile à la fin de l'exécution de la fonction, correspondant au type déclaré dans (result)."
+
+      - id: "wat_q16"
+        question: "Quels sont les quatre types numériques de base supportés par WebAssembly ?"
+        answers:
+          - "i32, i64, f32 et f64 (entiers et flottants 32/64 bits)"
+          - "int, long, float et double comme en C/C++"
+          - "number, bigint, float et decimal comme en JavaScript"
+          - "byte, short, int et long pour les différentes tailles d'entiers"
+        correct: 0
+        explanation: "WebAssembly supporte quatre types numériques : i32 (entier 32 bits), i64 (entier 64 bits), f32 (flottant 32 bits) et f64 (flottant 64 bits)."
+
+      - id: "wat_q17"
+        question: "Comment déclare-t-on une variable locale dans une fonction WAT ?"
+        answers:
+          - "Avec (local $nom type) dans la signature de la fonction"
+          - "Avec (var $nom type) à l'intérieur du corps de la fonction"
+          - "Avec (let $nom type value) comme en JavaScript moderne"
+          - "Les variables locales n'existent pas, seuls les paramètres sont disponibles"
+        correct: 0
+        explanation: "Les variables locales sont déclarées avec (local $name type) dans la fonction. Elles sont initialisées à zéro et accessibles via local.get et local.set."
+
+      - id: "wat_q18"
+        question: "Quelle instruction permet d'appeler une fonction définie dans le même module WAT ?"
+        answers:
+          - "L'instruction call suivie de l'identifiant ou index de la fonction"
+          - "L'instruction invoke avec le nom de la fonction entre guillemets"
+          - "L'instruction exec suivi du pointeur vers la fonction"
+          - "Un simple appel par nom comme en JavaScript : nomFonction(args)"
+        correct: 0
+        explanation: "L'instruction call $nom_fonction ou call index appelle une fonction du module. Les arguments doivent être préalablement empilés."
+
+      - id: "wat_q19"
+        question: "Que représente une table dans un module WebAssembly ?"
+        answers:
+          - "Un tableau de références (fonctions ou externref) permettant les appels indirects"
+          - "Une structure de données clé-valeur pour stocker des configurations"
+          - "Un alias pour la mémoire linéaire avec un accès plus rapide"
+          - "Une liste des fonctions exportées avec leurs signatures"
+        correct: 0
+        explanation: "Une table WebAssembly est un tableau de références typées (funcref, externref) utilisé principalement pour les appels de fonctions indirects via call_indirect."
+
+      - id: "wat_q20"
+        question: "Comment effectue-t-on un appel de fonction indirect via une table en WAT ?"
+        answers:
+          - "Avec call_indirect en spécifiant la signature et l'index de la fonction dans la table"
+          - "Avec invoke_table suivi du nom de la table et de l'index"
+          - "Avec call $table[$index] comme notation d'accès tableau"
+          - "Les appels indirects ne sont pas possibles en WebAssembly"
+        correct: 0
+        explanation: "call_indirect permet d'appeler une fonction via son index dans une table, en vérifiant que sa signature correspond au type attendu, sinon une trap est déclenchée."
+
+  - id: "j2-matin-runtimes"
+    title: "Jour 2 – Matin : Runtimes WASM et API JavaScript"
+    questions:
+      - id: "runtime_q1"
+        question: "Quel est le rôle principal d'un runtime WebAssembly ?"
+        answers:
+          - "Fournir un environnement d'exécution capable de charger, valider et exécuter des modules WASM"
+          - "Compiler le code source C/C++ directement en instructions machine natives"
+          - "Servir de serveur web pour distribuer les fichiers WASM aux navigateurs"
+          - "Convertir automatiquement le code JavaScript en bytecode WebAssembly"
+        correct: 0
+        explanation: "Un runtime WASM charge le bytecode, le valide pour la sécurité, le compile en code machine et l'exécute, que ce soit dans un navigateur ou hors navigateur."
+
+      - id: "runtime_q2"
+        question: "Quelle méthode JavaScript permet de compiler un module WebAssembly de manière asynchrone ?"
+        answers:
+          - "WebAssembly.compile() qui retourne une Promise résolue avec le module compilé"
+          - "WebAssembly.load() qui charge et compile le fichier en une seule opération"
+          - "WebAssembly.create() qui instancie directement le module sans compilation"
+          - "WebAssembly.parse() qui analyse le bytecode et retourne un objet module"
+        correct: 0
+        explanation: "WebAssembly.compile(bytes) prend un ArrayBuffer ou TypedArray contenant le bytecode et retourne une Promise qui se résout en un WebAssembly.Module."
+
+      - id: "runtime_q3"
+        question: "Comment instancie-t-on un module WebAssembly avec des imports en JavaScript ?"
+        answers:
+          - "Avec WebAssembly.instantiate(module, importObject) fournissant les dépendances"
+          - "Avec WebAssembly.create(module).withImports(importObject) en chaînage"
+          - "Avec new WebAssembly.Instance(module) puis module.setImports(obj)"
+          - "Les imports sont automatiquement résolus depuis le scope global JavaScript"
+        correct: 0
+        explanation: "WebAssembly.instantiate() accepte un module compilé et un objet d'imports contenant les fonctions, mémoires, tables et globales requises par le module."
+
+      - id: "runtime_q4"
+        question: "Quel runtime WebAssembly est développé par la Bytecode Alliance et écrit en Rust ?"
+        answers:
+          - "Wasmtime, conçu pour être sécurisé, rapide et conforme aux standards"
+          - "Wasm3, optimisé pour les environnements embarqués à faible mémoire"
+          - "V8, le moteur JavaScript de Google Chrome intégrant le support WASM"
+          - "SpiderMonkey, le moteur JavaScript de Mozilla Firefox"
+        correct: 0
+        explanation: "Wasmtime est un runtime WASM standalone développé par la Bytecode Alliance, écrit en Rust, avec un focus sur la sécurité et la conformité aux spécifications."
+
+      - id: "runtime_q5"
+        question: "Comment accède-t-on aux fonctions exportées d'une instance WebAssembly en JavaScript ?"
+        answers:
+          - "Via la propriété instance.exports qui contient toutes les exportations du module"
+          - "Via la méthode instance.getExport('nomFonction') pour chaque fonction"
+          - "Via WebAssembly.getExports(instance) qui retourne un tableau de fonctions"
+          - "Les fonctions sont automatiquement ajoutées à l'objet window global"
+        correct: 0
+        explanation: "Après instanciation, instance.exports est un objet contenant toutes les exportations du module (fonctions, mémoire, tables, globales) accessibles par leur nom."
+
+      - id: "runtime_q6"
+        question: "Quelle est la méthode recommandée pour charger et instancier un module WASM depuis une URL ?"
+        answers:
+          - "WebAssembly.instantiateStreaming(fetch(url), imports) pour un chargement optimisé"
+          - "WebAssembly.loadFromURL(url, imports) pour un chargement direct"
+          - "fetch(url).then(r => WebAssembly.compile(r)) uniquement sans streaming"
+          - "new WebAssembly.Module(url) avec l'URL passée directement en paramètre"
+        correct: 0
+        explanation: "instantiateStreaming permet de compiler le module pendant le téléchargement, offrant de meilleures performances que de charger tout le fichier avant compilation."
+
+      - id: "runtime_q7"
+        question: "Comment partage-t-on de la mémoire entre JavaScript et un module WebAssembly ?"
+        answers:
+          - "En créant un WebAssembly.Memory et en le passant dans l'objet imports"
+          - "La mémoire est automatiquement partagée via le garbage collector JavaScript"
+          - "En utilisant SharedArrayBuffer qui est toujours compatible avec WASM"
+          - "En exportant un pointeur depuis le module vers la mémoire JavaScript"
+        correct: 0
+        explanation: "On crée un WebAssembly.Memory en JavaScript, on le passe en import au module WASM, et on accède au même ArrayBuffer depuis les deux côtés."
+
+      - id: "runtime_q8"
+        question: "Quel runtime WebAssembly est spécialement optimisé pour les microcontrôleurs et l'IoT ?"
+        answers:
+          - "Wasm3, un interpréteur compact et rapide conçu pour les environnements contraints"
+          - "Wasmtime, grâce à son compilation JIT très efficace en mémoire"
+          - "Wasmer, avec son mode de compilation universel pour toutes plateformes"
+          - "Node.js, via son module wasm natif optimisé pour l'embarqué"
+        correct: 0
+        explanation: "Wasm3 est un interpréteur WASM ultra-compact (quelques Ko) et rapide, idéal pour les microcontrôleurs, Arduino, et autres environnements à ressources limitées."
+
+      - id: "runtime_q9"
+        question: "Quelle interface WASI permet à un module WebAssembly d'accéder au système de fichiers ?"
+        answers:
+          - "Les fonctions fd_read, fd_write et path_open de l'API WASI filesystem"
+          - "L'import automatique de l'objet fs de Node.js dans le module"
+          - "L'API FileSystem Access du navigateur directement accessible depuis WASM"
+          - "WASI ne permet pas l'accès au système de fichiers pour des raisons de sécurité"
+        correct: 0
+        explanation: "WASI définit des fonctions standardisées (fd_read, fd_write, path_open, etc.) permettant aux modules WASM d'interagir avec le système de fichiers de manière portable."
+
+      - id: "runtime_q10"
+        question: "Comment gère-t-on les erreurs lors de l'instanciation d'un module WebAssembly en JavaScript ?"
+        answers:
+          - "Avec try/catch ou .catch() sur la Promise, les erreurs étant des WebAssembly.CompileError ou LinkError"
+          - "Les erreurs sont silencieusement ignorées et instance vaut null en cas d'échec"
+          - "Avec un callback d'erreur passé en troisième paramètre de instantiate()"
+          - "Via l'événement global 'wasmerror' sur l'objet window du navigateur"
+        correct: 0
+        explanation: "Les erreurs de compilation lèvent WebAssembly.CompileError, les erreurs de liaison WebAssembly.LinkError, et les erreurs d'exécution WebAssembly.RuntimeError."
+
+      - id: "runtime_q11"
+        question: "Quelle propriété de WebAssembly.Memory permet d'accéder aux données brutes depuis JavaScript ?"
+        answers:
+          - "La propriété buffer qui retourne l'ArrayBuffer sous-jacent de la mémoire"
+          - "La propriété data qui retourne un Uint8Array de la mémoire complète"
+          - "La méthode getBytes() qui copie la mémoire dans un nouveau tableau"
+          - "La propriété raw qui donne un accès direct aux octets natifs"
+        correct: 0
+        explanation: "memory.buffer retourne l'ArrayBuffer représentant la mémoire linéaire, qu'on peut ensuite wrapper dans des TypedArrays pour lire/écrire des données."
+
+      - id: "runtime_q12"
+        question: "Comment redimensionne-t-on la mémoire d'un module WebAssembly depuis JavaScript ?"
+        answers:
+          - "En appelant memory.grow(n) où n est le nombre de pages (64 Ko) à ajouter"
+          - "En réassignant memory.buffer à un ArrayBuffer plus grand"
+          - "En créant une nouvelle WebAssembly.Memory et en copiant les données"
+          - "La mémoire WebAssembly ne peut pas être redimensionnée après création"
+        correct: 0
+        explanation: "memory.grow(n) ajoute n pages de 64 Ko à la mémoire. Attention : buffer est invalidé après grow(), il faut récupérer une nouvelle référence."
+
+      - id: "runtime_q13"
+        question: "Quel est le rôle de l'objet importObject lors de l'instanciation d'un module WASM ?"
+        answers:
+          - "Fournir les fonctions, mémoires, tables et globales que le module importe"
+          - "Définir les options de compilation comme le niveau d'optimisation"
+          - "Spécifier les permissions de sécurité accordées au module"
+          - "Configurer le comportement du garbage collector pour le module"
+        correct: 0
+        explanation: "importObject contient les dépendances externes du module, organisées par namespace (ex: {env: {memory: mem, log: fn}}), correspondant aux déclarations import du module."
+
+      - id: "runtime_q14"
+        question: "Comment passe-t-on une chaîne de caractères à une fonction WebAssembly depuis JavaScript ?"
+        answers:
+          - "En encodant la chaîne en UTF-8, l'écrivant dans la mémoire partagée et passant le pointeur"
+          - "En utilisant directement le type string natif de WebAssembly"
+          - "En convertissant la chaîne en nombre via parseInt avant l'appel"
+          - "Les chaînes ne peuvent pas être passées à WebAssembly, uniquement des nombres"
+        correct: 0
+        explanation: "WebAssembly ne supporte que les types numériques. On encode la chaîne en UTF-8, on l'écrit dans la mémoire linéaire, puis on passe l'adresse et la longueur."
+
+      - id: "runtime_q15"
+        question: "Quelle méthode permet de valider un module WebAssembly sans le compiler ?"
+        answers:
+          - "WebAssembly.validate(bytes) qui retourne true si le bytecode est valide"
+          - "WebAssembly.check(bytes) qui lance une exception si invalide"
+          - "WebAssembly.verify(bytes) qui retourne un rapport de validation détaillé"
+          - "La validation est toujours effectuée pendant la compilation, pas séparément"
+        correct: 0
+        explanation: "WebAssembly.validate(bytes) vérifie rapidement si le bytecode est bien formé et valide selon la spec, sans effectuer la compilation complète."
+
+      - id: "runtime_q16"
+        question: "Comment crée-t-on une table WebAssembly partagée entre JavaScript et un module WASM ?"
+        answers:
+          - "Avec new WebAssembly.Table({initial: n, element: 'anyfunc'}) passée en import"
+          - "Les tables sont automatiquement créées par le module lors de l'instanciation"
+          - "Avec WebAssembly.createTable(size) qui retourne une table vide"
+          - "En exportant une table depuis le module puis en y accédant via exports"
+        correct: 0
+        explanation: "On crée une WebAssembly.Table en JavaScript avec la taille et le type d'éléments, puis on la passe dans importObject pour la partager avec le module."
+
+      - id: "runtime_q17"
+        question: "Quel avantage offre l'API WebAssembly.instantiateStreaming par rapport à instantiate ?"
+        answers:
+          - "La compilation commence pendant le téléchargement, réduisant le temps total de chargement"
+          - "Elle permet d'instancier plusieurs modules en parallèle automatiquement"
+          - "Elle active le mode debug automatiquement pour faciliter le développement"
+          - "Elle compresse automatiquement le module pour réduire la bande passante"
+        correct: 0
+        explanation: "instantiateStreaming compile le module au fur et à mesure du téléchargement (streaming compilation), offrant un démarrage plus rapide que de charger puis compiler."
+
+      - id: "runtime_q18"
+        question: "Comment appelle-t-on une fonction exportée qui prend des paramètres i64 depuis JavaScript ?"
+        answers:
+          - "En passant des BigInt, le type JavaScript compatible avec les entiers 64 bits WASM"
+          - "En passant deux nombres i32 représentant les parties haute et basse"
+          - "En utilisant la notation spéciale i64(valeur) pour le wrapping"
+          - "Les fonctions i64 ne sont pas appelables depuis JavaScript directement"
+        correct: 0
+        explanation: "Depuis l'introduction de BigInt en JavaScript, les valeurs i64 de WebAssembly sont automatiquement converties vers/depuis BigInt lors des appels."
+
+      - id: "runtime_q19"
+        question: "Quel runtime WebAssembly est développé par Wasmer Inc. et supporte plusieurs backends de compilation ?"
+        answers:
+          - "Wasmer, qui supporte LLVM, Cranelift et Singlepass comme backends"
+          - "Wasmtime, exclusivement basé sur le backend Cranelift"
+          - "Wasm3, qui utilise un interpréteur sans compilation JIT"
+          - "WasmEdge, spécialisé pour les environnements cloud et edge"
+        correct: 0
+        explanation: "Wasmer est un runtime polyvalent supportant plusieurs backends (LLVM, Cranelift, Singlepass), permettant de choisir entre vitesse de compilation et performance d'exécution."
+
+      - id: "runtime_q20"
+        question: "Comment vérifie-t-on si WebAssembly est supporté dans l'environnement JavaScript courant ?"
+        answers:
+          - "En testant typeof WebAssembly === 'object' ou la présence de WebAssembly.instantiate"
+          - "En appelant WebAssembly.isSupported() qui retourne un booléen"
+          - "En vérifiant navigator.webAssembly dans le navigateur uniquement"
+          - "WebAssembly est toujours disponible dans tous les environnements JavaScript modernes"
+        correct: 0
+        explanation: "On vérifie la présence de l'objet global WebAssembly et de ses méthodes principales. Tous les navigateurs modernes le supportent depuis 2017."
+
+  - id: "j2-aprem-assemblyscript"
+    title: "Jour 2 – Après-midi : AssemblyScript"
+    questions:
+      - id: "as_q1"
+        question: "Qu'est-ce qu'AssemblyScript et quel est son principal avantage ?"
+        answers:
+          - "Un langage similaire à TypeScript qui compile directement en WebAssembly"
+          - "Une extension de JavaScript qui améliore les performances du DOM"
+          - "Un framework pour créer des interfaces utilisateur en WebAssembly"
+          - "Un outil de débogage pour analyser les modules WASM existants"
+        correct: 0
+        explanation: "AssemblyScript utilise une syntaxe proche de TypeScript, permettant aux développeurs JavaScript/TypeScript de créer des modules WASM sans apprendre C, C++ ou Rust."
+
+      - id: "as_q2"
+        question: "Quelle commande permet d'initialiser un nouveau projet AssemblyScript ?"
+        answers:
+          - "npx asinit . pour créer la structure de projet dans le répertoire courant"
+          - "npm create assemblyscript pour générer un nouveau projet vide"
+          - "as init --template default pour initialiser avec le template par défaut"
+          - "yarn add assemblyscript && yarn setup pour configurer le projet"
+        correct: 0
+        explanation: "La commande npx asinit . initialise un projet AssemblyScript avec la structure de dossiers, le fichier asconfig.json et les dépendances nécessaires."
+
+      - id: "as_q3"
+        question: "Comment AssemblyScript gère-t-il la mémoire par rapport à TypeScript standard ?"
+        answers:
+          - "Il utilise un garbage collector intégré au runtime AssemblyScript"
+          - "La mémoire est gérée manuellement avec malloc et free comme en C"
+          - "Il ne gère pas la mémoire, tout est alloué statiquement à la compilation"
+          - "Il utilise le garbage collector de JavaScript via les imports automatiques"
+        correct: 0
+        explanation: "AssemblyScript inclut son propre garbage collector léger qui gère automatiquement l'allocation et la libération de la mémoire pour les objets."
+
+      - id: "as_q4"
+        question: "Quel fichier de configuration définit les options de compilation d'un projet AssemblyScript ?"
+        answers:
+          - "asconfig.json qui spécifie les targets, les options et les chemins"
+          - "tsconfig.json standard avec des extensions spécifiques AssemblyScript"
+          - "package.json dans la section 'assemblyscript' pour la configuration"
+          - "wasm.config.js pour définir les options de compilation en JavaScript"
+        correct: 0
+        explanation: "asconfig.json est le fichier de configuration principal d'AssemblyScript, définissant les cibles de compilation (debug, release), les options et les chemins d'entrée/sortie."
+
+      - id: "as_q5"
+        question: "Comment exporte-t-on une fonction depuis un module AssemblyScript ?"
+        answers:
+          - "En utilisant le mot-clé export devant la déclaration de fonction"
+          - "En ajoutant la fonction au tableau __exports dans le module"
+          - "En décorant la fonction avec @wasm_export avant sa définition"
+          - "Toutes les fonctions sont automatiquement exportées par défaut"
+        correct: 0
+        explanation: "Comme en TypeScript/ES6, on utilise simplement 'export function nomFonction()' pour rendre une fonction accessible depuis JavaScript."
+
+      - id: "as_q6"
+        question: "Quels types numériques spécifiques AssemblyScript ajoute-t-il par rapport à TypeScript ?"
+        answers:
+          - "Des types de taille fixe comme i32, u32, i64, u64, f32, f64"
+          - "Uniquement les types number et bigint comme en TypeScript standard"
+          - "Des types int et float génériques optimisés pour WebAssembly"
+          - "Aucun type supplémentaire, il utilise les types TypeScript tels quels"
+        correct: 0
+        explanation: "AssemblyScript définit des types numériques de taille fixe correspondant aux types WebAssembly : i32, u32, i64, u64, f32, f64, plus i8, u8, i16, u16."
+
+      - id: "as_q7"
+        question: "Comment intègre-t-on un module WASM généré par AssemblyScript dans une application front-end ?"
+        answers:
+          - "En important le loader AssemblyScript et en utilisant instantiate() avec le fichier .wasm"
+          - "En incluant directement le fichier .wasm avec une balise script type='wasm'"
+          - "En convertissant le .wasm en .js avec un outil de bundling automatique"
+          - "Les modules AssemblyScript ne sont pas compatibles avec les navigateurs"
+        correct: 0
+        explanation: "Le package @assemblyscript/loader fournit des helpers pour charger et instancier les modules, gérer la mémoire et les types complexes comme les chaînes."
+
+      - id: "as_q8"
+        question: "Comment déclare-t-on une classe en AssemblyScript ?"
+        answers:
+          - "Avec la syntaxe class standard de TypeScript, supportant l'héritage et les interfaces"
+          - "Les classes ne sont pas supportées, uniquement les fonctions et les structures"
+          - "Avec une syntaxe spéciale @WasmClass pour définir les classes WASM"
+          - "En utilisant des objets littéraux car le mot-clé class n'existe pas"
+        correct: 0
+        explanation: "AssemblyScript supporte la programmation orientée objet avec la syntaxe class de TypeScript, incluant l'héritage, les constructeurs et les méthodes."
+
+      - id: "as_q9"
+        question: "Quel outil permet de déboguer du code AssemblyScript dans le navigateur ?"
+        answers:
+          - "Les source maps générées par le compilateur permettant de voir le code AS original"
+          - "Un débogueur spécial AssemblyScript disponible comme extension Chrome"
+          - "Le débogage n'est pas possible, il faut utiliser des console.log manuels"
+          - "L'inspecteur WASM intégré qui affiche uniquement le bytecode"
+        correct: 0
+        explanation: "Le compilateur AssemblyScript génère des source maps (.wasm.map) permettant aux DevTools du navigateur d'afficher le code source AssemblyScript original lors du débogage."
+
+      - id: "as_q10"
+        question: "Quelle option de compilation AssemblyScript produit un module optimisé pour la production ?"
+        answers:
+          - "L'option --optimize ou -O qui active les optimisations de taille et vitesse"
+          - "L'option --production qui désactive tous les checks de développement"
+          - "L'option --release qui compile sans le garbage collector"
+          - "L'option --minify qui compresse le bytecode WASM généré"
+        correct: 0
+        explanation: "L'option --optimize (ou -O, -O3, --shrinkLevel) active les optimisations Binaryen, réduisant la taille et améliorant les performances du module WASM."
+
+      - id: "as_q11"
+        question: "Comment passe-t-on une chaîne de caractères JavaScript à une fonction AssemblyScript ?"
+        answers:
+          - "En utilisant __newString() du loader qui alloue et copie la chaîne dans la mémoire WASM"
+          - "En passant directement la chaîne, la conversion est automatique"
+          - "En encodant manuellement chaque caractère en UTF-8 dans un ArrayBuffer"
+          - "Les chaînes ne peuvent pas être passées, uniquement des tableaux de nombres"
+        correct: 0
+        explanation: "Le loader AssemblyScript fournit __newString(str) qui alloue de la mémoire dans le module WASM et y copie la chaîne JavaScript encodée."
+
+      - id: "as_q12"
+        question: "Quelle est la différence entre les modes 'debug' et 'release' dans asconfig.json ?"
+        answers:
+          - "Debug inclut les assertions et source maps, release active les optimisations maximales"
+          - "Debug compile plus vite, release produit un fichier plus petit"
+          - "Debug permet l'utilisation de console.log, release le désactive"
+          - "Il n'y a pas de différence significative entre les deux modes"
+        correct: 0
+        explanation: "Le mode debug préserve les informations de débogage et les assertions, tandis que release optimise agressivement le code pour la taille et la performance."
+
+      - id: "as_q13"
+        question: "Comment récupère-t-on une chaîne retournée par une fonction AssemblyScript en JavaScript ?"
+        answers:
+          - "En utilisant __getString(ptr) du loader qui lit la chaîne depuis la mémoire WASM"
+          - "La chaîne est automatiquement convertie en string JavaScript"
+          - "En parcourant manuellement la mémoire jusqu'au caractère nul terminateur"
+          - "En appelant toString() sur la valeur de retour de la fonction"
+        correct: 0
+        explanation: "Le loader fournit __getString(ptr) qui lit une chaîne AssemblyScript depuis son pointeur dans la mémoire linéaire et la convertit en string JavaScript."
+
+      - id: "as_q14"
+        question: "Comment déclare-t-on un tableau typé en AssemblyScript ?"
+        answers:
+          - "Avec la syntaxe générique comme Int32Array ou Array<i32>"
+          - "Avec la syntaxe JavaScript standard comme let arr = []"
+          - "Avec une allocation manuelle via memory.alloc(size)"
+          - "Les tableaux n'existent pas, on utilise uniquement la mémoire linéaire"
+        correct: 0
+        explanation: "AssemblyScript supporte les TypedArrays (Int32Array, Float64Array, etc.) et les tableaux génériques Array<T> avec une syntaxe proche de TypeScript."
+
+      - id: "as_q15"
+        question: "Quelle fonction du loader permet de libérer un objet alloué par AssemblyScript ?"
+        answers:
+          - "__release(ptr) qui décrémente le compteur de références de l'objet"
+          - "free(ptr) comme en C pour libérer la mémoire manuellement"
+          - "La libération est automatique, aucune fonction n'est nécessaire"
+          - "__dispose(ptr) qui supprime immédiatement l'objet de la mémoire"
+        correct: 0
+        explanation: "AssemblyScript utilise un comptage de références. __release() décrémente le compteur, et l'objet est collecté quand il atteint zéro."
+
+      - id: "as_q16"
+        question: "Comment importe-t-on une fonction JavaScript dans un module AssemblyScript ?"
+        answers:
+          - "En déclarant la fonction avec @external('module', 'name') ou declare function"
+          - "En ajoutant la fonction dans un fichier imports.ts spécial"
+          - "Les imports sont automatiquement détectés depuis le code JavaScript"
+          - "En utilisant la syntaxe require('module').function comme en Node.js"
+        correct: 0
+        explanation: "On utilise le décorateur @external('env', 'myFunc') ou declare function myFunc(): void pour déclarer des fonctions importées depuis JavaScript."
+
+      - id: "as_q17"
+        question: "Quel est l'avantage d'utiliser StaticArray par rapport à Array en AssemblyScript ?"
+        answers:
+          - "StaticArray a une taille fixe et un overhead mémoire réduit"
+          - "StaticArray est plus rapide car il n'utilise pas le garbage collector"
+          - "StaticArray permet de stocker plus de 2^32 éléments"
+          - "StaticArray supporte les types mixtes dans le même tableau"
+        correct: 0
+        explanation: "StaticArray<T> a une taille fixe définie à la création, un layout mémoire plus compact et moins d'overhead que Array<T> qui est redimensionnable."
+
+      - id: "as_q18"
+        question: "Comment active-t-on le support SIMD dans un projet AssemblyScript ?"
+        answers:
+          - "En utilisant les types v128 et les opérations SIMD disponibles nativement"
+          - "En installant un package npm séparé pour les opérations vectorielles"
+          - "Le SIMD n'est pas supporté par AssemblyScript actuellement"
+          - "En ajoutant le flag --enable-simd lors de la compilation"
+        correct: 0
+        explanation: "AssemblyScript supporte nativement les opérations SIMD via le type v128 et des fonctions intégrées comme v128.add, v128.mul, etc."
+
+      - id: "as_q19"
+        question: "Comment gère-t-on les erreurs et exceptions en AssemblyScript ?"
+        answers:
+          - "Avec assert() pour les vérifications et abort() pour les erreurs fatales"
+          - "Avec try/catch/finally exactement comme en TypeScript"
+          - "Les erreurs provoquent un crash silencieux sans possibilité de gestion"
+          - "En retournant des codes d'erreur car les exceptions n'existent pas"
+        correct: 0
+        explanation: "AssemblyScript utilise assert(condition) pour les assertions et abort() pour les erreurs fatales. Le try/catch n'est pas supporté (proposition WASM en cours)."
+
+      - id: "as_q20"
+        question: "Quel outil permet d'analyser la taille et la composition d'un module AssemblyScript compilé ?"
+        answers:
+          - "L'outil wasm-opt de Binaryen avec l'option --print-features ou des analyseurs comme Twiggy"
+          - "La commande asc --analyze qui génère un rapport de composition"
+          - "L'extension VS Code AssemblyScript avec son panneau d'analyse intégré"
+          - "Il n'existe pas d'outil d'analyse pour les modules AssemblyScript"
+        correct: 0
+        explanation: "Des outils comme wasm-opt (Binaryen), Twiggy, ou wasm-size permettent d'analyser la taille, les sections et les fonctions d'un module WASM compilé."
+
+  - id: "j3-matin-emscripten"
+    title: "Jour 3 – Matin : L'outil Emscripten"
+    questions:
+      - id: "em_q1"
+        question: "Quel est le rôle principal d'Emscripten dans l'écosystème WebAssembly ?"
+        answers:
+          - "Compiler du code C/C++ en WebAssembly avec un fichier JavaScript d'accompagnement"
+          - "Exécuter des modules WebAssembly dans un environnement serveur Node.js"
+          - "Déboguer le bytecode WASM généré par d'autres compilateurs"
+          - "Optimiser les modules WASM existants pour réduire leur taille"
+        correct: 0
+        explanation: "Emscripten est une chaîne de compilation qui transforme le code C/C++ en WebAssembly, générant aussi un fichier JavaScript 'glue code' pour l'intégration."
+
+      - id: "em_q2"
+        question: "Quelle est la commande du compilateur Emscripten pour compiler un fichier C ?"
+        answers:
+          - "emcc source.c -o output.js pour générer le module WASM et le glue code JS"
+          - "em-compile source.c --target=wasm pour cibler WebAssembly"
+          - "gcc-wasm source.c -o output.wasm pour une compilation directe"
+          - "clang --emit-wasm source.c pour générer uniquement le binaire"
+        correct: 0
+        explanation: "emcc est le compilateur Emscripten. La commande 'emcc source.c -o output.js' génère output.js (glue code) et output.wasm (module binaire)."
+
+      - id: "em_q3"
+        question: "Quels langages peuvent être compilés en WebAssembly avec Emscripten ?"
+        answers:
+          - "C et C++, ainsi que tout langage compilable vers LLVM IR"
+          - "Uniquement le C pur, le C++ n'étant pas supporté"
+          - "JavaScript et TypeScript via une transpilation spéciale"
+          - "Python et Ruby grâce à des extensions spécifiques"
+        correct: 0
+        explanation: "Emscripten compile principalement C et C++. Tout langage pouvant cibler LLVM IR (comme Rust ou D) peut potentiellement utiliser Emscripten."
+
+      - id: "em_q4"
+        question: "Comment installe-t-on Emscripten sur un système Debian/Ubuntu ?"
+        answers:
+          - "Via le SDK officiel emsdk ou via apt install emscripten sur certaines distributions"
+          - "En téléchargeant un binaire précompilé depuis le site officiel"
+          - "Via npm install -g emscripten comme package Node.js global"
+          - "En compilant manuellement depuis les sources GitHub uniquement"
+        correct: 0
+        explanation: "Emscripten s'installe via emsdk (SDK officiel) ou via apt install emscripten sur Debian/Ubuntu, bien que emsdk offre les versions les plus récentes."
+
+      - id: "em_q5"
+        question: "Quelle fonction JavaScript permet d'appeler une fonction C exportée avec Emscripten ?"
+        answers:
+          - "Module.ccall('nomFonction', 'typeRetour', ['typesParams'], [valeurs])"
+          - "wasmModule.call('nomFonction', param1, param2) directement"
+          - "emscripten.invoke('nomFonction', args) via le module global"
+          - "window.wasm.nomFonction(params) après chargement du module"
+        correct: 0
+        explanation: "ccall permet d'appeler une fonction C avec conversion automatique des types. On spécifie le nom, le type de retour, les types de paramètres et les valeurs."
+
+      - id: "em_q6"
+        question: "Quelle est la différence entre ccall et cwrap dans Emscripten ?"
+        answers:
+          - "ccall appelle directement la fonction, cwrap retourne une fonction JavaScript réutilisable"
+          - "ccall est synchrone, cwrap est asynchrone avec Promises"
+          - "ccall gère les chaînes automatiquement, cwrap requiert un encodage manuel"
+          - "ccall est déprécié, cwrap est la méthode recommandée"
+        correct: 0
+        explanation: "ccall effectue un appel unique, tandis que cwrap retourne une fonction JavaScript wrapper qu'on peut appeler plusieurs fois, plus performant pour les appels répétés."
+
+      - id: "em_q7"
+        question: "Quel fichier est généré par Emscripten en plus du module .wasm ?"
+        answers:
+          - "Un fichier JavaScript 'glue code' qui charge et initialise le module WASM"
+          - "Un fichier HTML minimal pour tester le module dans un navigateur"
+          - "Un fichier de configuration JSON décrivant les exports du module"
+          - "Un fichier source map pour le débogage du code C original"
+        correct: 0
+        explanation: "Emscripten génère un fichier JS 'glue code' qui gère le chargement du WASM, l'initialisation de la mémoire, et fournit les API comme ccall/cwrap."
+
+      - id: "em_q8"
+        question: "Comment exporte-t-on explicitement des fonctions C pour les rendre accessibles depuis JavaScript avec Emscripten ?"
+        answers:
+          - "En utilisant EMSCRIPTEN_KEEPALIVE ou en les listant dans EXPORTED_FUNCTIONS"
+          - "En ajoutant le mot-clé 'export' devant la déclaration de fonction en C"
+          - "Toutes les fonctions sont automatiquement exportées par défaut"
+          - "En créant un fichier exports.json listant les fonctions à exporter"
+        correct: 0
+        explanation: "On utilise la macro EMSCRIPTEN_KEEPALIVE devant la fonction ou l'option de compilation -sEXPORTED_FUNCTIONS=['_maFonction'] pour lister les exports."
+
+      - id: "em_q9"
+        question: "Quel projet a précédé WebAssembly et a inspiré le développement d'Emscripten ?"
+        answers:
+          - "asm.js, un sous-ensemble optimisable de JavaScript développé par Mozilla"
+          - "Google Native Client (NaCl) pour l'exécution de code natif dans Chrome"
+          - "Adobe Flash Player pour les applications multimédias dans le navigateur"
+          - "Java Applets pour l'exécution de bytecode dans les navigateurs"
+        correct: 0
+        explanation: "Emscripten a d'abord ciblé asm.js, un sous-ensemble de JavaScript optimisable. Quand WebAssembly est arrivé, Emscripten a ajouté le support WASM."
+
+      - id: "em_q10"
+        question: "Comment active-t-on les optimisations lors de la compilation avec emcc ?"
+        answers:
+          - "Avec les flags -O1, -O2, -O3 ou -Os comme avec GCC/Clang classique"
+          - "Avec l'option --optimize=max pour les optimisations maximales"
+          - "Les optimisations sont toujours activées par défaut dans Emscripten"
+          - "En post-traitant le fichier .wasm avec un outil séparé"
+        correct: 0
+        explanation: "emcc utilise les mêmes flags d'optimisation que GCC/Clang : -O0 (aucune), -O1, -O2, -O3 (max perf), -Os (taille), -Oz (taille extrême)."
+
+      - id: "em_q11"
+        question: "Comment Emscripten gère-t-il les chaînes de caractères C lors des appels depuis JavaScript ?"
+        answers:
+          - "Il fournit des fonctions comme allocateUTF8 et UTF8ToString pour la conversion mémoire"
+          - "Les chaînes sont automatiquement converties sans intervention du développeur"
+          - "Il utilise un encodage propriétaire incompatible avec UTF-8 standard"
+          - "Les chaînes C ne peuvent pas être passées à JavaScript avec Emscripten"
+        correct: 0
+        explanation: "Emscripten fournit des helpers comme allocateUTF8() pour allouer une chaîne en mémoire WASM et UTF8ToString() pour lire une chaîne depuis la mémoire."
+
+      - id: "em_q12"
+        question: "Quelle option de compilation Emscripten permet de générer un module ES6 au lieu d'un script classique ?"
+        answers:
+          - "-sEXPORT_ES6=1 combiné avec -sMODULARIZE pour créer un module ES6"
+          - "--output-type=esm pour spécifier le format de sortie ES6"
+          - "-std=es6 pour activer le mode ECMAScript 6"
+          - "Emscripten génère toujours du ES6 par défaut depuis la version 3.0"
+        correct: 0
+        explanation: "L'option -sEXPORT_ES6=1 avec -sMODULARIZE génère un module ES6 exportable avec import/export, facilitant l'intégration dans les bundlers modernes."
+
+      - id: "em_q13"
+        question: "Comment accède-t-on à la mémoire linéaire WASM depuis JavaScript avec Emscripten ?"
+        answers:
+          - "Via Module.HEAP8, HEAP16, HEAP32, HEAPU8, HEAPF32, HEAPF64 selon le type"
+          - "En appelant Module.getMemory() qui retourne un ArrayBuffer"
+          - "La mémoire n'est pas accessible directement depuis JavaScript"
+          - "Via window.wasmMemory qui est automatiquement exposé par Emscripten"
+        correct: 0
+        explanation: "Emscripten expose des vues typées sur la mémoire : HEAP8 (Int8Array), HEAPU8 (Uint8Array), HEAP32 (Int32Array), HEAPF64 (Float64Array), etc."
+
+      - id: "em_q14"
+        question: "Quelle est la fonction du flag -sALLOW_MEMORY_GROWTH lors de la compilation Emscripten ?"
+        answers:
+          - "Permettre à la mémoire WASM de croître dynamiquement au-delà de sa taille initiale"
+          - "Activer le garbage collector pour libérer automatiquement la mémoire"
+          - "Limiter la mémoire maximale utilisable par le module WASM"
+          - "Optimiser l'allocation mémoire en pré-allouant des blocs"
+        correct: 0
+        explanation: "Par défaut, la mémoire WASM est fixe. -sALLOW_MEMORY_GROWTH permet au module d'appeler memory.grow() pour augmenter la mémoire dynamiquement."
+
+      - id: "em_q15"
+        question: "Comment débogue-t-on du code C compilé avec Emscripten dans le navigateur ?"
+        answers:
+          - "Avec -gsource-map ou -g4 pour générer des source maps et déboguer le code C original"
+          - "En utilisant console.log() injecté automatiquement par Emscripten"
+          - "Le débogage du code C n'est pas possible, seul le WASM peut être inspecté"
+          - "Avec l'extension Chrome 'C Debugger' spécifique à Emscripten"
+        correct: 0
+        explanation: "L'option -gsource-map génère des source maps permettant de déboguer le code C/C++ original dans les DevTools du navigateur avec points d'arrêt."
+
+      - id: "em_q16"
+        question: "Quel est le rôle de l'option -sEXPORTED_RUNTIME_METHODS dans Emscripten ?"
+        answers:
+          - "Spécifier quelles méthodes runtime (ccall, cwrap, UTF8ToString) exposer au JavaScript"
+          - "Lister les fonctions C à exporter depuis le module WASM"
+          - "Définir les méthodes de callback que JavaScript peut enregistrer"
+          - "Activer les méthodes de profiling pour mesurer les performances"
+        correct: 0
+        explanation: "EXPORTED_RUNTIME_METHODS liste les helpers Emscripten à exposer (ccall, cwrap, UTF8ToString, etc.). Par défaut, peu sont exposés pour réduire la taille."
+
+      - id: "em_q17"
+        question: "Comment Emscripten gère-t-il les appels à printf() et autres fonctions d'I/O standard ?"
+        answers:
+          - "Il les redirige vers console.log() ou un élément HTML configurable"
+          - "Les appels à printf() sont ignorés silencieusement dans le navigateur"
+          - "Il génère une erreur car les I/O ne sont pas supportées dans le navigateur"
+          - "Il écrit dans un fichier virtuel accessible via Module.readFile()"
+        correct: 0
+        explanation: "Emscripten émule les I/O standard : printf() est redirigé vers console.log() par défaut, ou vers un élément HTML <textarea> si Module.print est configuré."
+
+      - id: "em_q18"
+        question: "Quelle commande permet de lier plusieurs fichiers C en un seul module WASM avec Emscripten ?"
+        answers:
+          - "emcc file1.c file2.c file3.c -o output.js compile et lie tous les fichiers"
+          - "em-link file1.o file2.o file3.o -o output.wasm pour le linking séparé"
+          - "emcc --merge file1.wasm file2.wasm pour fusionner des modules existants"
+          - "Chaque fichier doit être compilé séparément puis chargé individuellement"
+        correct: 0
+        explanation: "Comme GCC, emcc accepte plusieurs fichiers sources : 'emcc a.c b.c c.c -o out.js' les compile tous et les lie en un seul module WASM."
+
+      - id: "em_q19"
+        question: "Comment utilise-t-on des bibliothèques C tierces (comme zlib) avec Emscripten ?"
+        answers:
+          - "En les compilant depuis les sources avec emcc/em++ ou en utilisant les ports Emscripten"
+          - "En téléchargeant des binaires .wasm précompilés depuis npm"
+          - "Les bibliothèques tierces ne peuvent pas être utilisées avec Emscripten"
+          - "En convertissant les fichiers .a natifs avec l'outil em-convert"
+        correct: 0
+        explanation: "Emscripten propose des 'ports' pour les bibliothèques courantes (zlib, SDL, etc.) avec --use-port=zlib, ou on compile manuellement les sources avec emcc."
+
+      - id: "em_q20"
+        question: "Quelle est la différence entre compiler avec -o output.js et -o output.html avec Emscripten ?"
+        answers:
+          - "-o .js génère le glue code seul, -o .html ajoute une page HTML de test avec canvas"
+          - "-o .js génère du JavaScript pur, -o .html génère du WASM embarqué"
+          - "Les deux sont équivalents, seule l'extension du fichier change"
+          - "-o .html est déprécié, il faut toujours utiliser -o .js"
+        correct: 0
+        explanation: "Avec -o output.html, Emscripten génère une page HTML complète avec canvas pour les applications graphiques, utile pour tester rapidement. -o .js ne génère que le glue code."
+
+  - id: "j3-aprem-portage"
+    title: "Jour 3 – Après-midi : Portage de librairie"
+    questions:
+      - id: "port_q1"
+        question: "Quel est le rôle d'emconfigure dans le workflow de portage d'une librairie C existante ?"
+        answers:
+          - "Remplacer ./configure en configurant l'environnement pour cibler Emscripten au lieu du compilateur natif"
+          - "Générer automatiquement un fichier de configuration JSON pour le projet"
+          - "Analyser les dépendances de la librairie et télécharger les ports manquants"
+          - "Convertir les anciens Makefiles vers le nouveau format CMake"
+        correct: 0
+        explanation: "emconfigure remplace ./configure et configure les variables d'environnement (CC, CXX, etc.) pour que le script configure utilise emcc au lieu de gcc."
+
+      - id: "port_q2"
+        question: "Quelle commande utilise-t-on pour compiler avec make en ciblant Emscripten ?"
+        answers:
+          - "emmake make pour exécuter make avec les variables d'environnement Emscripten"
+          - "make --emscripten pour activer le mode de compilation WebAssembly"
+          - "emcc-make qui est un remplacement complet de GNU Make"
+          - "make CC=emcc suffit pour rediriger vers le compilateur Emscripten"
+        correct: 0
+        explanation: "emmake exécute make en configurant CC=emcc, CXX=em++, AR=emar, etc., permettant aux Makefiles existants de compiler vers WASM sans modification."
+
+      - id: "port_q3"
+        question: "À quoi sert l'option -sMODULARIZE lors de la compilation Emscripten ?"
+        answers:
+          - "Encapsuler le code généré dans une fonction factory retournant une Promise du module"
+          - "Diviser le code WASM en plusieurs modules chargeables séparément"
+          - "Activer le support des modules ES6 natifs dans le navigateur"
+          - "Minifier et optimiser le code JavaScript généré"
+        correct: 0
+        explanation: "MODULARIZE encapsule le glue code dans une fonction factory. Appeler Module() retourne une Promise résolue quand le module WASM est prêt."
+
+      - id: "port_q4"
+        question: "Comment spécifie-t-on les fonctions C à exporter depuis le module WASM compilé ?"
+        answers:
+          - "Avec -sEXPORTED_FUNCTIONS=['_fonction1','_fonction2'] en préfixant les noms par underscore"
+          - "En créant un fichier exports.txt listant les fonctions à exporter"
+          - "Toutes les fonctions publiques sont automatiquement exportées"
+          - "Avec l'attribut __attribute__((wasm_export)) devant chaque fonction"
+        correct: 0
+        explanation: "L'option -sEXPORTED_FUNCTIONS=['_main','_maFonction'] liste les fonctions à exporter. Le underscore préfixe les symboles C selon la convention."
+
+      - id: "port_q5"
+        question: "Qu'est-ce que le système de fichiers virtuel d'Emscripten (MEMFS) ?"
+        answers:
+          - "Un système de fichiers en mémoire simulant les opérations fichier pour le code C porté"
+          - "Un cache de fichiers téléchargés depuis le serveur pour accélérer le chargement"
+          - "Un système de persistance utilisant IndexedDB du navigateur"
+          - "Un format de compression pour embarquer les ressources dans le module WASM"
+        correct: 0
+        explanation: "MEMFS est le système de fichiers par défaut d'Emscripten, entièrement en mémoire. Il permet au code C utilisant fopen/fread de fonctionner dans le navigateur."
+
+      - id: "port_q6"
+        question: "Comment pré-charge-t-on des fichiers dans le système de fichiers virtuel d'Emscripten ?"
+        answers:
+          - "Avec --preload-file chemin pour embarquer les fichiers dans un .data chargé au démarrage"
+          - "En utilisant Module.addFile() avant l'instanciation du module"
+          - "Via un fichier manifest.json listant les ressources à charger"
+          - "Les fichiers doivent être convertis en base64 et inclus dans le JavaScript"
+        correct: 0
+        explanation: "--preload-file path@ crée un fichier .data contenant les ressources, chargé et monté dans MEMFS avant l'exécution de main()."
+
+      - id: "port_q7"
+        question: "Quelle variable d'environnement configure le chemin vers le SDK Emscripten ?"
+        answers:
+          - "EMSDK pointe vers le répertoire d'installation, activé par source emsdk_env.sh"
+          - "EMSCRIPTEN_HOME définit le chemin vers les binaires emcc et em++"
+          - "PATH_WASM configure le chemin de recherche des outils Emscripten"
+          - "EM_CONFIG spécifie le fichier de configuration global du compilateur"
+        correct: 0
+        explanation: "EMSDK est défini par 'source emsdk_env.sh' et configure toutes les variables nécessaires (PATH, EM_CONFIG, EMSDK_NODE, etc.)."
+
+      - id: "port_q8"
+        question: "Comment gère-t-on une librairie utilisant Autoconf/Automake avec Emscripten ?"
+        answers:
+          - "Exécuter emconfigure ./configure puis emmake make pour compiler vers WASM"
+          - "Remplacer Autoconf par CMake car Autoconf n'est pas compatible Emscripten"
+          - "Modifier manuellement tous les fichiers .m4 pour ajouter le support WASM"
+          - "Utiliser autogen-wasm qui génère des scripts configure compatibles"
+        correct: 0
+        explanation: "Le workflow standard est : emconfigure ./configure --prefix=... puis emmake make. emconfigure configure CC/CXX pour cibler Emscripten."
+
+      - id: "port_q9"
+        question: "Que fait l'option -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap'] ?"
+        answers:
+          - "Expose les fonctions helper ccall et cwrap dans l'objet Module pour les appels JS→C"
+          - "Exporte les fonctions C nommées ccall et cwrap depuis le module WASM"
+          - "Active le mode de compatibilité avec les anciennes versions d'Emscripten"
+          - "Génère des wrappers TypeScript pour les fonctions exportées"
+        correct: 0
+        explanation: "EXPORTED_RUNTIME_METHODS expose les helpers Emscripten dans Module (ccall, cwrap, UTF8ToString, etc.). Par défaut, ils ne sont pas exposés pour réduire la taille."
+
+      - id: "port_q10"
+        question: "Comment compile-t-on une librairie C++ utilisant CMake avec Emscripten ?"
+        answers:
+          - "Avec emcmake cmake .. pour configurer puis emmake make pour compiler"
+          - "En passant -DCMAKE_TOOLCHAIN_FILE=emscripten.cmake manuellement"
+          - "CMake n'est pas supporté, il faut convertir vers des Makefiles classiques"
+          - "Avec cmake --target=wasm32 pour activer la compilation WebAssembly"
+        correct: 0
+        explanation: "emcmake configure CMake avec le toolchain Emscripten (CMAKE_TOOLCHAIN_FILE). Ensuite emmake make compile le projet vers WASM."
+
+      - id: "port_q11"
+        question: "Quelle est la différence entre --embed-file et --preload-file dans Emscripten ?"
+        answers:
+          - "--embed-file inclut les données dans le JS, --preload-file crée un fichier .data séparé"
+          - "--embed-file est synchrone, --preload-file est asynchrone pour les gros fichiers"
+          - "Les deux sont équivalents, seul le nom de l'option diffère"
+          - "--embed-file compresse les données, --preload-file les laisse brutes"
+        correct: 0
+        explanation: "--embed-file encode les fichiers en base64 dans le JS (augmente sa taille). --preload-file crée un .data séparé, meilleur pour les gros fichiers."
+
+      - id: "port_q12"
+        question: "Comment persiste-t-on des données dans le navigateur avec le filesystem Emscripten ?"
+        answers:
+          - "En utilisant IDBFS qui synchronise le filesystem virtuel avec IndexedDB"
+          - "En écrivant directement dans localStorage depuis le code C"
+          - "La persistance n'est pas possible, MEMFS est volatile par définition"
+          - "En exportant manuellement les fichiers vers le système hôte"
+        correct: 0
+        explanation: "IDBFS est un backend filesystem qui synchronise avec IndexedDB. Il faut appeler FS.syncfs() pour forcer la synchronisation avec la base."
+
+      - id: "port_q13"
+        question: "Que signifie l'option -sINITIAL_MEMORY=256MB lors de la compilation ?"
+        answers:
+          - "Définit la taille initiale de la mémoire linéaire WASM à 256 mégaoctets"
+          - "Limite la mémoire maximale utilisable par le module à 256 Mo"
+          - "Alloue 256 Mo de mémoire JavaScript pour le glue code"
+          - "Configure la taille du cache de compilation à 256 Mo"
+        correct: 0
+        explanation: "INITIAL_MEMORY définit la taille initiale de la mémoire linéaire WebAssembly. Utile pour les applications nécessitant beaucoup de mémoire dès le démarrage."
+
+      - id: "port_q14"
+        question: "Comment résout-on les symboles non définis lors du portage d'une librairie C ?"
+        answers:
+          - "En implémentant les fonctions manquantes en JavaScript ou en les stubant avec -sERROR_ON_UNDEFINED_SYMBOLS=0"
+          - "En recompilant la librairie avec l'option --resolve-all-symbols"
+          - "Les symboles non définis sont automatiquement ignorés par Emscripten"
+          - "En ajoutant les sources manquantes au projet avant compilation"
+        correct: 0
+        explanation: "On peut stub les fonctions avec -sERROR_ON_UNDEFINED_SYMBOLS=0 (warnings) ou implémenter les symboles en JS via mergeInto(LibraryManager.library, {...})."
+
+      - id: "port_q15"
+        question: "Quel est l'avantage d'utiliser -sWASM_BIGINT lors de la compilation Emscripten ?"
+        answers:
+          - "Permet d'utiliser les BigInt JavaScript pour les entiers 64 bits C (int64_t)"
+          - "Active le support des grands nombres flottants en précision arbitraire"
+          - "Optimise les calculs sur les tableaux de grande taille"
+          - "Compresse les grands modules WASM pour réduire leur taille"
+        correct: 0
+        explanation: "WASM_BIGINT permet de passer des int64_t entre C et JS en utilisant les BigInt natifs de JavaScript, évitant la conversion en deux i32."
+
+      - id: "port_q16"
+        question: "Comment débogue-t-on une librairie C portée avec Emscripten ?"
+        answers:
+          - "Compiler avec -g pour les symboles de debug et -gsource-map pour les source maps"
+          - "Utiliser gdb qui fonctionne directement avec les modules WASM"
+          - "Le débogage n'est pas possible pour les librairies portées"
+          - "Injecter des printf() car c'est la seule méthode de débogage disponible"
+        correct: 0
+        explanation: "L'option -g conserve les symboles de debug. -gsource-map génère des source maps pour déboguer le C original dans les DevTools du navigateur."
+
+      - id: "port_q17"
+        question: "À quoi sert l'option -sSINGLE_FILE=1 lors de la compilation ?"
+        answers:
+          - "Embarque le bytecode WASM en base64 dans le fichier JavaScript"
+          - "Génère un seul fichier source C à partir de tous les fichiers du projet"
+          - "Fusionne tous les modules WASM en un seul module optimisé"
+          - "Compile le projet en une seule passe sans linking séparé"
+        correct: 0
+        explanation: "SINGLE_FILE=1 encode le .wasm en base64 dans le .js, produisant un seul fichier. Pratique pour la distribution mais augmente la taille."
+
+      - id: "port_q18"
+        question: "Comment passe-t-on des arguments de ligne de commande au programme C porté ?"
+        answers:
+          - "Via Module.arguments = ['arg1', 'arg2'] avant l'instanciation du module"
+          - "En appelant Module.main(['arg1', 'arg2']) après le chargement"
+          - "Les arguments de ligne de commande ne sont pas supportés dans le navigateur"
+          - "En définissant window.argv = [...] avant le chargement du script"
+        correct: 0
+        explanation: "Module.arguments définit les arguments passés à main(argc, argv). On peut aussi utiliser Module['arguments'] dans le code d'initialisation."
+
+      - id: "port_q19"
+        question: "Quelle option permet de désactiver l'appel automatique à main() au chargement ?"
+        answers:
+          - "-sINVOKE_RUN=0 empêche l'exécution automatique de main() au démarrage"
+          - "--no-entry pour compiler sans point d'entrée défini"
+          - "-sMAIN_MODULE=0 pour désactiver la fonction main"
+          - "Module.noRun = true dans le fichier JavaScript"
+        correct: 0
+        explanation: "INVOKE_RUN=0 empêche l'appel automatique de main(). On peut ensuite l'appeler manuellement avec Module.callMain(['args'])."
+
+      - id: "port_q20"
+        question: "Comment intègre-t-on un module WASM porté dans une application React ou Vue ?"
+        answers:
+          - "Charger le glue code JS qui retourne une Promise, puis utiliser les exports du Module"
+          - "Importer directement le fichier .wasm comme un module ES6 standard"
+          - "Les frameworks SPA ne sont pas compatibles avec les modules Emscripten"
+          - "Convertir le module WASM en Web Component avec un outil dédié"
+        correct: 0
+        explanation: "Avec -sMODULARIZE, on importe le JS qui retourne une factory. On appelle Module().then(mod => ...) pour obtenir l'instance et ses exports."
+
+meta:
+  formation_title: "WebAssembly : booster les performances de ses applications web"
+  qcm_title: "QCM sur WebAssembly"
+  output_file: "qcm-wasm.yaml"
+  language: "fr"
+  difficulty: "difficile"
+  questions_per_chapter: 20
+  options_original:
+    language: "fr"
+    questions_per_chapter: 20
+    difficulty: "difficile"
+    qcm_title: "QCM sur WebAssembly"
+    output_file: "qcm-wasm.yaml"
+    new_questions: 10
+  options_last_run:
+    language: "fr"
+    questions_per_chapter: 20
+    difficulty: "difficile"
+    qcm_title: "QCM sur WebAssembly"
+    output_file: "qcm-wasm.yaml"
+    new_questions: 10
+
+plan:
+  plan_chapters:
+    - id: "j1-matin-intro"
+      title: "Jour 1 – Matin : Introduction à WASM"
+      notions:
+        - "Problématiques résolues par WebAssembly, historique et architecture"
+        - "Portabilité, sécurité et performance du standard"
+        - "Organisation de la spécification et documentation officielle"
+        - "WASI et Bytecode Alliance"
+        - "Structure d'un module WASM et format binaire"
+    - id: "j1-aprem-wat"
+      title: "Jour 1 – Après-midi : Le langage textuel WAT"
+      notions:
+        - "Environnement de développement WAT et extensions VS Code"
+        - "Déclarations d'un module : fonctions, globaux, mémoire linéaire"
+        - "S-expressions et pile d'instructions"
+        - "Import/export de fonctions et artefacts"
+        - "Instructions : boucles, conditions, opérations et trap"
+    - id: "j2-matin-runtimes"
+      title: "Jour 2 – Matin : Runtimes WASM et API JavaScript"
+      notions:
+        - "Prérequis d'un runtime et liste des runtimes disponibles"
+        - "Description de WASI : interface système pour WebAssembly"
+        - "Installation et configuration de runtimes"
+        - "Interface JavaScript pour utiliser un module WASM"
+        - "Chargement, instanciation et appel de fonctions exportées"
+    - id: "j2-aprem-assemblyscript"
+      title: "Jour 2 – Après-midi : AssemblyScript"
+      notions:
+        - "Installation du module Node AssemblyScript et initialisation avec asinit"
+        - "Garbage collector et gestion de la mémoire"
+        - "Programmation orientée objet en AssemblyScript"
+        - "Intégration d'une librairie WASM dans une application front-end"
+        - "Optimisation et débogage des modules AssemblyScript"
+    - id: "j3-matin-emscripten"
+      title: "Jour 3 – Matin : L'outil Emscripten"
+      notions:
+        - "Langages pouvant être portés en WASM : C, C++, Rust, Go"
+        - "Présentation générale et historique d'Emscripten"
+        - "Installation officielle et sous Debian/Ubuntu"
+        - "Compilateur emcc et fichier JavaScript d'enveloppe"
+        - "Stratégies d'appels depuis JavaScript : ccall, cwrap"
+    - id: "j3-aprem-portage"
+      title: "Jour 3 – Après-midi : Portage de librairie"
+      notions:
+        - "Compiler et configurer avec Emscripten, Autoconf, Emmake et Emconfigure"
+        - "Interaction avec les makefiles existants"
+        - "Options de compilation : MODULARIZE, EXPORTED_FUNCTIONS, EXPORTED_RUNTIME_METHODS"
+        - "Système de fichiers virtuel d'Emscripten"
+        - "Variables d'environnement et configuration avancée"
+
+progress:
+  status: "complete"
+  total_chapters: 6
+  completed_chapters: 6
+  questions_per_chapter: 20
+  chapters:
+    - id: "j1-matin-intro"
+      questions_generated: 20
+      questions_remaining: 0
+    - id: "j1-aprem-wat"
+      questions_generated: 20
+      questions_remaining: 0
+    - id: "j2-matin-runtimes"
+      questions_generated: 20
+      questions_remaining: 0
+    - id: "j2-aprem-assemblyscript"
+      questions_generated: 20
+      questions_remaining: 0
+    - id: "j3-matin-emscripten"
+      questions_generated: 20
+      questions_remaining: 0
+    - id: "j3-aprem-portage"
+      questions_generated: 20
+      questions_remaining: 0
