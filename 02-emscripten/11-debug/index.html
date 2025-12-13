@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emscripten - Debug avec Source Maps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">Emscripten - Debug</h1>
+      <p class="text-gray-600 mb-6">
+        Questions QCM: em_q15, port_q16 - Debug avec source maps
+      </p>
+
+      <!-- Instructions -->
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+        <h3 class="font-bold text-blue-800">🔧 Pour déboguer :</h3>
+        <ol
+          class="text-blue-700 text-sm mt-2 list-decimal list-inside space-y-1"
+        >
+          <li>Ouvrir Chrome DevTools (F12)</li>
+          <li>Aller dans "Sources"</li>
+          <li>
+            Chercher le fichier
+            <code class="bg-blue-100 px-1 rounded">debug.c</code>
+          </li>
+          <li>Placer des points d'arrêt dans le code C</li>
+          <li>Cliquer sur les boutons ci-dessous</li>
+        </ol>
+      </div>
+
+      <!-- Tests -->
+      <div class="space-y-4">
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-blue-600 mb-2">
+            calculate(a, b, op)
+          </h2>
+          <div class="flex gap-2 mb-2">
+            <input
+              type="number"
+              id="a"
+              value="10"
+              class="border rounded px-2 py-1 w-20"
+              placeholder="a"
+            />
+            <input
+              type="number"
+              id="b"
+              value="5"
+              class="border rounded px-2 py-1 w-20"
+              placeholder="b"
+            />
+            <select id="op" class="border rounded px-2 py-1">
+              <option value="0">+ (add)</option>
+              <option value="1">- (sub)</option>
+              <option value="2">* (mul)</option>
+              <option value="3">/ (div)</option>
+            </select>
+            <button
+              id="btn-calc"
+              class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+            >
+              Calculer
+            </button>
+          </div>
+          <div
+            id="calc-result"
+            class="font-mono bg-gray-100 p-2 rounded text-sm"
+          ></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-green-600 mb-2">
+            Division par zéro (erreur)
+          </h2>
+          <button
+            id="btn-div-zero"
+            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Tester 10 / 0
+          </button>
+          <div
+            id="div-result"
+            class="font-mono bg-gray-100 p-2 rounded text-sm mt-2"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Console -->
+      <div class="mt-6">
+        <h3 class="font-bold text-gray-700 mb-2">Console (printf)</h3>
+        <div
+          id="console"
+          class="bg-black text-green-400 font-mono text-sm p-4 rounded-lg h-48 overflow-auto"
+        ></div>
+      </div>
+
+      <!-- Options de debug -->
+      <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <h3 class="font-bold text-yellow-800">💡 Flags de compilation debug</h3>
+        <table class="text-yellow-700 text-sm mt-2 w-full">
+          <tr>
+            <td class="font-mono pr-4">-g3</td>
+            <td>Symboles debug complets</td>
+          </tr>
+          <tr>
+            <td class="font-mono pr-4">-gsource-map</td>
+            <td>Génère fichier .wasm.map</td>
+          </tr>
+          <tr>
+            <td class="font-mono pr-4">-sASSERTIONS=2</td>
+            <td>Assertions détaillées</td>
+          </tr>
+          <tr>
+            <td class="font-mono pr-4">-sSAFE_HEAP=1</td>
+            <td>Vérifie accès mémoire</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const consoleDiv = document.getElementById("console");
+
+      // Capturer les printf
+      var Module = {
+        print: function (text) {
+          consoleDiv.innerHTML += text + "\n";
+          consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        },
+        printErr: function (text) {
+          consoleDiv.innerHTML +=
+            '<span class="text-red-400">' + text + "</span>\n";
+          consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        },
+      };
+    </script>
+    <script src="dist/debug.js"></script>
+    <script>
+      Module.onRuntimeInitialized = () => {
+        const calculate = Module.cwrap("calculate", "number", [
+          "number",
+          "number",
+          "number",
+        ]);
+
+        document.getElementById("btn-calc").addEventListener("click", () => {
+          const a = parseInt(document.getElementById("a").value);
+          const b = parseInt(document.getElementById("b").value);
+          const op = parseInt(document.getElementById("op").value);
+          const result = calculate(a, b, op);
+          document.getElementById(
+            "calc-result"
+          ).textContent = `Résultat: ${result}`;
+        });
+
+        document
+          .getElementById("btn-div-zero")
+          .addEventListener("click", () => {
+            const result = calculate(10, 0, 3);
+            document.getElementById(
+              "div-result"
+            ).textContent = `Résultat: ${result}`;
+          });
+      };
+    </script>
+  </body>
+</html>

@@ -145,14 +145,14 @@ existants dans le repository.
 | 12  | em_q12 | -sEXPORT_ES6                | ✅        | `02-emscripten/03-es6/`               | -                               |
 | 13  | em_q13 | HEAP8/HEAP32/HEAPF64        | ✅        | `02-emscripten/09-heap/`              | -                               |
 | 14  | em_q14 | -sALLOW_MEMORY_GROWTH       | ✅        | `02-emscripten/10-memory-growth/`     | -                               |
-| 15  | em_q15 | Debug -gsource-map          | ❌        | -                                     | `02-emscripten/11-debug/`       |
-| 16  | em_q16 | EXPORTED_RUNTIME_METHODS    | ⚠️        | `02-emscripten/02-library/Makefile`   | -                               |
+| 15  | em_q15 | Debug -gsource-map          | ✅        | `02-emscripten/11-debug/`             | -                               |
+| 16  | em_q16 | EXPORTED_RUNTIME_METHODS    | ✅        | `02-emscripten/02-library/Makefile`   | -                               |
 | 17  | em_q17 | printf → console.log        | ✅        | `02-emscripten/01-hello/`             | -                               |
-| 18  | em_q18 | Lier plusieurs fichiers C   | ❌        | -                                     | `02-emscripten/12-multifile/`   |
-| 19  | em_q19 | Ports bibliothèques tierces | ❌        | -                                     | `02-emscripten/13-ports/`       |
+| 18  | em_q18 | Lier plusieurs fichiers C   | ✅        | `02-emscripten/12-multifile/`         | -                               |
+| 19  | em_q19 | Ports bibliothèques tierces | ✅        | `02-emscripten/13-ports/`             | -                               |
 | 20  | em_q20 | -o .js vs -o .html          | ❌        | -                                     | `02-emscripten/14-html-output/` |
 
-**Résumé Chapitre 5:** 15/20 couverts (75%)
+**Résumé Chapitre 5:** 19/20 couverts (95%)
 
 ---
 
@@ -175,13 +175,13 @@ existants dans le repository.
 | 13  | port_q13 | -sINITIAL_MEMORY               | ❌        | -                                   | `02-emscripten/20-memory-config/`     |
 | 14  | port_q14 | Symboles non définis           | ❌        | -                                   | `02-emscripten/21-undefined-symbols/` |
 | 15  | port_q15 | -sWASM_BIGINT                  | ❌        | -                                   | `02-emscripten/22-bigint/`            |
-| 16  | port_q16 | Debug librairie portée         | ❌        | -                                   | `02-emscripten/11-debug/`             |
+| 16  | port_q16 | Debug librairie portée         | ✅        | `02-emscripten/11-debug/`           | -                                     |
 | 17  | port_q17 | -sSINGLE_FILE=1                | ❌        | -                                   | `02-emscripten/23-single-file/`       |
 | 18  | port_q18 | Module.arguments               | ✅        | `02-emscripten/05-main/`            | -                                     |
 | 19  | port_q19 | -sINVOKE_RUN=0                 | ❌        | -                                   | `02-emscripten/24-no-main/`           |
 | 20  | port_q20 | Intégration React/Vue          | ❌        | -                                   | `02-emscripten/25-spa-integration/`   |
 
-**Résumé Chapitre 6:** 6/20 couverts (30%)
+**Résumé Chapitre 6:** 7/20 couverts (35%)
 
 ---
 
@@ -193,9 +193,9 @@ existants dans le repository.
 | 2. Langage WAT       | 20       | 20      | 100%        |
 | 3. Runtimes & API JS | 20       | 20      | 100%        |
 | 4. AssemblyScript    | 20       | 20      | 100%        |
-| 5. Emscripten        | 15       | 20      | 75%         |
-| 6. Portage librairie | 6        | 20      | 30%         |
-| **TOTAL**            | **101**  | **120** | **84%**     |
+| 5. Emscripten        | 19       | 20      | 95%         |
+| 6. Portage librairie | 7        | 20      | 35%         |
+| **TOTAL**            | **106**  | **120** | **88%**     |
 
 ---
 

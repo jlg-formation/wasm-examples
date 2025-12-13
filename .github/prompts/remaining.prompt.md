@@ -4,8 +4,8 @@ agent: agent
 
 ## Role
 
-Tu es un expert en WebAssembly (WAT, WASI), Emscripten et AssemblyScript.
-Tu analyses la couverture pédagogique entre des exemples de code et un QCM.
+Tu es un expert en WebAssembly (WAT, WASI), Emscripten et AssemblyScript. Tu
+analyses la couverture pédagogique entre des exemples de code et un QCM.
 
 ## Contexte
 
@@ -29,7 +29,8 @@ Le fichier QCM se trouve dans `qcm/qcm-wasm.yml`.
 ### Phase 1 : Analyse (si le plan n'existe pas)
 
 1. Lis le fichier `qcm/qcm-wasm.yml` pour comprendre les questions
-2. Examine les exemples dans les dossiers `01-wat/`, `02-emscripten/`, `03-wasi/`, `04-assemblyscript/`
+2. Examine les exemples dans les dossiers `01-wat/`, `02-emscripten/`,
+   `03-wasi/`, `04-assemblyscript/`
 3. Crée le fichier `/remaining-examples.plan.md`
 
 ### Phase 2 : Réalisation (si le plan existe)
@@ -37,15 +38,18 @@ Le fichier QCM se trouve dans `qcm/qcm-wasm.yml`.
 **Paramètre : `count`** = nombre d'exemples à créer par exécution (défaut : 3)
 
 1. Lis le fichier `/remaining-examples.plan.md`
-2. Identifie les `count` premiers exemples non couverts (❌) qui n'ont pas encore été créés
+2. Identifie les `count` premiers exemples non couverts (❌) qui n'ont pas
+   encore été créés
 3. Pour chaque exemple :
    - Crée l'exemple (code ou documentation) selon le type indiqué
-   - Mets à jour le plan : change ❌ en ✅ et ajoute le chemin dans "Exemple existant"
+   - Mets à jour le plan : change ❌ en ✅ et ajoute le chemin dans "Exemple
+     existant"
 4. Affiche un résumé des exemples créés et le nombre restant
 
 ## Format de sortie
 
-Le fichier `/remaining-examples.plan.md` doit contenir un tableau avec ce format :
+Le fichier `/remaining-examples.plan.md` doit contenir un tableau avec ce format
+:
 
 | #   | Question QCM                      | Couvert ? | Exemple existant    | Exemple à créer       |
 | --- | --------------------------------- | --------- | ------------------- | --------------------- |
@@ -54,15 +58,15 @@ Le fichier `/remaining-examples.plan.md` doit contenir un tableau avec ce format
 
 ## Exemple
 
-Pour une question sur les boucles en WAT :
-| # | Question QCM | Couvert ? | Exemple existant | Exemple à créer |
-|---|--------------|-----------|------------------|-----------------|
-| 7 | Comment créer une boucle en WAT ? | ✅ | `01-wat/07-loop/` | - |
+Pour une question sur les boucles en WAT : | # | Question QCM | Couvert ? |
+Exemple existant | Exemple à créer |
+|---|--------------|-----------|------------------|-----------------| | 7 |
+Comment créer une boucle en WAT ? | ✅ | `01-wat/07-loop/` | - |
 
-Pour une question sans exemple :
-| # | Question QCM | Couvert ? | Exemple existant | Exemple à créer |
-|---|--------------|-----------|------------------|-----------------|
-| 15 | Comment utiliser SIMD en Wasm ? | ❌ | - | `01-wat/16-simd/` |
+Pour une question sans exemple : | # | Question QCM | Couvert ? | Exemple
+existant | Exemple à créer |
+|---|--------------|-----------|------------------|-----------------| | 15 |
+Comment utiliser SIMD en Wasm ? | ❌ | - | `01-wat/16-simd/` |
 
 ## Contraintes
 
@@ -72,13 +76,15 @@ Pour une question sans exemple :
 
 ### Numérotation des exemples (CRITIQUE)
 
-Chaque dossier a sa **propre numérotation indépendante**. Les préfixes `NN-` doivent être **uniques au sein de chaque dossier**.
+Chaque dossier a sa **propre numérotation indépendante**. Les préfixes `NN-`
+doivent être **uniques au sein de chaque dossier**.
 
 #### Procédure obligatoire AVANT de créer un exemple :
 
 1. **Liste les fichiers/dossiers existants** du dossier cible avec `ls`
 2. **Identifie le numéro maximum** déjà utilisé (ex: si max = 17, prochain = 18)
-3. **Vérifie aussi le plan** `/remaining-examples.plan.md` pour les numéros réservés non encore créés
+3. **Vérifie aussi le plan** `/remaining-examples.plan.md` pour les numéros
+   réservés non encore créés
 4. **Utilise le numéro suivant** le plus élevé entre fichiers réels et plan
 
 #### Exemples de calcul :
@@ -98,11 +104,13 @@ docs/ contient: 01-w3c.md, 02-bytecode.md, ..., 07-security.md
 
 #### Mise à jour du plan :
 
-Quand tu crées un exemple, **mets à jour le plan** avec le numéro réellement utilisé (pas celui initialement proposé s'il a changé).
+Quand tu crées un exemple, **mets à jour le plan** avec le numéro réellement
+utilisé (pas celui initialement proposé s'il a changé).
 
 ## Types de contenus à créer
 
-Selon la nature de la question non couverte, propose le type de contenu approprié :
+Selon la nature de la question non couverte, propose le type de contenu
+approprié :
 
 | Type de question                | Contenu à créer | Exemple de format (NN = prochain numéro) |
 | ------------------------------- | --------------- | ---------------------------------------- |
@@ -113,7 +121,8 @@ Selon la nature de la question non couverte, propose le type de contenu appropri
 | Configuration/Installation      | Guide           | `docs/NN-<slug>.md`                      |
 | Outils externes (VS Code, etc.) | Documentation   | `docs/NN-<slug>.md`                      |
 
-⚠️ **Important** : `NN` doit être calculé dynamiquement (voir section Numérotation).
+⚠️ **Important** : `NN` doit être calculé dynamiquement (voir section
+Numérotation).
 
 ## Principes de création des exemples
 
@@ -144,6 +153,12 @@ Les fichiers de documentation doivent :
 
 Pour les exemples incluant une interface HTML :
 
-- Utiliser **Tailwind CSS via CDN** (`<script src="https://cdn.tailwindcss.com"></script>`)
+- Utiliser **Tailwind CSS via CDN**
+  (`<script src="https://cdn.tailwindcss.com"></script>`)
 - Privilégier les classes Tailwind aux styles CSS custom
 - Conserver uniquement le CSS custom indispensable (ex: coloration syntaxique)
+
+### Serveur Web de test
+
+- Utiliser `npx serve` pour lancer un serveur HTTP local
+- Ne pas utiliser `python -m http.server`
