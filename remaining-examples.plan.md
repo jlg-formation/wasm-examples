@@ -129,28 +129,28 @@ existants dans le repository.
 
 ## Chapitre 5 : Emscripten (j3-matin-emscripten)
 
-| #   | ID     | Question QCM                | Couvert ? | Exemple existant                      | Exemple à créer                 |
-| --- | ------ | --------------------------- | --------- | ------------------------------------- | ------------------------------- |
-| 1   | em_q1  | Rôle Emscripten             | ✅        | `02-emscripten/01-hello/`             | -                               |
-| 2   | em_q2  | Commande emcc               | ✅        | `02-emscripten/*/Makefile`            | -                               |
-| 3   | em_q3  | Langages C/C++              | ✅        | `02-emscripten/01-hello/hello.c`      | -                               |
-| 4   | em_q4  | Installation Emscripten     | ✅        | `docs/12-emscripten-install.md`       | -                               |
-| 5   | em_q5  | Module.ccall()              | ✅        | `02-emscripten/02-library/wrapper.js` | -                               |
-| 6   | em_q6  | ccall vs cwrap              | ✅        | `02-emscripten/02-library/wrapper.js` | -                               |
-| 7   | em_q7  | Glue code JS                | ✅        | `02-emscripten/01-hello/hello.js`     | -                               |
-| 8   | em_q8  | EMSCRIPTEN_KEEPALIVE        | ✅        | `02-emscripten/02-library/add.c`      | -                               |
-| 9   | em_q9  | asm.js historique           | ✅        | `docs/05-asmjs-history.md`            | -                               |
-| 10  | em_q10 | Flags -O1/-O2/-O3           | ✅        | `02-emscripten/08-optimize/`          | -                               |
-| 11  | em_q11 | Chaînes UTF8ToString        | ✅        | `02-emscripten/04-strings/`           | -                               |
-| 12  | em_q12 | -sEXPORT_ES6                | ✅        | `02-emscripten/03-es6/`               | -                               |
-| 13  | em_q13 | HEAP8/HEAP32/HEAPF64        | ✅        | `02-emscripten/09-heap/`              | -                               |
-| 14  | em_q14 | -sALLOW_MEMORY_GROWTH       | ✅        | `02-emscripten/10-memory-growth/`     | -                               |
-| 15  | em_q15 | Debug -gsource-map          | ✅        | `02-emscripten/11-debug/`             | -                               |
-| 16  | em_q16 | EXPORTED_RUNTIME_METHODS    | ✅        | `02-emscripten/02-library/Makefile`   | -                               |
-| 17  | em_q17 | printf → console.log        | ✅        | `02-emscripten/01-hello/`             | -                               |
-| 18  | em_q18 | Lier plusieurs fichiers C   | ✅        | `02-emscripten/12-multifile/`         | -                               |
-| 19  | em_q19 | Ports bibliothèques tierces | ✅        | `02-emscripten/13-ports/`             | -                               |
-| 20  | em_q20 | -o .js vs -o .html          | ✅        | `02-emscripten/14-html-output/`       | -                               |
+| #   | ID     | Question QCM                | Couvert ? | Exemple existant                      | Exemple à créer |
+| --- | ------ | --------------------------- | --------- | ------------------------------------- | --------------- |
+| 1   | em_q1  | Rôle Emscripten             | ✅        | `02-emscripten/01-hello/`             | -               |
+| 2   | em_q2  | Commande emcc               | ✅        | `02-emscripten/*/Makefile`            | -               |
+| 3   | em_q3  | Langages C/C++              | ✅        | `02-emscripten/01-hello/hello.c`      | -               |
+| 4   | em_q4  | Installation Emscripten     | ✅        | `docs/12-emscripten-install.md`       | -               |
+| 5   | em_q5  | Module.ccall()              | ✅        | `02-emscripten/02-library/wrapper.js` | -               |
+| 6   | em_q6  | ccall vs cwrap              | ✅        | `02-emscripten/02-library/wrapper.js` | -               |
+| 7   | em_q7  | Glue code JS                | ✅        | `02-emscripten/01-hello/hello.js`     | -               |
+| 8   | em_q8  | EMSCRIPTEN_KEEPALIVE        | ✅        | `02-emscripten/02-library/add.c`      | -               |
+| 9   | em_q9  | asm.js historique           | ✅        | `docs/05-asmjs-history.md`            | -               |
+| 10  | em_q10 | Flags -O1/-O2/-O3           | ✅        | `02-emscripten/08-optimize/`          | -               |
+| 11  | em_q11 | Chaînes UTF8ToString        | ✅        | `02-emscripten/04-strings/`           | -               |
+| 12  | em_q12 | -sEXPORT_ES6                | ✅        | `02-emscripten/03-es6/`               | -               |
+| 13  | em_q13 | HEAP8/HEAP32/HEAPF64        | ✅        | `02-emscripten/09-heap/`              | -               |
+| 14  | em_q14 | -sALLOW_MEMORY_GROWTH       | ✅        | `02-emscripten/10-memory-growth/`     | -               |
+| 15  | em_q15 | Debug -gsource-map          | ✅        | `02-emscripten/11-debug/`             | -               |
+| 16  | em_q16 | EXPORTED_RUNTIME_METHODS    | ✅        | `02-emscripten/02-library/Makefile`   | -               |
+| 17  | em_q17 | printf → console.log        | ✅        | `02-emscripten/01-hello/`             | -               |
+| 18  | em_q18 | Lier plusieurs fichiers C   | ✅        | `02-emscripten/12-multifile/`         | -               |
+| 19  | em_q19 | Ports bibliothèques tierces | ✅        | `02-emscripten/13-ports/`             | -               |
+| 20  | em_q20 | -o .js vs -o .html          | ✅        | `02-emscripten/14-html-output/`       | -               |
 
 **Résumé Chapitre 5:** 20/20 couverts (100%)
 

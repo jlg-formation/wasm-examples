@@ -1,15 +1,15 @@
 # Emscripten - Sortie HTML vs JS
 
-> **Question QCM associée:** em_q20 - Quelle est la différence entre `-o
-> app.js` et `-o app.html` ?
+> **Question QCM associée:** em_q20 - Quelle est la différence entre `-o app.js`
+> et `-o app.html` ?
 
 ## Concept clé
 
 L'extension du fichier de sortie détermine ce qu'Emscripten génère :
 
-| Extension | Fichiers générés              | Usage                    |
-| --------- | ----------------------------- | ------------------------ |
-| `.js`     | `app.js` + `app.wasm`         | Intégration personnalisée |
+| Extension | Fichiers générés                   | Usage                     |
+| --------- | ---------------------------------- | ------------------------- |
+| `.js`     | `app.js` + `app.wasm`              | Intégration personnalisée |
 | `.html`   | `app.html` + `app.js` + `app.wasm` | Page de test standalone   |
 
 ## Sortie `.js` (production)

@@ -41,13 +41,13 @@ node wrapper.mjs
 
 ## Outils Emscripten pour le portage
 
-| Outil       | Usage                         |
-| ----------- | ----------------------------- |
-| emconfigure | Configure un projet Autoconf  |
-| emmake      | Exécute make avec emcc        |
-| emcmake     | Configure un projet CMake     |
-| emar        | Crée des archives .a          |
-| emranlib    | Indexe les archives           |
+| Outil       | Usage                        |
+| ----------- | ---------------------------- |
+| emconfigure | Configure un projet Autoconf |
+| emmake      | Exécute make avec emcc       |
+| emcmake     | Configure un projet CMake    |
+| emar        | Crée des archives .a         |
+| emranlib    | Indexe les archives          |
 
 ## Ressources
 
