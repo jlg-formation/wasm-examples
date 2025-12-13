@@ -100,30 +100,30 @@ existants dans le repository.
 
 ## Chapitre 4 : AssemblyScript (j2-aprem-assemblyscript)
 
-| #   | ID     | Question QCM                | Couvert ? | Exemple existant                    | Exemple à créer                  |
-| --- | ------ | --------------------------- | --------- | ----------------------------------- | -------------------------------- |
-| 1   | as_q1  | Qu'est-ce qu'AssemblyScript | ✅        | `04-assemblyscript/01-hello/`       | -                                |
-| 2   | as_q2  | npx asinit                  | ✅        | `04-assemblyscript/*/package.json`  | -                                |
-| 3   | as_q3  | Garbage collector           | ✅        | `04-assemblyscript/04-gc/`          | -                                |
-| 4   | as_q4  | asconfig.json               | ✅        | `04-assemblyscript/*/asconfig.json` | -                                |
-| 5   | as_q5  | Export function             | ✅        | `04-assemblyscript/03-exports/`     | -                                |
-| 6   | as_q6  | Types i32/u32/i64/f64       | ✅        | `04-assemblyscript/01-hello/`       | -                                |
-| 7   | as_q7  | Intégration front-end       | ✅        | `04-assemblyscript/*/index.html`    | -                                |
-| 8   | as_q8  | Déclaration classe          | ✅        | `04-assemblyscript/02-class/`       | -                                |
-| 9   | as_q9  | Source maps debug           | ✅        | `docs/10-assemblyscript-debug.md`   | -                                |
-| 10  | as_q10 | Option --optimize           | ✅        | `04-assemblyscript/05-optimize/`    | -                                |
-| 11  | as_q11 | \_\_newString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -                                |
-| 12  | as_q12 | Debug vs Release            | ✅        | `04-assemblyscript/*/build/`        | -                                |
-| 13  | as_q13 | \_\_getString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -                                |
-| 14  | as_q14 | Tableau typé Int32Array     | ✅        | `04-assemblyscript/07-arrays/`      | -                                |
-| 15  | as_q15 | \_\_release()               | ✅        | `04-assemblyscript/04-gc/`          | -                                |
-| 16  | as_q16 | @external import            | ✅        | `04-assemblyscript/08-imports/`     | -                                |
-| 17  | as_q17 | StaticArray vs Array        | ✅        | `04-assemblyscript/07-arrays/`      | -                                |
-| 18  | as_q18 | Support SIMD v128           | ✅        | `04-assemblyscript/09-simd/`        | -                                |
-| 19  | as_q19 | assert() et abort()         | ❌        | -                                   | `04-assemblyscript/10-errors/`   |
-| 20  | as_q20 | Analyse taille module       | ❌        | -                                   | `docs/11-wasm-analysis-tools.md` |
+| #   | ID     | Question QCM                | Couvert ? | Exemple existant                    | Exemple à créer |
+| --- | ------ | --------------------------- | --------- | ----------------------------------- | --------------- |
+| 1   | as_q1  | Qu'est-ce qu'AssemblyScript | ✅        | `04-assemblyscript/01-hello/`       | -               |
+| 2   | as_q2  | npx asinit                  | ✅        | `04-assemblyscript/*/package.json`  | -               |
+| 3   | as_q3  | Garbage collector           | ✅        | `04-assemblyscript/04-gc/`          | -               |
+| 4   | as_q4  | asconfig.json               | ✅        | `04-assemblyscript/*/asconfig.json` | -               |
+| 5   | as_q5  | Export function             | ✅        | `04-assemblyscript/03-exports/`     | -               |
+| 6   | as_q6  | Types i32/u32/i64/f64       | ✅        | `04-assemblyscript/01-hello/`       | -               |
+| 7   | as_q7  | Intégration front-end       | ✅        | `04-assemblyscript/*/index.html`    | -               |
+| 8   | as_q8  | Déclaration classe          | ✅        | `04-assemblyscript/02-class/`       | -               |
+| 9   | as_q9  | Source maps debug           | ✅        | `docs/10-assemblyscript-debug.md`   | -               |
+| 10  | as_q10 | Option --optimize           | ✅        | `04-assemblyscript/05-optimize/`    | -               |
+| 11  | as_q11 | \_\_newString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -               |
+| 12  | as_q12 | Debug vs Release            | ✅        | `04-assemblyscript/*/build/`        | -               |
+| 13  | as_q13 | \_\_getString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -               |
+| 14  | as_q14 | Tableau typé Int32Array     | ✅        | `04-assemblyscript/07-arrays/`      | -               |
+| 15  | as_q15 | \_\_release()               | ✅        | `04-assemblyscript/04-gc/`          | -               |
+| 16  | as_q16 | @external import            | ✅        | `04-assemblyscript/08-imports/`     | -               |
+| 17  | as_q17 | StaticArray vs Array        | ✅        | `04-assemblyscript/07-arrays/`      | -               |
+| 18  | as_q18 | Support SIMD v128           | ✅        | `04-assemblyscript/09-simd/`        | -               |
+| 19  | as_q19 | assert() et abort()         | ✅        | `04-assemblyscript/10-errors/`      | -               |
+| 20  | as_q20 | Analyse taille module       | ✅        | `docs/11-wasm-analysis-tools.md`    | -               |
 
-**Résumé Chapitre 4:** 18/20 couverts (90%)
+**Résumé Chapitre 4:** 20/20 couverts (100%)
 
 ---
 
@@ -134,7 +134,7 @@ existants dans le repository.
 | 1   | em_q1  | Rôle Emscripten             | ✅        | `02-emscripten/01-hello/`             | -                                 |
 | 2   | em_q2  | Commande emcc               | ✅        | `02-emscripten/*/Makefile`            | -                                 |
 | 3   | em_q3  | Langages C/C++              | ✅        | `02-emscripten/01-hello/hello.c`      | -                                 |
-| 4   | em_q4  | Installation Emscripten     | ❌        | -                                     | `docs/12-emscripten-install.md`   |
+| 4   | em_q4  | Installation Emscripten     | ✅        | `docs/12-emscripten-install.md`       | -                                 |
 | 5   | em_q5  | Module.ccall()              | ✅        | `02-emscripten/02-library/wrapper.js` | -                                 |
 | 6   | em_q6  | ccall vs cwrap              | ✅        | `02-emscripten/02-library/wrapper.js` | -                                 |
 | 7   | em_q7  | Glue code JS                | ✅        | `02-emscripten/01-hello/hello.js`     | -                                 |
@@ -152,7 +152,7 @@ existants dans le repository.
 | 19  | em_q19 | Ports bibliothèques tierces | ❌        | -                                     | `02-emscripten/13-ports/`         |
 | 20  | em_q20 | -o .js vs -o .html          | ❌        | -                                     | `02-emscripten/14-html-output/`   |
 
-**Résumé Chapitre 5:** 10/20 couverts (50%)
+**Résumé Chapitre 5:** 11/20 couverts (55%)
 
 ---
 
@@ -166,7 +166,7 @@ existants dans le repository.
 | 4   | port_q4  | EXPORTED_FUNCTIONS             | ✅        | `02-emscripten/02-library/Makefile` | -                                     |
 | 5   | port_q5  | MEMFS filesystem virtuel       | ✅        | `02-emscripten/07-filesystem/`      | -                                     |
 | 6   | port_q6  | --preload-file                 | ✅        | `02-emscripten/07-filesystem/`      | -                                     |
-| 7   | port_q7  | Variable EMSDK                 | ❌        | -                                   | `docs/12-emscripten-install.md`       |
+| 7   | port_q7  | Variable EMSDK                 | ✅        | `docs/12-emscripten-install.md`     | -                                     |
 | 8   | port_q8  | Autoconf/Automake              | ❌        | -                                   | `02-emscripten/15-autoconf/`          |
 | 9   | port_q9  | EXPORTED_RUNTIME_METHODS       | ⚠️        | `02-emscripten/02-library/Makefile` | -                                     |
 | 10  | port_q10 | emcmake cmake                  | ❌        | -                                   | `02-emscripten/18-cmake/`             |
@@ -181,7 +181,7 @@ existants dans le repository.
 | 19  | port_q19 | -sINVOKE_RUN=0                 | ❌        | -                                   | `02-emscripten/24-no-main/`           |
 | 20  | port_q20 | Intégration React/Vue          | ❌        | -                                   | `02-emscripten/25-spa-integration/`   |
 
-**Résumé Chapitre 6:** 5/20 couverts (25%)
+**Résumé Chapitre 6:** 6/20 couverts (30%)
 
 ---
 
@@ -192,10 +192,10 @@ existants dans le repository.
 | 1. Introduction WASM | 20       | 20      | 100%        |
 | 2. Langage WAT       | 20       | 20      | 100%        |
 | 3. Runtimes & API JS | 20       | 20      | 100%        |
-| 4. AssemblyScript    | 18       | 20      | 90%         |
-| 5. Emscripten        | 10       | 20      | 50%         |
-| 6. Portage librairie | 5        | 20      | 25%         |
-| **TOTAL**            | **93**   | **120** | **78%**     |
+| 4. AssemblyScript    | 20       | 20      | 100%        |
+| 5. Emscripten        | 11       | 20      | 55%         |
+| 6. Portage librairie | 6        | 20      | 30%         |
+| **TOTAL**            | **97**   | **120** | **81%**     |
 
 ---
 

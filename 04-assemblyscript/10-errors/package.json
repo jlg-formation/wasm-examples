@@ -1,0 +1,15 @@
+{
+  "name": "10-errors",
+  "version": "1.0.0",
+  "description": "AssemblyScript - assert() et abort() pour la gestion des erreurs",
+  "type": "module",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "test": "node wrapper.mjs"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.27.34"
+  }
+}

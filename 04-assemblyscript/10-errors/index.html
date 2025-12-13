@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AssemblyScript - assert() et abort()</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">
+        AssemblyScript - Gestion des erreurs
+      </h1>
+      <p class="text-gray-600 mb-6">
+        Question QCM: as_q19 - assert() et abort()
+      </p>
+
+      <div class="space-y-4">
+        <!-- Division -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-blue-600 mb-2">
+            divide(a, b) avec assert()
+          </h2>
+          <p class="text-gray-600 mb-2 text-sm">Assert vérifie que b ≠ 0</p>
+          <div class="flex gap-2 mb-2">
+            <input
+              type="number"
+              id="div-a"
+              value="20"
+              class="border rounded px-2 py-1 w-20"
+              placeholder="a"
+            />
+            <span class="py-1">÷</span>
+            <input
+              type="number"
+              id="div-b"
+              value="4"
+              class="border rounded px-2 py-1 w-20"
+              placeholder="b"
+            />
+            <button
+              id="btn-divide"
+              class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+            >
+              Diviser
+            </button>
+          </div>
+          <div
+            id="div-result"
+            class="font-mono bg-gray-100 p-2 rounded text-sm"
+          ></div>
+        </div>
+
+        <!-- Validation d'âge -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-green-600 mb-2">
+            validateAge(age) avec abort()
+          </h2>
+          <p class="text-gray-600 mb-2 text-sm">
+            Abort si âge &lt; 0 ou &gt; 150
+          </p>
+          <div class="flex gap-2 mb-2">
+            <input
+              type="number"
+              id="age"
+              value="25"
+              class="border rounded px-2 py-1 w-20"
+              placeholder="Âge"
+            />
+            <button
+              id="btn-age"
+              class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
+            >
+              Valider
+            </button>
+          </div>
+          <div
+            id="age-result"
+            class="font-mono bg-gray-100 p-2 rounded text-sm"
+          ></div>
+        </div>
+
+        <!-- processData -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-purple-600 mb-2">
+            processData(value)
+          </h2>
+          <p class="text-gray-600 mb-2 text-sm">
+            Assert value ≥ 0, abort si value &gt; 1,000,000
+          </p>
+          <div class="flex gap-2 mb-2">
+            <input
+              type="number"
+              id="data"
+              value="50"
+              class="border rounded px-2 py-1 w-32"
+              placeholder="Valeur"
+            />
+            <button
+              id="btn-data"
+              class="bg-purple-500 text-white px-4 py-1 rounded hover:bg-purple-600"
+            >
+              Traiter
+            </button>
+          </div>
+          <div
+            id="data-result"
+            class="font-mono bg-gray-100 p-2 rounded text-sm"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Note technique -->
+      <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <h3 class="font-bold text-yellow-800">💡 Concept clé</h3>
+        <ul class="text-yellow-700 text-sm mt-2 space-y-1">
+          <li>
+            <code class="bg-yellow-100 px-1 rounded"
+              >assert(condition, msg)</code
+            >
+            - Vérifie une condition
+          </li>
+          <li>
+            <code class="bg-yellow-100 px-1 rounded">abort(msg)</code> - Erreur
+            fatale immédiate
+          </li>
+          <li><strong>try/catch n'existe pas</strong> en AssemblyScript</li>
+          <li>
+            Les erreurs deviennent des <code>RuntimeError</code> en JavaScript
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script type="module">
+      const divResult = document.getElementById("div-result");
+      const ageResult = document.getElementById("age-result");
+      const dataResult = document.getElementById("data-result");
+
+      // Imports pour gérer les abort
+      const imports = {
+        env: {
+          abort(messagePtr, fileNamePtr, line, column) {
+            throw new Error(`Abort à ligne ${line}`);
+          },
+        },
+      };
+
+      // Charger le module WASM
+      const response = await fetch("./build/debug.wasm");
+      const wasmModule = await WebAssembly.instantiateStreaming(
+        response,
+        imports
+      );
+      const { divide, validateAge, processData } = wasmModule.instance.exports;
+
+      // Division
+      document.getElementById("btn-divide").addEventListener("click", () => {
+        const a = parseInt(document.getElementById("div-a").value);
+        const b = parseInt(document.getElementById("div-b").value);
+        try {
+          const result = divide(a, b);
+          divResult.innerHTML = `<span class="text-green-600">✓ ${a} ÷ ${b} = ${result}</span>`;
+        } catch (e) {
+          divResult.innerHTML = `<span class="text-red-600">❌ Assert échoué: division par zéro</span>`;
+        }
+      });
+
+      // Validation d'âge
+      document.getElementById("btn-age").addEventListener("click", () => {
+        const age = parseInt(document.getElementById("age").value);
+        try {
+          validateAge(age);
+          ageResult.innerHTML = `<span class="text-green-600">✓ Âge ${age} validé</span>`;
+        } catch (e) {
+          ageResult.innerHTML = `<span class="text-red-600">❌ Abort: âge ${age} invalide</span>`;
+        }
+      });
+
+      // processData
+      document.getElementById("btn-data").addEventListener("click", () => {
+        const value = parseInt(document.getElementById("data").value);
+        try {
+          const result = processData(value);
+          dataResult.innerHTML = `<span class="text-green-600">✓ processData(${value}) = ${result}</span>`;
+        } catch (e) {
+          dataResult.innerHTML = `<span class="text-red-600">❌ Erreur: valeur ${value} rejetée</span>`;
+        }
+      });
+    </script>
+  </body>
+</html>
