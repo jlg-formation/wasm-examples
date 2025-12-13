@@ -1,31 +1,19 @@
 // String handling with AssemblyScript
-// Demonstrates __newString() and __getString() from the loader
+// The generated bindings handle string conversion automatically
 
-import {
-  greet,
-  reverse,
-  getLength,
-  __newString,
-  __getString,
-} from "./build/release.js";
+import { greet, reverse, getLength } from "./build/release.js";
 
-// Pass a JS string to AssemblyScript using __newString()
-// The loader allocates memory in WASM and copies the string
-const namePtr = __newString("WebAssembly");
+// With modern AssemblyScript, string conversion is handled automatically
+// by the generated bindings - no need for __newString() or __getString()
 
-// Call the greet function (takes and returns string pointers internally)
-const greetingPtr = greet(namePtr);
-
-// Read the returned string from WASM memory using __getString()
-const greeting = __getString(greetingPtr);
+// Call greet with a regular JavaScript string
+const greeting = greet("WebAssembly");
 console.log("Greeting:", greeting);
 
 // Reverse a string
-const helloPtr = __newString("Hello World!");
-const reversedPtr = reverse(helloPtr);
-const reversed = __getString(reversedPtr);
+const reversed = reverse("Hello World!");
 console.log("Reversed:", reversed);
 
-// Get string length (returns i32 directly, no __getString needed)
-const length = getLength(helloPtr);
+// Get string length
+const length = getLength("Hello World!");
 console.log("Length:", length);
