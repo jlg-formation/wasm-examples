@@ -99,30 +99,30 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 
 ## Chapitre 4 : AssemblyScript (j2-aprem-assemblyscript)
 
-| #   | ID     | Question QCM                | Couvert ? | Exemple existant                    | Exemple à créer                   |
-| --- | ------ | --------------------------- | --------- | ----------------------------------- | --------------------------------- |
-| 1   | as_q1  | Qu'est-ce qu'AssemblyScript | ✅        | `04-assemblyscript/01-hello/`       | -                                 |
-| 2   | as_q2  | npx asinit                  | ✅        | `04-assemblyscript/*/package.json`  | -                                 |
-| 3   | as_q3  | Garbage collector           | ✅        | `04-assemblyscript/04-gc/`          | -                                 |
-| 4   | as_q4  | asconfig.json               | ✅        | `04-assemblyscript/*/asconfig.json` | -                                 |
-| 5   | as_q5  | Export function             | ✅        | `04-assemblyscript/03-exports/`     | -                                 |
-| 6   | as_q6  | Types i32/u32/i64/f64       | ✅        | `04-assemblyscript/01-hello/`       | -                                 |
-| 7   | as_q7  | Intégration front-end       | ✅        | `04-assemblyscript/*/index.html`    | -                                 |
-| 8   | as_q8  | Déclaration classe          | ✅        | `04-assemblyscript/02-class/`       | -                                 |
-| 9   | as_q9  | Source maps debug           | ❌        | -                                   | `docs/10-assemblyscript-debug.md` |
-| 10  | as_q10 | Option --optimize           | ❌        | -                                   | `04-assemblyscript/05-optimize/`  |
-| 11  | as_q11 | \_\_newString() loader      | ❌        | -                                   | `04-assemblyscript/06-strings/`   |
-| 12  | as_q12 | Debug vs Release            | ✅        | `04-assemblyscript/*/build/`        | -                                 |
-| 13  | as_q13 | \_\_getString() loader      | ❌        | -                                   | `04-assemblyscript/06-strings/`   |
-| 14  | as_q14 | Tableau typé Int32Array     | ❌        | -                                   | `04-assemblyscript/07-arrays/`    |
-| 15  | as_q15 | \_\_release()               | ✅        | `04-assemblyscript/04-gc/`          | -                                 |
-| 16  | as_q16 | @external import            | ❌        | -                                   | `04-assemblyscript/08-imports/`   |
-| 17  | as_q17 | StaticArray vs Array        | ❌        | -                                   | `04-assemblyscript/07-arrays/`    |
-| 18  | as_q18 | Support SIMD v128           | ❌        | -                                   | `04-assemblyscript/09-simd/`      |
-| 19  | as_q19 | assert() et abort()         | ❌        | -                                   | `04-assemblyscript/10-errors/`    |
-| 20  | as_q20 | Analyse taille module       | ❌        | -                                   | `docs/11-wasm-analysis-tools.md`  |
+| #   | ID     | Question QCM                | Couvert ? | Exemple existant                    | Exemple à créer                  |
+| --- | ------ | --------------------------- | --------- | ----------------------------------- | -------------------------------- |
+| 1   | as_q1  | Qu'est-ce qu'AssemblyScript | ✅        | `04-assemblyscript/01-hello/`       | -                                |
+| 2   | as_q2  | npx asinit                  | ✅        | `04-assemblyscript/*/package.json`  | -                                |
+| 3   | as_q3  | Garbage collector           | ✅        | `04-assemblyscript/04-gc/`          | -                                |
+| 4   | as_q4  | asconfig.json               | ✅        | `04-assemblyscript/*/asconfig.json` | -                                |
+| 5   | as_q5  | Export function             | ✅        | `04-assemblyscript/03-exports/`     | -                                |
+| 6   | as_q6  | Types i32/u32/i64/f64       | ✅        | `04-assemblyscript/01-hello/`       | -                                |
+| 7   | as_q7  | Intégration front-end       | ✅        | `04-assemblyscript/*/index.html`    | -                                |
+| 8   | as_q8  | Déclaration classe          | ✅        | `04-assemblyscript/02-class/`       | -                                |
+| 9   | as_q9  | Source maps debug           | ✅        | `docs/10-assemblyscript-debug.md`   | -                                |
+| 10  | as_q10 | Option --optimize           | ✅        | `04-assemblyscript/05-optimize/`    | -                                |
+| 11  | as_q11 | \_\_newString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -                                |
+| 12  | as_q12 | Debug vs Release            | ✅        | `04-assemblyscript/*/build/`        | -                                |
+| 13  | as_q13 | \_\_getString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -                                |
+| 14  | as_q14 | Tableau typé Int32Array     | ❌        | -                                   | `04-assemblyscript/07-arrays/`   |
+| 15  | as_q15 | \_\_release()               | ✅        | `04-assemblyscript/04-gc/`          | -                                |
+| 16  | as_q16 | @external import            | ❌        | -                                   | `04-assemblyscript/08-imports/`  |
+| 17  | as_q17 | StaticArray vs Array        | ❌        | -                                   | `04-assemblyscript/07-arrays/`   |
+| 18  | as_q18 | Support SIMD v128           | ❌        | -                                   | `04-assemblyscript/09-simd/`     |
+| 19  | as_q19 | assert() et abort()         | ❌        | -                                   | `04-assemblyscript/10-errors/`   |
+| 20  | as_q20 | Analyse taille module       | ❌        | -                                   | `docs/11-wasm-analysis-tools.md` |
 
-**Résumé Chapitre 4:** 10/20 couverts (50%)
+**Résumé Chapitre 4:** 14/20 couverts (70%)
 
 ---
 
@@ -191,10 +191,10 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | 1. Introduction WASM | 20       | 20      | 100%        |
 | 2. Langage WAT       | 20       | 20      | 100%        |
 | 3. Runtimes & API JS | 20       | 20      | 100%        |
-| 4. AssemblyScript    | 10       | 20      | 50%         |
+| 4. AssemblyScript    | 14       | 20      | 70%         |
 | 5. Emscripten        | 10       | 20      | 50%         |
 | 6. Portage librairie | 5        | 20      | 25%         |
-| **TOTAL**            | **85**   | **120** | **71%**     |
+| **TOTAL**            | **89**   | **120** | **74%**     |
 
 ---
 

@@ -1,0 +1,15 @@
+{
+  "name": "06-strings",
+  "version": "1.0.0",
+  "description": "AssemblyScript string handling demo",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "node wrapper.mjs"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.27.23"
+  },
+  "type": "module"
+}
