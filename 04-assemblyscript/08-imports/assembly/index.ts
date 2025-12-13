@@ -9,14 +9,17 @@
 // "env" est le module par défaut pour les imports WASM
 
 // Import d'une fonction de log depuis JavaScript
+// @ts-ignore: AssemblyScript decorator
 @external("env", "logNumber")
 declare function logNumber(value: i32): void;
 
 // Import d'une fonction qui retourne une valeur
+// @ts-ignore: AssemblyScript decorator
 @external("env", "getTimestamp")
 declare function getTimestamp(): f64;
 
 // Import d'une fonction de notification
+// @ts-ignore: AssemblyScript decorator
 @external("env", "notify")
 declare function notify(code: i32): void;
 
@@ -59,6 +62,7 @@ export function calculate(a: i32, b: i32): i32 {
 // Exemple avec import personnalisé (math)
 // ============================================
 
+// @ts-ignore: AssemblyScript decorator
 @external("math", "random")
 declare function jsRandom(): f64;
 

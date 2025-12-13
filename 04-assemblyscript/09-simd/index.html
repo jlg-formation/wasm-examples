@@ -84,62 +84,61 @@
     </div>
 
     <script type="module">
+      // Avec les bindings ESM, les StaticArray sont automatiquement
+      // convertis en tableaux JavaScript natifs
       import {
         addVectorsSimd,
         multiplyFloatsSimd,
         sumArrayScalar,
         sumArraySimd,
         createTestArray,
-        __pin,
-        __unpin,
-        __getArray,
       } from "./build/release.js";
 
-      // Demo i32x4.add
-      const addPtr = addVectorsSimd(1, 2, 3, 4, 10, 20, 30, 40);
-      __pin(addPtr);
-      const addResult = __getArray(addPtr);
+      // Demo i32x4.add - retourne directement un tableau JS
+      const addResult = addVectorsSimd(1, 2, 3, 4, 10, 20, 30, 40);
       document.getElementById(
         "add-result"
       ).textContent = `Résultat: [${addResult.join(", ")}]`;
-      __unpin(addPtr);
 
-      // Demo f32x4.mul
-      const mulPtr = multiplyFloatsSimd(1.5, 2.0, 2.5, 3.0, 2.0, 2.0, 2.0, 2.0);
-      __pin(mulPtr);
-      const mulResult = __getArray(mulPtr);
+      // Demo f32x4.mul - retourne directement un tableau JS
+      const mulResult = multiplyFloatsSimd(
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      );
       document.getElementById(
         "mul-result"
       ).textContent = `Résultat: [${mulResult
         .map((n) => n.toFixed(1))
         .join(", ")}]`;
-      __unpin(mulPtr);
 
       // Benchmark
       document.getElementById("btn-benchmark").addEventListener("click", () => {
         const resultEl = document.getElementById("benchmark-result");
         resultEl.innerHTML = "⏳ Benchmark en cours...";
 
-        // Créer un tableau de test
+        // Créer un tableau de test - retourne un tableau JS
         const size = 100000;
-        const arrPtr = createTestArray(size);
-        __pin(arrPtr);
+        const testArray = createTestArray(size);
 
         // Benchmark Scalaire
         const startScalar = performance.now();
         for (let i = 0; i < 100; i++) {
-          sumArrayScalar(arrPtr);
+          sumArrayScalar(testArray);
         }
         const timeScalar = performance.now() - startScalar;
 
         // Benchmark SIMD
         const startSimd = performance.now();
         for (let i = 0; i < 100; i++) {
-          sumArraySimd(arrPtr);
+          sumArraySimd(testArray);
         }
         const timeSimd = performance.now() - startSimd;
-
-        __unpin(arrPtr);
 
         const speedup = (timeScalar / timeSimd).toFixed(2);
         resultEl.innerHTML = `
