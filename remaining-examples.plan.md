@@ -1,6 +1,7 @@
 # Plan de couverture QCM - Exemples WebAssembly
 
-Ce document analyse la couverture des questions du QCM par les exemples existants dans le repository.
+Ce document analyse la couverture des questions du QCM par les exemples
+existants dans le repository.
 
 ## Légende
 
@@ -114,15 +115,15 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | 11  | as_q11 | \_\_newString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -                                |
 | 12  | as_q12 | Debug vs Release            | ✅        | `04-assemblyscript/*/build/`        | -                                |
 | 13  | as_q13 | \_\_getString() loader      | ✅        | `04-assemblyscript/06-strings/`     | -                                |
-| 14  | as_q14 | Tableau typé Int32Array     | ❌        | -                                   | `04-assemblyscript/07-arrays/`   |
+| 14  | as_q14 | Tableau typé Int32Array     | ✅        | `04-assemblyscript/07-arrays/`      | -                                |
 | 15  | as_q15 | \_\_release()               | ✅        | `04-assemblyscript/04-gc/`          | -                                |
-| 16  | as_q16 | @external import            | ❌        | -                                   | `04-assemblyscript/08-imports/`  |
-| 17  | as_q17 | StaticArray vs Array        | ❌        | -                                   | `04-assemblyscript/07-arrays/`   |
-| 18  | as_q18 | Support SIMD v128           | ❌        | -                                   | `04-assemblyscript/09-simd/`     |
+| 16  | as_q16 | @external import            | ✅        | `04-assemblyscript/08-imports/`     | -                                |
+| 17  | as_q17 | StaticArray vs Array        | ✅        | `04-assemblyscript/07-arrays/`      | -                                |
+| 18  | as_q18 | Support SIMD v128           | ✅        | `04-assemblyscript/09-simd/`        | -                                |
 | 19  | as_q19 | assert() et abort()         | ❌        | -                                   | `04-assemblyscript/10-errors/`   |
 | 20  | as_q20 | Analyse taille module       | ❌        | -                                   | `docs/11-wasm-analysis-tools.md` |
 
-**Résumé Chapitre 4:** 14/20 couverts (70%)
+**Résumé Chapitre 4:** 18/20 couverts (90%)
 
 ---
 
@@ -191,10 +192,10 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | 1. Introduction WASM | 20       | 20      | 100%        |
 | 2. Langage WAT       | 20       | 20      | 100%        |
 | 3. Runtimes & API JS | 20       | 20      | 100%        |
-| 4. AssemblyScript    | 14       | 20      | 70%         |
+| 4. AssemblyScript    | 18       | 20      | 90%         |
 | 5. Emscripten        | 10       | 20      | 50%         |
 | 6. Portage librairie | 5        | 20      | 25%         |
-| **TOTAL**            | **89**   | **120** | **74%**     |
+| **TOTAL**            | **93**   | **120** | **78%**     |
 
 ---
 
@@ -202,17 +203,21 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 
 ### Haute priorité (concepts fondamentaux)
 
-1. ~~**`01-wat/23-strings/`** - Passage de chaînes de caractères entre JS et WASM~~ ✅
+1. ~~**`01-wat/23-strings/`** - Passage de chaînes de caractères entre JS et
+   WASM~~ ✅
 2. ~~**`01-wat/22-memory-grow/`** - Croissance dynamique de la mémoire~~ ✅
 3. ~~**`01-wat/20-streaming/`** - Utilisation de `instantiateStreaming`~~ ✅
-4. ~~**`01-wat/21-error-handling/`** - Gestion des erreurs CompileError/LinkError/RuntimeError~~ ✅
+4. ~~**`01-wat/21-error-handling/`** - Gestion des erreurs
+   CompileError/LinkError/RuntimeError~~ ✅
 5. ~~**`01-wat/25-bigint/`** - Utilisation des BigInt pour i64~~ ✅
 
 ### Moyenne priorité (AssemblyScript)
 
-6. **`04-assemblyscript/06-strings/`** - **newString/**getString avec le loader
-7. **`04-assemblyscript/08-imports/`** - @external pour importer des fonctions JS
-8. **`04-assemblyscript/07-arrays/`** - StaticArray et Int32Array
+6. ~~**`04-assemblyscript/06-strings/`** - **newString/**getString avec le
+   loader~~ ✅
+7. ~~**`04-assemblyscript/08-imports/`** - @external pour importer des fonctions
+   JS~~ ✅
+8. ~~**`04-assemblyscript/07-arrays/`** - StaticArray et Int32Array~~ ✅
 9. **`04-assemblyscript/04-gc/`** - Garbage collector et \_\_release
 
 ### Moyenne priorité (Emscripten avancé)
@@ -227,4 +232,4 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 14. **`02-emscripten/15-autoconf/`** - emconfigure pour projets Autoconf
 15. **`02-emscripten/19-idbfs/`** - Persistance avec IndexedDB
 16. **`02-emscripten/25-spa-integration/`** - Intégration React/Vue
-17. **`04-assemblyscript/09-simd/`** - Opérations SIMD v128
+17. ~~**`04-assemblyscript/09-simd/`** - Opérations SIMD v128~~ ✅

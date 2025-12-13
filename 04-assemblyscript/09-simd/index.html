@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AssemblyScript - SIMD v128</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">
+        AssemblyScript - SIMD v128
+      </h1>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-blue-600 mb-2">i32x4.add()</h2>
+          <p class="text-gray-600 mb-2">Addition de 4 entiers en parallèle</p>
+          <div class="grid grid-cols-2 gap-2 text-sm mb-2">
+            <div>
+              Vecteur A: <code class="bg-gray-100 px-1">[1, 2, 3, 4]</code>
+            </div>
+            <div>
+              Vecteur B: <code class="bg-gray-100 px-1">[10, 20, 30, 40]</code>
+            </div>
+          </div>
+          <div
+            id="add-result"
+            class="font-mono bg-green-50 p-2 rounded text-green-700"
+          ></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-purple-600 mb-2">
+            f32x4.mul()
+          </h2>
+          <p class="text-gray-600 mb-2">
+            Multiplication de 4 floats en parallèle
+          </p>
+          <div class="grid grid-cols-2 gap-2 text-sm mb-2">
+            <div>
+              Vecteur A:
+              <code class="bg-gray-100 px-1">[1.5, 2.0, 2.5, 3.0]</code>
+            </div>
+            <div>
+              Vecteur B:
+              <code class="bg-gray-100 px-1">[2.0, 2.0, 2.0, 2.0]</code>
+            </div>
+          </div>
+          <div
+            id="mul-result"
+            class="font-mono bg-purple-50 p-2 rounded text-purple-700"
+          ></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-orange-600 mb-2">
+            ⚡ Benchmark SIMD vs Scalaire
+          </h2>
+          <p class="text-gray-600 mb-2">
+            Somme d'un tableau de 100 000 éléments
+          </p>
+          <button
+            id="btn-benchmark"
+            class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 mb-2"
+          >
+            Lancer le benchmark
+          </button>
+          <div
+            id="benchmark-result"
+            class="font-mono bg-gray-100 p-2 rounded text-sm"
+          ></div>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <h3 class="font-bold text-blue-800">💡 SIMD en bref</h3>
+        <ul class="text-blue-700 text-sm mt-1 space-y-1">
+          <li>• <code>v128</code> = vecteur 128 bits (4×i32 ou 4×f32)</li>
+          <li>• Une seule instruction pour 4 opérations</li>
+          <li>• Idéal pour : graphiques, audio, calculs scientifiques</li>
+        </ul>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        addVectorsSimd,
+        multiplyFloatsSimd,
+        sumArrayScalar,
+        sumArraySimd,
+        createTestArray,
+        __pin,
+        __unpin,
+        __getArray,
+      } from "./build/release.js";
+
+      // Demo i32x4.add
+      const addPtr = addVectorsSimd(1, 2, 3, 4, 10, 20, 30, 40);
+      __pin(addPtr);
+      const addResult = __getArray(addPtr);
+      document.getElementById(
+        "add-result"
+      ).textContent = `Résultat: [${addResult.join(", ")}]`;
+      __unpin(addPtr);
+
+      // Demo f32x4.mul
+      const mulPtr = multiplyFloatsSimd(1.5, 2.0, 2.5, 3.0, 2.0, 2.0, 2.0, 2.0);
+      __pin(mulPtr);
+      const mulResult = __getArray(mulPtr);
+      document.getElementById(
+        "mul-result"
+      ).textContent = `Résultat: [${mulResult
+        .map((n) => n.toFixed(1))
+        .join(", ")}]`;
+      __unpin(mulPtr);
+
+      // Benchmark
+      document.getElementById("btn-benchmark").addEventListener("click", () => {
+        const resultEl = document.getElementById("benchmark-result");
+        resultEl.innerHTML = "⏳ Benchmark en cours...";
+
+        // Créer un tableau de test
+        const size = 100000;
+        const arrPtr = createTestArray(size);
+        __pin(arrPtr);
+
+        // Benchmark Scalaire
+        const startScalar = performance.now();
+        for (let i = 0; i < 100; i++) {
+          sumArrayScalar(arrPtr);
+        }
+        const timeScalar = performance.now() - startScalar;
+
+        // Benchmark SIMD
+        const startSimd = performance.now();
+        for (let i = 0; i < 100; i++) {
+          sumArraySimd(arrPtr);
+        }
+        const timeSimd = performance.now() - startSimd;
+
+        __unpin(arrPtr);
+
+        const speedup = (timeScalar / timeSimd).toFixed(2);
+        resultEl.innerHTML = `
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <span class="text-gray-600">Scalaire:</span>
+            <span class="font-bold">${timeScalar.toFixed(2)} ms</span>
+          </div>
+          <div>
+            <span class="text-gray-600">SIMD:</span>
+            <span class="font-bold text-green-600">${timeSimd.toFixed(
+              2
+            )} ms</span>
+          </div>
+        </div>
+        <div class="mt-2 text-center">
+          🚀 <span class="text-xl font-bold text-orange-600">${speedup}x</span> plus rapide avec SIMD
+        </div>
+      `;
+      });
+    </script>
+  </body>
+</html>

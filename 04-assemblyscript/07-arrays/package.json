@@ -1,0 +1,28 @@
+{
+  "name": "07-arrays",
+  "version": "1.0.0",
+  "description": "AssemblyScript arrays example - StaticArray, Array, Int32Array",
+  "main": "index.js",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "assemblyscript",
+    "wasm",
+    "arrays"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "^0.27.23"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  }
+}

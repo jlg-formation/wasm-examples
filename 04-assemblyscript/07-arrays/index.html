@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AssemblyScript - Arrays</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">
+        AssemblyScript - Tableaux
+      </h1>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-blue-600 mb-2">
+            StaticArray&lt;i32&gt;
+          </h2>
+          <p class="text-gray-600">Taille fixe, plus performant</p>
+          <div
+            id="static-result"
+            class="mt-2 font-mono bg-gray-100 p-2 rounded"
+          ></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-green-600 mb-2">
+            Array&lt;i32&gt;
+          </h2>
+          <p class="text-gray-600">Taille dynamique avec push/pop</p>
+          <div
+            id="dynamic-result"
+            class="mt-2 font-mono bg-gray-100 p-2 rounded"
+          ></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-purple-600 mb-2">Int32Array</h2>
+          <p class="text-gray-600">Compatible TypedArray JavaScript</p>
+          <div
+            id="int32-result"
+            class="mt-2 font-mono bg-gray-100 p-2 rounded"
+          ></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-semibold text-orange-600 mb-2">
+            Float64Array
+          </h2>
+          <p class="text-gray-600">Calculs en virgule flottante</p>
+          <div
+            id="float64-result"
+            class="mt-2 font-mono bg-gray-100 p-2 rounded"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        sumStaticArray,
+        getStaticLength,
+        demonstratePush,
+        createInt32Array,
+        sumInt32Array,
+        createFloat64Array,
+        averageFloat64Array,
+        __pin,
+        __unpin,
+        __getArray,
+        __getArrayView,
+        __newArray,
+      } from "./build/release.js";
+
+      // StaticArray demo
+      const staticSum = sumStaticArray();
+      const staticLen = getStaticLength();
+      document.getElementById(
+        "static-result"
+      ).innerHTML = `Longueur: ${staticLen}<br>Somme: ${staticSum}`;
+
+      // Array dynamique demo
+      const pushResult = demonstratePush();
+      document.getElementById(
+        "dynamic-result"
+      ).innerHTML = `Après 3 push(): length = ${pushResult}`;
+
+      // Int32Array demo
+      const int32Ptr = createInt32Array(5);
+      __pin(int32Ptr);
+      const int32View = __getArrayView(int32Ptr);
+      const int32Sum = sumInt32Array(int32Ptr);
+      document.getElementById(
+        "int32-result"
+      ).innerHTML = `Tableau: [${Array.from(int32View).join(
+        ", "
+      )}]<br>Somme: ${int32Sum}`;
+      __unpin(int32Ptr);
+
+      // Float64Array demo
+      const float64Ptr = createFloat64Array(4);
+      __pin(float64Ptr);
+      const float64View = __getArrayView(float64Ptr);
+      const float64Avg = averageFloat64Array(float64Ptr);
+      document.getElementById(
+        "float64-result"
+      ).innerHTML = `Tableau: [${Array.from(float64View)
+        .map((n) => n.toFixed(1))
+        .join(", ")}]<br>Moyenne: ${float64Avg.toFixed(2)}`;
+      __unpin(float64Ptr);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "08-imports",
+  "version": "1.0.0",
+  "description": "AssemblyScript @external imports example",
+  "main": "index.js",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "assemblyscript",
+    "wasm",
+    "imports",
+    "external"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "^0.27.23"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  }
+}
