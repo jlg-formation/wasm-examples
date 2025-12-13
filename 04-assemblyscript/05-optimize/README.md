@@ -43,3 +43,8 @@ The release build should be significantly smaller than the debug build:
 debug.wasm    ~2-3KB (with debug info)
 release.wasm  ~500B  (optimized)
 ```
+
+Compare the fibonacci functions in both .wat files:
+
+- `release.wat`: 574 characters
+- `debug.wat`: 621 characters
