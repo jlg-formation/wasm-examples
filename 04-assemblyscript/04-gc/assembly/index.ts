@@ -5,7 +5,9 @@
  */
 
 // Classe simple pour démontrer l'allocation
-export class Counter {
+// Note: Les classes ne sont pas exportables directement en WASM,
+// on exporte des fonctions factory à la place
+class Counter {
   count: i32;
 
   constructor(initial: i32 = 0) {
@@ -32,13 +34,24 @@ export function createAndUseCounter(initial: i32): i32 {
   // Le counter sera collecté après cette fonction
 }
 
-// Démonstration de __pin et __unpin
-// __pin empêche un objet d'être collecté
-// __unpin permet à nouveau la collection
-export function createPinnedCounter(initial: i32): Counter {
-  const counter = new Counter(initial);
-  // L'objet retourné sera automatiquement géré par les bindings
-  return counter;
+// Variable globale pour stocker un counter persistant
+let pinnedCounter: Counter | null = null;
+
+// Crée un counter persistant (stocké en global)
+export function createPinnedCounter(initial: i32): void {
+  pinnedCounter = new Counter(initial);
+}
+
+// Récupère la valeur du counter persistant
+export function getPinnedCounterValue(): i32 {
+  if (pinnedCounter === null) return -1;
+  return pinnedCounter!.getValue();
+}
+
+// Incrémente le counter persistant
+export function incrementPinnedCounter(): i32 {
+  if (pinnedCounter === null) return -1;
+  return pinnedCounter!.increment();
 }
 
 // Fonction pour forcer un cycle de garbage collection

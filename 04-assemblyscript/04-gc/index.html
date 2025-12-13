@@ -3,134 +3,437 @@
   <head>
     <meta charset="UTF-8" />
     <title>AssemblyScript Garbage Collector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      body {
-        font-family: system-ui;
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 1rem;
+      /* Syntax highlighting for code display */
+      .code-highlight .comment {
+        color: #5c6370;
+        font-style: italic;
       }
-      pre {
-        background: #f5f5f5;
-        padding: 1rem;
-        border-radius: 4px;
+      .code-highlight .keyword {
+        color: #c678dd;
       }
-      button {
-        padding: 0.5rem 1rem;
-        margin: 0.25rem;
-        cursor: pointer;
+      .code-highlight .function {
+        color: #61afef;
       }
-      .output {
-        margin-top: 1rem;
+      .code-highlight .number {
+        color: #d19a66;
+      }
+      .code-highlight .string {
+        color: #98c379;
+      }
+      /* Step done state */
+      .step-done {
+        opacity: 0.7;
+      }
+      .step-done .step-number {
+        background-color: #22c55e !important;
       }
     </style>
   </head>
-  <body>
-    <h1>AssemblyScript - Garbage Collector</h1>
+  <body class="font-sans max-w-4xl mx-auto p-4 my-8">
+    <h1 class="text-3xl font-bold mb-4">
+      🗑️ AssemblyScript - Garbage Collector
+    </h1>
 
-    <p>
-      Cette démo illustre la gestion automatique de la mémoire en
-      AssemblyScript.
+    <p class="mb-6">
+      <strong>Objectif :</strong> Comprendre la différence entre les objets
+      <span class="text-amber-500 font-semibold">temporaires</span> (collectés
+      par le GC) et les objets
+      <span class="text-green-500 font-semibold">persistants</span> (qui
+      survivent au GC).
     </p>
 
-    <h2>Tests</h2>
-    <button onclick="testCounter()">Créer Counter</button>
-    <button onclick="testArray()">Créer Array</button>
-    <button onclick="testGC()">Forcer GC</button>
-    <button onclick="showHeap()">Afficher Heap</button>
+    <!-- Status counters -->
+    <div class="flex gap-8 p-4 bg-gray-100 rounded-lg mb-6">
+      <div class="text-center">
+        <div class="text-4xl font-bold text-amber-500" id="tempCount">0</div>
+        <div class="text-sm text-gray-600">Objets temporaires créés</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-green-500" id="persistValue">—</div>
+        <div class="text-sm text-gray-600">Valeur objet persistant</div>
+      </div>
+    </div>
 
-    <h2>Résultats</h2>
-    <pre id="output">Cliquez sur un bouton pour tester...</pre>
+    <!-- Scenario -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">📋 Scénario guidé</h2>
 
-    <h2>Code</h2>
-    <pre>
-// AssemblyScript utilise un GC automatique
-export class Counter {
+      <div
+        class="step flex items-center gap-4 p-3 bg-white rounded mb-3"
+        id="step1"
+      >
+        <div
+          class="step-number w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shrink-0"
+        >
+          1
+        </div>
+        <div class="flex-1">
+          <strong>Créer 50 objets temporaires</strong><br />
+          <small class="text-gray-500"
+            >Chaque appel crée un Counter local qui sera éligible au GC après
+            usage.</small
+          >
+        </div>
+        <button
+          onclick="step1()"
+          id="btn1"
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Créer
+        </button>
+      </div>
+
+      <div
+        class="step flex items-center gap-4 p-3 bg-white rounded mb-3"
+        id="step2"
+      >
+        <div
+          class="step-number w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shrink-0"
+        >
+          2
+        </div>
+        <div class="flex-1">
+          <strong>Créer 1 objet persistant</strong><br />
+          <small class="text-gray-500"
+            >Stocké dans une variable globale, il survivra au GC.</small
+          >
+        </div>
+        <button
+          onclick="step2()"
+          id="btn2"
+          disabled
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Créer
+        </button>
+      </div>
+
+      <div
+        class="step flex items-center gap-4 p-3 bg-white rounded mb-3"
+        id="step3"
+      >
+        <div
+          class="step-number w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shrink-0"
+        >
+          3
+        </div>
+        <div class="flex-1">
+          <strong>Forcer le Garbage Collection</strong><br />
+          <small class="text-gray-500"
+            >Appelle __collect() pour nettoyer les objets non référencés.</small
+          >
+        </div>
+        <button
+          onclick="step3()"
+          id="btn3"
+          disabled
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Collecter
+        </button>
+      </div>
+
+      <div
+        class="step flex items-center gap-4 p-3 bg-white rounded mb-3"
+        id="step4"
+      >
+        <div
+          class="step-number w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shrink-0"
+        >
+          4
+        </div>
+        <div class="flex-1">
+          <strong>Vérifier l'objet persistant</strong><br />
+          <small class="text-gray-500"
+            >L'objet persistant doit toujours être accessible et
+            fonctionnel.</small
+          >
+        </div>
+        <button
+          onclick="step4()"
+          id="btn4"
+          disabled
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Vérifier
+        </button>
+      </div>
+
+      <div class="mt-6 text-right">
+        <button
+          onclick="resetScenario()"
+          class="px-4 py-2 bg-red-400 text-white rounded hover:bg-red-500"
+        >
+          🔄 Recommencer
+        </button>
+      </div>
+    </div>
+
+    <!-- Console output -->
+    <h2 class="text-xl font-bold mb-2">📟 Console</h2>
+    <div
+      id="output"
+      class="bg-gray-900 text-gray-300 p-4 rounded font-mono text-sm min-h-[150px] whitespace-pre-wrap mb-6"
+    >
+      En attente...
+    </div>
+
+    <!-- Code display -->
+    <div class="mb-6">
+      <h3 class="font-bold mb-2">💻 Code exécuté</h3>
+      <div
+        id="codeDisplay"
+        class="code-highlight bg-[#282c34] text-[#abb2bf] p-4 rounded font-mono text-sm whitespace-pre overflow-x-auto min-h-[80px] border-l-4 border-blue-500"
+      >
+        // Cliquez sur une étape pour voir le code exécuté
+      </div>
+    </div>
+
+    <!-- Full code reference -->
+    <details class="mt-8">
+      <summary class="cursor-pointer font-bold p-2 hover:bg-gray-100 rounded">
+        📝 Voir le code AssemblyScript complet
+      </summary>
+      <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto mt-2">
+// Classe interne (non exportable directement en WASM)
+class Counter {
   count: i32;
-  constructor(initial: i32 = 0) {
-    this.count = initial;
-  }
+  constructor(initial: i32 = 0) { this.count = initial; }
+  increment(): i32 { return ++this.count; }
+  getValue(): i32 { return this.count; }
 }
 
-// Les objets sont automatiquement collectés
-// quand ils ne sont plus référencés
+// TEMPORAIRE : l'objet est créé et utilisé localement
+// → Sera collecté par le GC après l'appel
 export function createAndUseCounter(initial: i32): i32 {
   const counter = new Counter(initial);
+  counter.increment();
   return counter.getValue();
-  // counter sera collecté après cette fonction
 }
-    </pre>
+
+// PERSISTANT : stocké dans une variable globale
+// → Survit au GC tant que la référence existe
+let pinnedCounter: Counter | null = null;
+
+export function createPinnedCounter(initial: i32): void {
+  pinnedCounter = new Counter(initial);
+}
+
+export function getPinnedCounterValue(): i32 {
+  return pinnedCounter ? pinnedCounter!.getValue() : -1;
+}
+
+export function incrementPinnedCounter(): i32 {
+  return pinnedCounter ? pinnedCounter!.increment() : -1;
+}
+
+// Force un cycle de garbage collection
+export function forceGC(): void {
+  __collect();
+}
+      </pre>
+    </details>
 
     <script type="module">
       import {
         createAndUseCounter,
         createPinnedCounter,
+        getPinnedCounterValue,
+        incrementPinnedCounter,
         forceGC,
-        createArray,
-        sumArray,
-        Counter,
       } from "./build/release.js";
 
       const output = document.getElementById("output");
+      const tempCountEl = document.getElementById("tempCount");
+      const persistValueEl = document.getElementById("persistValue");
+      const codeDisplay = document.getElementById("codeDisplay");
+
+      let tempCount = 0;
+
+      // Code snippets for each step
+      const codeSnippets = {
+        step1: `<span class="comment">// JavaScript - Appel de la fonction WASM</span>
+<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < <span class="number">50</span>; i++) {
+  <span class="keyword">const</span> result = <span class="function">createAndUseCounter</span>(i);
+}
+
+<span class="comment">// AssemblyScript - Fonction appelée</span>
+<span class="keyword">export function</span> <span class="function">createAndUseCounter</span>(initial: i32): i32 {
+  <span class="keyword">const</span> counter = <span class="keyword">new</span> Counter(initial);  <span class="comment">// Allocation</span>
+  counter.increment();
+  <span class="keyword">return</span> counter.getValue();
+  <span class="comment">// ↑ counter sort du scope → éligible au GC</span>
+}`,
+        step2: `<span class="comment">// JavaScript</span>
+<span class="function">createPinnedCounter</span>(<span class="number">100</span>);
+
+<span class="comment">// AssemblyScript - Variable globale = persistant</span>
+<span class="keyword">let</span> pinnedCounter: Counter | <span class="keyword">null</span> = <span class="keyword">null</span>;
+
+<span class="keyword">export function</span> <span class="function">createPinnedCounter</span>(initial: i32): <span class="keyword">void</span> {
+  pinnedCounter = <span class="keyword">new</span> Counter(initial);
+  <span class="comment">// ↑ Stocké en global → survit au GC</span>
+}`,
+        step3: `<span class="comment">// JavaScript</span>
+<span class="function">forceGC</span>();
+
+<span class="comment">// AssemblyScript</span>
+<span class="keyword">export function</span> <span class="function">forceGC</span>(): <span class="keyword">void</span> {
+  <span class="function">__collect</span>();  <span class="comment">// Built-in AssemblyScript</span>
+}
+
+<span class="comment">// Résultat :</span>
+<span class="comment">// - 50 objets temporaires → COLLECTÉS (mémoire libérée)</span>
+<span class="comment">// - 1 objet persistant   → PRÉSERVÉ (toujours référencé)</span>`,
+        step4: `<span class="comment">// JavaScript - L'objet persistant répond toujours !</span>
+<span class="keyword">const</span> before = <span class="function">getPinnedCounterValue</span>();  <span class="comment">// → 100</span>
+
+<span class="function">incrementPinnedCounter</span>();
+<span class="function">incrementPinnedCounter</span>();
+<span class="function">incrementPinnedCounter</span>();
+
+<span class="keyword">const</span> after = <span class="function">getPinnedCounterValue</span>();   <span class="comment">// → 103</span>
+
+<span class="comment">// ✓ L'objet a survécu au GC car il est toujours référencé</span>
+<span class="comment">//   par la variable globale pinnedCounter</span>`,
+        reset: `<span class="comment">// Reset</span>
+<span class="function">createPinnedCounter</span>(<span class="number">0</span>);  <span class="comment">// Crée un nouveau counter</span>
+<span class="function">forceGC</span>();               <span class="comment">// Nettoie l'ancien</span>
+tempCount = <span class="number">0</span>;`,
+      };
+
+      function showCode(step) {
+        codeDisplay.innerHTML = codeSnippets[step] || "";
+      }
 
       function log(msg) {
-        output.textContent += msg + "\n";
+        const time = new Date().toLocaleTimeString();
+        output.textContent += `[${time}] ${msg}\n`;
+        output.scrollTop = output.scrollHeight;
       }
 
       function clear() {
         output.textContent = "";
       }
 
-      window.testCounter = function () {
-        clear();
-        log("=== Test Counter ===");
+      function updateStatus() {
+        tempCountEl.textContent = tempCount;
+        const val = getPinnedCounterValue();
+        persistValueEl.textContent = val === -1 ? "—" : val;
+      }
 
-        // Créer et utiliser un counter (alloué puis collecté)
-        const result = createAndUseCounter(10);
-        log(`createAndUseCounter(10) = ${result}`);
+      function markDone(stepId) {
+        document.getElementById(stepId).classList.add("step-done");
+      }
 
-        // Créer un counter persistant
-        const counter = createPinnedCounter(0);
-        log(`Counter créé avec valeur: ${counter.getValue()}`);
-        counter.increment();
-        counter.increment();
-        log(`Après 2 incréments: ${counter.getValue()}`);
-      };
+      // Étape 1 : Créer des objets temporaires
+      window.step1 = function () {
+        showCode("step1");
+        log("📦 Création de 50 objets temporaires...");
 
-      window.testArray = function () {
-        clear();
-        log("=== Test Array ===");
-
-        const arr = createArray(5);
-        log(`Array créé avec ${arr.length} éléments`);
-
-        const sum = sumArray(arr);
-        log(`Somme: ${sum}`);
-      };
-
-      window.testGC = function () {
-        clear();
-        log("=== Force Garbage Collection ===");
-
-        // Créer plusieurs objets
-        for (let i = 0; i < 100; i++) {
-          createAndUseCounter(i);
+        for (let i = 0; i < 50; i++) {
+          const result = createAndUseCounter(i);
+          tempCount++;
         }
 
-        log("100 Counters créés et abandonnés...");
+        log(`✅ 50 Counters créés et utilisés.`);
+        log(`   Chacun a été alloué, incrémenté, puis abandonné.`);
+        log(`   Ils sont maintenant éligibles au Garbage Collection.\n`);
 
-        // Forcer GC
+        updateStatus();
+        markDone("step1");
+        document.getElementById("btn1").disabled = true;
+        document.getElementById("btn2").disabled = false;
+      };
+
+      // Étape 2 : Créer un objet persistant
+      window.step2 = function () {
+        showCode("step2");
+        log("📌 Création d'un objet persistant...");
+
+        createPinnedCounter(100);
+
+        log(`✅ Counter persistant créé avec valeur initiale: 100`);
+        log(`   Stocké dans une variable globale WASM.`);
+        log(`   Il ne sera PAS collecté par le GC.\n`);
+
+        updateStatus();
+        markDone("step2");
+        document.getElementById("btn2").disabled = true;
+        document.getElementById("btn3").disabled = false;
+      };
+
+      // Étape 3 : Forcer le GC
+      window.step3 = function () {
+        showCode("step3");
+        log("🗑️ Appel de __collect() pour forcer le GC...");
+
         forceGC();
-        log("__collect() appelé");
-        log("Les objets non référencés ont été collectés.");
+
+        log(`✅ Garbage Collection terminée.`);
+        log(`   Les ${tempCount} objets temporaires ont été nettoyés.`);
+        log(`   La mémoire qu'ils occupaient est libérée.\n`);
+
+        markDone("step3");
+        document.getElementById("btn3").disabled = true;
+        document.getElementById("btn4").disabled = false;
       };
 
-      window.showHeap = function () {
-        clear();
-        log("=== Info GC ===");
-        log("Le GC AssemblyScript gère automatiquement la mémoire.");
-        log("Utilisez __collect() pour forcer un cycle de collection.");
+      // Étape 4 : Vérifier l'objet persistant
+      window.step4 = function () {
+        showCode("step4");
+        log("🔍 Vérification de l'objet persistant...");
+
+        const before = getPinnedCounterValue();
+        log(`   Valeur actuelle: ${before}`);
+
+        incrementPinnedCounter();
+        incrementPinnedCounter();
+        incrementPinnedCounter();
+
+        const after = getPinnedCounterValue();
+        log(`   Après 3 incréments: ${after}`);
+
+        log(`\n🎉 SUCCÈS ! L'objet persistant a survécu au GC.`);
+        log(`   Il est toujours accessible et fonctionnel.`);
+
+        updateStatus();
+        markDone("step4");
+        document.getElementById("btn4").disabled = true;
       };
+
+      // Reset
+      window.resetScenario = function () {
+        showCode("reset");
+        clear();
+        tempCount = 0;
+
+        // Reset UI
+        document
+          .querySelectorAll(".step")
+          .forEach((el) => el.classList.remove("step-done"));
+        document.getElementById("btn1").disabled = false;
+        document.getElementById("btn2").disabled = true;
+        document.getElementById("btn3").disabled = true;
+        document.getElementById("btn4").disabled = true;
+
+        // Reset WASM state
+        createPinnedCounter(0);
+        forceGC();
+
+        updateStatus();
+        tempCountEl.textContent = "0";
+        persistValueEl.textContent = "—";
+
+        log(
+          "🔄 Scénario réinitialisé. Cliquez sur l'étape 1 pour commencer.\n"
+        );
+      };
+
+      // Init
+      updateStatus();
     </script>
   </body>
 </html>
