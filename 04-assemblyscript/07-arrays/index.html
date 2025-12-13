@@ -58,6 +58,8 @@
     </div>
 
     <script type="module">
+      // Avec les bindings ESM, AssemblyScript gère automatiquement
+      // la conversion des types (pas besoin de __pin/__unpin/__getArray)
       import {
         sumStaticArray,
         getStaticLength,
@@ -66,11 +68,6 @@
         sumInt32Array,
         createFloat64Array,
         averageFloat64Array,
-        __pin,
-        __unpin,
-        __getArray,
-        __getArrayView,
-        __newArray,
       } from "./build/release.js";
 
       // StaticArray demo
@@ -86,29 +83,23 @@
         "dynamic-result"
       ).innerHTML = `Après 3 push(): length = ${pushResult}`;
 
-      // Int32Array demo
-      const int32Ptr = createInt32Array(5);
-      __pin(int32Ptr);
-      const int32View = __getArrayView(int32Ptr);
-      const int32Sum = sumInt32Array(int32Ptr);
+      // Int32Array demo - retourne directement un Int32Array JS
+      const int32Arr = createInt32Array(5);
+      const int32Sum = sumInt32Array(int32Arr);
       document.getElementById(
         "int32-result"
-      ).innerHTML = `Tableau: [${Array.from(int32View).join(
+      ).innerHTML = `Tableau: [${Array.from(int32Arr).join(
         ", "
       )}]<br>Somme: ${int32Sum}`;
-      __unpin(int32Ptr);
 
-      // Float64Array demo
-      const float64Ptr = createFloat64Array(4);
-      __pin(float64Ptr);
-      const float64View = __getArrayView(float64Ptr);
-      const float64Avg = averageFloat64Array(float64Ptr);
+      // Float64Array demo - retourne directement un Float64Array JS
+      const float64Arr = createFloat64Array(4);
+      const float64Avg = averageFloat64Array(float64Arr);
       document.getElementById(
         "float64-result"
-      ).innerHTML = `Tableau: [${Array.from(float64View)
+      ).innerHTML = `Tableau: [${Array.from(float64Arr)
         .map((n) => n.toFixed(1))
         .join(", ")}]<br>Moyenne: ${float64Avg.toFixed(2)}`;
-      __unpin(float64Ptr);
     </script>
   </body>
 </html>
