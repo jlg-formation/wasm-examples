@@ -6,8 +6,8 @@ NODE := $(shell which node)
 # Fonctions exportées
 EXPORTS := -sEXPORTED_FUNCTIONS=_getHeapSize,_allocateBlock,_forceGrowth,_getMemoryPages,_malloc,_free
 
-# Méthodes runtime
-RUNTIME := -sEXPORTED_RUNTIME_METHODS=ccall,cwrap
+# Méthodes runtime (inclut HEAP* pour accéder au buffer mémoire)
+RUNTIME := -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,HEAPU8,HEAP32,HEAPF64
 
 # Mémoire initiale réduite pour démontrer la croissance
 INITIAL_MEMORY := -sINITIAL_MEMORY=1048576

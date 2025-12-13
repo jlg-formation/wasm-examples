@@ -6,6 +6,7 @@
 #include <emscripten.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 // Retourne la taille actuelle du heap en octets
 EMSCRIPTEN_KEEPALIVE

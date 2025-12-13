@@ -21,7 +21,6 @@ await new Promise((resolve) => {
 console.log("=== Démonstration ALLOW_MEMORY_GROWTH ===\n");
 
 // Wrappers de fonctions
-const getHeapSize = Module.cwrap("getHeapSize", "number", []);
 const allocateBlock = Module.cwrap("allocateBlock", "number", ["number"]);
 const forceGrowth = Module.cwrap("forceGrowth", "number", ["number", "number"]);
 const getMemoryPages = Module.cwrap("getMemoryPages", "number", []);
@@ -37,75 +36,76 @@ function formatSize(bytes) {
 }
 
 // ============================================
-// 1. État initial
+// 1. Concept
 // ============================================
-console.log("1. État initial de la mémoire");
+console.log("1. Concept ALLOW_MEMORY_GROWTH");
+console.log("-".repeat(40));
+console.log("   Par défaut, la mémoire WASM est fixe (INITIAL_MEMORY).");
+console.log(
+  "   Avec -sALLOW_MEMORY_GROWTH=1, elle peut grandir dynamiquement."
+);
+console.log("   Ce module a été compilé avec:");
+console.log("     -sINITIAL_MEMORY=1048576 (1 MB)");
+console.log("     -sALLOW_MEMORY_GROWTH=1");
+console.log("     -sMAXIMUM_MEMORY=64MB");
+
+// ============================================
+// 2. Allocations qui dépassent la taille initiale
+// ============================================
+console.log("\n2. Allocations dépassant la taille initiale");
 console.log("-".repeat(40));
 
-let pages = getMemoryPages();
-let heapSize = getHeapSize();
-console.log(`   Pages mémoire: ${pages} (${formatSize(pages * 64 * 1024)})`);
-console.log(`   Heap utilisé: ${formatSize(heapSize)}`);
-console.log(`   Buffer size: ${formatSize(Module.HEAPU8.length)}`);
-
-// ============================================
-// 2. Allocation progressive
-// ============================================
-console.log("\n2. Allocations progressives");
-console.log("-".repeat(40));
-
-const allocations = [64, 128, 256, 512, 1024]; // KB
-
-for (const sizeKB of allocations) {
-  const before = Module.HEAPU8.length;
-  const result = allocateBlock(sizeKB);
-  const after = Module.HEAPU8.length;
-
-  const grew = after > before ? " 📈 GRANDI!" : "";
-  console.log(`   Alloué ${sizeKB} KB → Buffer: ${formatSize(after)}${grew}`);
-}
-
-// ============================================
-// 3. Forcer la croissance
-// ============================================
-console.log("\n3. Forcer la croissance (allocations massives)");
-console.log("-".repeat(40));
-
-const initialBuffer = Module.HEAPU8.length;
-console.log(`   Buffer initial: ${formatSize(initialBuffer)}`);
+console.log("   Mémoire initiale: 1 MB");
+console.log("   Tentative d'allocation de 10 x 1 MB...");
 
 // Allouer 10 blocs de 1 MB chacun
 const totalAllocated = forceGrowth(10, 1024);
-console.log(`   Alloué au total: ${formatSize(totalAllocated)}`);
 
-const finalBuffer = Module.HEAPU8.length;
-console.log(`   Buffer final: ${formatSize(finalBuffer)}`);
-console.log(`   Croissance: ${formatSize(finalBuffer - initialBuffer)}`);
+if (totalAllocated > 0) {
+  console.log(`   ✓ Alloué avec succès: ${formatSize(totalAllocated)}`);
+  console.log(
+    "   → La mémoire a grandi automatiquement pour accommoder les allocations!"
+  );
+} else {
+  console.log("   ✗ Échec de l'allocation");
+}
 
 // ============================================
-// 4. État final
+// 3. Que se passe-t-il SANS ALLOW_MEMORY_GROWTH ?
 // ============================================
-console.log("\n4. État final de la mémoire");
+console.log("\n3. Sans ALLOW_MEMORY_GROWTH");
 console.log("-".repeat(40));
-
-pages = getMemoryPages();
-heapSize = getHeapSize();
-console.log(`   Pages mémoire: ${pages} (${formatSize(pages * 64 * 1024)})`);
-console.log(`   Heap utilisé: ${formatSize(heapSize)}`);
+console.log("   Si on compile sans ce flag, malloc() retourne NULL");
+console.log("   quand la mémoire est épuisée, causant un crash ou");
+console.log("   un comportement indéfini.");
 
 // ============================================
-// 5. Note importante
+// 4. Impact sur les vues HEAP*
 // ============================================
-console.log("\n5. ⚠️ Note importante");
+console.log("\n4. ⚠️ Impact sur les vues HEAP*");
 console.log("-".repeat(40));
-console.log("   Quand la mémoire grandit, les vues HEAP* sont recréées.");
-console.log("   Les références précédentes deviennent invalides!");
+console.log("   Quand la mémoire grandit, les ArrayBuffer sous-jacents");
+console.log("   sont recréés. Les références stockées deviennent invalides:");
 console.log("");
-console.log("   Mauvais:");
-console.log("     const heap = Module.HEAPU8;");
-console.log("     allocateSomething();  // Peut faire grandir la mémoire");
-console.log("     heap[0] = 1;  // ❌ heap peut être invalide!");
+console.log("   ❌ Mauvais:");
+console.log("      const heap = Module.HEAPU8;   // Référence stockée");
+console.log("      Module._malloc(largeSize);    // Peut faire grandir");
+console.log(
+  "      heap[0] = 1;                  // DANGER: heap peut être invalide!"
+);
 console.log("");
-console.log("   Bon:");
-console.log("     allocateSomething();");
-console.log("     Module.HEAPU8[0] = 1;  // ✅ Toujours à jour");
+console.log("   ✓ Bon:");
+console.log("      Module._malloc(largeSize);");
+console.log("      Module.HEAPU8[0] = 1;         // Toujours à jour");
+
+// ============================================
+// 5. Options de compilation
+// ============================================
+console.log("\n5. Options de compilation mémoire");
+console.log("-".repeat(40));
+console.log("   | Flag                    | Description                    |");
+console.log("   |-------------------------|--------------------------------|");
+console.log("   | -sALLOW_MEMORY_GROWTH=1 | Permet la croissance           |");
+console.log("   | -sINITIAL_MEMORY=16MB   | Mémoire initiale               |");
+console.log("   | -sMAXIMUM_MEMORY=256MB  | Limite maximale                |");
+console.log("   | -sSTACK_SIZE=64KB       | Taille de la pile              |");
