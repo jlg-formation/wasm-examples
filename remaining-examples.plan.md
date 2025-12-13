@@ -150,9 +150,9 @@ existants dans le repository.
 | 17  | em_q17 | printf → console.log        | ✅        | `02-emscripten/01-hello/`             | -                               |
 | 18  | em_q18 | Lier plusieurs fichiers C   | ✅        | `02-emscripten/12-multifile/`         | -                               |
 | 19  | em_q19 | Ports bibliothèques tierces | ✅        | `02-emscripten/13-ports/`             | -                               |
-| 20  | em_q20 | -o .js vs -o .html          | ❌        | -                                     | `02-emscripten/14-html-output/` |
+| 20  | em_q20 | -o .js vs -o .html          | ✅        | `02-emscripten/14-html-output/`       | -                               |
 
-**Résumé Chapitre 5:** 19/20 couverts (95%)
+**Résumé Chapitre 5:** 20/20 couverts (100%)
 
 ---
 
@@ -160,14 +160,14 @@ existants dans le repository.
 
 | #   | ID       | Question QCM                   | Couvert ? | Exemple existant                    | Exemple à créer                       |
 | --- | -------- | ------------------------------ | --------- | ----------------------------------- | ------------------------------------- |
-| 1   | port_q1  | emconfigure                    | ❌        | -                                   | `02-emscripten/15-autoconf/`          |
-| 2   | port_q2  | emmake make                    | ❌        | -                                   | `02-emscripten/16-makefile/`          |
+| 1   | port_q1  | emconfigure                    | ✅        | `02-emscripten/15-autoconf/`        | -                                     |
+| 2   | port_q2  | emmake make                    | ✅        | `02-emscripten/16-makefile/`        | -                                     |
 | 3   | port_q3  | -sMODULARIZE                   | ⚠️        | `02-emscripten/03-es6/Makefile`     | `02-emscripten/17-modularize/`        |
 | 4   | port_q4  | EXPORTED_FUNCTIONS             | ✅        | `02-emscripten/02-library/Makefile` | -                                     |
 | 5   | port_q5  | MEMFS filesystem virtuel       | ✅        | `02-emscripten/07-filesystem/`      | -                                     |
 | 6   | port_q6  | --preload-file                 | ✅        | `02-emscripten/07-filesystem/`      | -                                     |
 | 7   | port_q7  | Variable EMSDK                 | ✅        | `docs/12-emscripten-install.md`     | -                                     |
-| 8   | port_q8  | Autoconf/Automake              | ❌        | -                                   | `02-emscripten/15-autoconf/`          |
+| 8   | port_q8  | Autoconf/Automake              | ✅        | `02-emscripten/15-autoconf/`        | -                                     |
 | 9   | port_q9  | EXPORTED_RUNTIME_METHODS       | ⚠️        | `02-emscripten/02-library/Makefile` | -                                     |
 | 10  | port_q10 | emcmake cmake                  | ❌        | -                                   | `02-emscripten/18-cmake/`             |
 | 11  | port_q11 | --embed-file vs --preload-file | ⚠️        | `02-emscripten/07-filesystem/`      | -                                     |
@@ -181,7 +181,7 @@ existants dans le repository.
 | 19  | port_q19 | -sINVOKE_RUN=0                 | ❌        | -                                   | `02-emscripten/24-no-main/`           |
 | 20  | port_q20 | Intégration React/Vue          | ❌        | -                                   | `02-emscripten/25-spa-integration/`   |
 
-**Résumé Chapitre 6:** 7/20 couverts (35%)
+**Résumé Chapitre 6:** 10/20 couverts (50%)
 
 ---
 
@@ -193,9 +193,9 @@ existants dans le repository.
 | 2. Langage WAT       | 20       | 20      | 100%        |
 | 3. Runtimes & API JS | 20       | 20      | 100%        |
 | 4. AssemblyScript    | 20       | 20      | 100%        |
-| 5. Emscripten        | 19       | 20      | 95%         |
-| 6. Portage librairie | 7        | 20      | 35%         |
-| **TOTAL**            | **106**  | **120** | **88%**     |
+| 5. Emscripten        | 20       | 20      | 100%        |
+| 6. Portage librairie | 10       | 20      | 50%         |
+| **TOTAL**            | **110**  | **120** | **92%**     |
 
 ---
 
