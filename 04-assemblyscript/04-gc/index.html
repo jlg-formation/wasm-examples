@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AssemblyScript Garbage Collector</title>
+    <style>
+      body {
+        font-family: system-ui;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        margin: 0.25rem;
+        cursor: pointer;
+      }
+      .output {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>AssemblyScript - Garbage Collector</h1>
+
+    <p>
+      Cette démo illustre la gestion automatique de la mémoire en
+      AssemblyScript.
+    </p>
+
+    <h2>Tests</h2>
+    <button onclick="testCounter()">Créer Counter</button>
+    <button onclick="testArray()">Créer Array</button>
+    <button onclick="testGC()">Forcer GC</button>
+    <button onclick="showHeap()">Afficher Heap</button>
+
+    <h2>Résultats</h2>
+    <pre id="output">Cliquez sur un bouton pour tester...</pre>
+
+    <h2>Code</h2>
+    <pre>
+// AssemblyScript utilise un GC automatique
+export class Counter {
+  count: i32;
+  constructor(initial: i32 = 0) {
+    this.count = initial;
+  }
+}
+
+// Les objets sont automatiquement collectés
+// quand ils ne sont plus référencés
+export function createAndUseCounter(initial: i32): i32 {
+  const counter = new Counter(initial);
+  return counter.getValue();
+  // counter sera collecté après cette fonction
+}
+    </pre>
+
+    <script type="module">
+      import {
+        createAndUseCounter,
+        createPinnedCounter,
+        forceGC,
+        createArray,
+        sumArray,
+        Counter,
+      } from "./build/release.js";
+
+      const output = document.getElementById("output");
+
+      function log(msg) {
+        output.textContent += msg + "\n";
+      }
+
+      function clear() {
+        output.textContent = "";
+      }
+
+      window.testCounter = function () {
+        clear();
+        log("=== Test Counter ===");
+
+        // Créer et utiliser un counter (alloué puis collecté)
+        const result = createAndUseCounter(10);
+        log(`createAndUseCounter(10) = ${result}`);
+
+        // Créer un counter persistant
+        const counter = createPinnedCounter(0);
+        log(`Counter créé avec valeur: ${counter.getValue()}`);
+        counter.increment();
+        counter.increment();
+        log(`Après 2 incréments: ${counter.getValue()}`);
+      };
+
+      window.testArray = function () {
+        clear();
+        log("=== Test Array ===");
+
+        const arr = createArray(5);
+        log(`Array créé avec ${arr.length} éléments`);
+
+        const sum = sumArray(arr);
+        log(`Somme: ${sum}`);
+      };
+
+      window.testGC = function () {
+        clear();
+        log("=== Force Garbage Collection ===");
+
+        // Créer plusieurs objets
+        for (let i = 0; i < 100; i++) {
+          createAndUseCounter(i);
+        }
+
+        log("100 Counters créés et abandonnés...");
+
+        // Forcer GC
+        forceGC();
+        log("__collect() appelé");
+        log("Les objets non référencés ont été collectés.");
+      };
+
+      window.showHeap = function () {
+        clear();
+        log("=== Info GC ===");
+        log("Le GC AssemblyScript gère automatiquement la mémoire.");
+        log("Utilisez __collect() pour forcer un cycle de collection.");
+      };
+    </script>
+  </body>
+</html>

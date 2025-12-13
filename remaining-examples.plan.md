@@ -70,30 +70,30 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 
 ## Chapitre 3 : Runtimes WASM et API JavaScript (j2-matin-runtimes)
 
-| #   | ID          | Question QCM                  | Couvert ? | Exemple existant               | Exemple à créer             |
-| --- | ----------- | ----------------------------- | --------- | ------------------------------ | --------------------------- |
-| 1   | runtime_q1  | Rôle runtime                  | ✅        | `01-wat/*/wrapper.mjs`         | -                           |
-| 2   | runtime_q2  | WebAssembly.compile()         | ✅        | `01-wat/*/wrapper.mjs`         | -                           |
-| 3   | runtime_q3  | WebAssembly.instantiate()     | ✅        | `01-wat/02-import/wrapper.mjs` | -                           |
-| 4   | runtime_q4  | Wasmtime (Bytecode Alliance)  | ✅        | `03-wasi/01-hello/`            | -                           |
-| 5   | runtime_q5  | instance.exports              | ✅        | `01-wat/01-export/wrapper.mjs` | -                           |
-| 6   | runtime_q6  | instantiateStreaming          | ✅        | `01-wat/20-streaming/`         | -                           |
-| 7   | runtime_q7  | Partage mémoire JS/WASM       | ✅        | `01-wat/05-memory/wrapper.mjs` | -                           |
-| 8   | runtime_q8  | Wasm3 (IoT)                   | ✅        | `docs/09-wasm-runtimes.md`     | -                           |
-| 9   | runtime_q9  | WASI filesystem               | ✅        | `03-wasi/01-hello/`            | -                           |
-| 10  | runtime_q10 | Gestion erreurs               | ✅        | `01-wat/21-error-handling/`    | -                           |
-| 11  | runtime_q11 | memory.buffer                 | ✅        | `01-wat/05-memory/wrapper.mjs` | -                           |
-| 12  | runtime_q12 | memory.grow()                 | ✅        | `01-wat/22-memory-grow/`       | -                           |
-| 13  | runtime_q13 | importObject                  | ✅        | `01-wat/02-import/wrapper.mjs` | -                           |
-| 14  | runtime_q14 | Passer string à WASM          | ✅        | `01-wat/23-strings/`           | -                           |
-| 15  | runtime_q15 | WebAssembly.validate()        | ✅        | `01-wat/24-validate/`          | -                           |
-| 16  | runtime_q16 | WebAssembly.Table()           | ✅        | `01-wat/11-table/wrapper.mjs`  | -                           |
-| 17  | runtime_q17 | instantiateStreaming avantage | ✅        | `01-wat/20-streaming/`         | -                           |
-| 18  | runtime_q18 | BigInt pour i64               | ❌        | -                              | `01-wat/25-bigint/`         |
-| 19  | runtime_q19 | Wasmer                        | ✅        | `docs/09-wasm-runtimes.md`     | -                           |
-| 20  | runtime_q20 | Vérifier support WASM         | ❌        | -                              | `01-wat/26-feature-detect/` |
+| #   | ID          | Question QCM                  | Couvert ? | Exemple existant               | Exemple à créer |
+| --- | ----------- | ----------------------------- | --------- | ------------------------------ | --------------- |
+| 1   | runtime_q1  | Rôle runtime                  | ✅        | `01-wat/*/wrapper.mjs`         | -               |
+| 2   | runtime_q2  | WebAssembly.compile()         | ✅        | `01-wat/*/wrapper.mjs`         | -               |
+| 3   | runtime_q3  | WebAssembly.instantiate()     | ✅        | `01-wat/02-import/wrapper.mjs` | -               |
+| 4   | runtime_q4  | Wasmtime (Bytecode Alliance)  | ✅        | `03-wasi/01-hello/`            | -               |
+| 5   | runtime_q5  | instance.exports              | ✅        | `01-wat/01-export/wrapper.mjs` | -               |
+| 6   | runtime_q6  | instantiateStreaming          | ✅        | `01-wat/20-streaming/`         | -               |
+| 7   | runtime_q7  | Partage mémoire JS/WASM       | ✅        | `01-wat/05-memory/wrapper.mjs` | -               |
+| 8   | runtime_q8  | Wasm3 (IoT)                   | ✅        | `docs/09-wasm-runtimes.md`     | -               |
+| 9   | runtime_q9  | WASI filesystem               | ✅        | `03-wasi/01-hello/`            | -               |
+| 10  | runtime_q10 | Gestion erreurs               | ✅        | `01-wat/21-error-handling/`    | -               |
+| 11  | runtime_q11 | memory.buffer                 | ✅        | `01-wat/05-memory/wrapper.mjs` | -               |
+| 12  | runtime_q12 | memory.grow()                 | ✅        | `01-wat/22-memory-grow/`       | -               |
+| 13  | runtime_q13 | importObject                  | ✅        | `01-wat/02-import/wrapper.mjs` | -               |
+| 14  | runtime_q14 | Passer string à WASM          | ✅        | `01-wat/23-strings/`           | -               |
+| 15  | runtime_q15 | WebAssembly.validate()        | ✅        | `01-wat/24-validate/`          | -               |
+| 16  | runtime_q16 | WebAssembly.Table()           | ✅        | `01-wat/11-table/wrapper.mjs`  | -               |
+| 17  | runtime_q17 | instantiateStreaming avantage | ✅        | `01-wat/20-streaming/`         | -               |
+| 18  | runtime_q18 | BigInt pour i64               | ✅        | `01-wat/25-bigint/`            | -               |
+| 19  | runtime_q19 | Wasmer                        | ✅        | `docs/09-wasm-runtimes.md`     | -               |
+| 20  | runtime_q20 | Vérifier support WASM         | ✅        | `01-wat/26-feature-detect/`    | -               |
 
-**Résumé Chapitre 3:** 18/20 couverts (90%)
+**Résumé Chapitre 3:** 20/20 couverts (100%)
 
 ---
 
@@ -103,7 +103,7 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | --- | ------ | --------------------------- | --------- | ----------------------------------- | --------------------------------- |
 | 1   | as_q1  | Qu'est-ce qu'AssemblyScript | ✅        | `04-assemblyscript/01-hello/`       | -                                 |
 | 2   | as_q2  | npx asinit                  | ✅        | `04-assemblyscript/*/package.json`  | -                                 |
-| 3   | as_q3  | Garbage collector           | ❌        | -                                   | `04-assemblyscript/04-gc/`        |
+| 3   | as_q3  | Garbage collector           | ✅        | `04-assemblyscript/04-gc/`          | -                                 |
 | 4   | as_q4  | asconfig.json               | ✅        | `04-assemblyscript/*/asconfig.json` | -                                 |
 | 5   | as_q5  | Export function             | ✅        | `04-assemblyscript/03-exports/`     | -                                 |
 | 6   | as_q6  | Types i32/u32/i64/f64       | ✅        | `04-assemblyscript/01-hello/`       | -                                 |
@@ -115,14 +115,14 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | 12  | as_q12 | Debug vs Release            | ✅        | `04-assemblyscript/*/build/`        | -                                 |
 | 13  | as_q13 | \_\_getString() loader      | ❌        | -                                   | `04-assemblyscript/06-strings/`   |
 | 14  | as_q14 | Tableau typé Int32Array     | ❌        | -                                   | `04-assemblyscript/07-arrays/`    |
-| 15  | as_q15 | \_\_release()               | ❌        | -                                   | `04-assemblyscript/04-gc/`        |
+| 15  | as_q15 | \_\_release()               | ✅        | `04-assemblyscript/04-gc/`          | -                                 |
 | 16  | as_q16 | @external import            | ❌        | -                                   | `04-assemblyscript/08-imports/`   |
 | 17  | as_q17 | StaticArray vs Array        | ❌        | -                                   | `04-assemblyscript/07-arrays/`    |
 | 18  | as_q18 | Support SIMD v128           | ❌        | -                                   | `04-assemblyscript/09-simd/`      |
 | 19  | as_q19 | assert() et abort()         | ❌        | -                                   | `04-assemblyscript/10-errors/`    |
 | 20  | as_q20 | Analyse taille module       | ❌        | -                                   | `docs/11-wasm-analysis-tools.md`  |
 
-**Résumé Chapitre 4:** 8/20 couverts (40%)
+**Résumé Chapitre 4:** 10/20 couverts (50%)
 
 ---
 
@@ -190,11 +190,11 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 | -------------------- | -------- | ------- | ----------- |
 | 1. Introduction WASM | 20       | 20      | 100%        |
 | 2. Langage WAT       | 20       | 20      | 100%        |
-| 3. Runtimes & API JS | 18       | 20      | 90%         |
-| 4. AssemblyScript    | 8        | 20      | 40%         |
+| 3. Runtimes & API JS | 20       | 20      | 100%        |
+| 4. AssemblyScript    | 10       | 20      | 50%         |
 | 5. Emscripten        | 10       | 20      | 50%         |
 | 6. Portage librairie | 5        | 20      | 25%         |
-| **TOTAL**            | **81**   | **120** | **68%**     |
+| **TOTAL**            | **85**   | **120** | **71%**     |
 
 ---
 
@@ -206,7 +206,7 @@ Ce document analyse la couverture des questions du QCM par les exemples existant
 2. ~~**`01-wat/22-memory-grow/`** - Croissance dynamique de la mémoire~~ ✅
 3. ~~**`01-wat/20-streaming/`** - Utilisation de `instantiateStreaming`~~ ✅
 4. ~~**`01-wat/21-error-handling/`** - Gestion des erreurs CompileError/LinkError/RuntimeError~~ ✅
-5. **`01-wat/25-bigint/`** - Utilisation des BigInt pour i64
+5. ~~**`01-wat/25-bigint/`** - Utilisation des BigInt pour i64~~ ✅
 
 ### Moyenne priorité (AssemblyScript)
 
