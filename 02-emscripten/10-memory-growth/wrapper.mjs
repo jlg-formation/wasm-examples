@@ -25,7 +25,11 @@ const allocateBlock = Module.cwrap("allocateBlock", "number", ["number"]);
 const forceGrowth = Module.cwrap("forceGrowth", "number", ["number", "number"]);
 const getMemoryPages = Module.cwrap("getMemoryPages", "number", []);
 
-// Fonction utilitaire pour afficher la taille
+/**
+ * Formate une taille en bytes de façon lisible
+ * @param {number} bytes - Taille en octets
+ * @returns {string} Taille formatée (KB, MB, etc.)
+ */
 function formatSize(bytes) {
   if (bytes >= 1024 * 1024) {
     return (bytes / (1024 * 1024)).toFixed(2) + " MB";

@@ -39,19 +39,21 @@ for (const level of levels) {
     const Module = require(jsPath);
 
     // Attendre l'initialisation
-    await new Promise((resolve) => {
-      if (Module.onRuntimeInitialized) {
-        const orig = Module.onRuntimeInitialized;
-        Module.onRuntimeInitialized = () => {
-          orig();
-          resolve();
-        };
-      } else {
-        Module.onRuntimeInitialized = resolve;
-      }
-      // Fallback si déjà initialisé
-      setTimeout(resolve, 100);
-    });
+    await /** @type {Promise<void>} */ (
+      new Promise((resolve) => {
+        if (Module.onRuntimeInitialized) {
+          const orig = Module.onRuntimeInitialized;
+          Module.onRuntimeInitialized = () => {
+            orig();
+            resolve(undefined);
+          };
+        } else {
+          Module.onRuntimeInitialized = () => resolve(undefined);
+        }
+        // Fallback si déjà initialisé
+        setTimeout(() => resolve(undefined), 100);
+      })
+    );
 
     // Benchmark
     const start = performance.now();
@@ -72,7 +74,7 @@ for (const level of levels) {
         1
       )} KB)`
     );
-  } catch (e) {
+  } catch (/** @type {any} */ e) {
     console.log(`❌ -${level}: Erreur - ${e.message}`);
   }
 }
