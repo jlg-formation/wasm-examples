@@ -139,3 +139,11 @@ Les fichiers de documentation doivent :
 - Être concis (max 1-2 pages)
 - Inclure des liens vers les ressources officielles
 - Mentionner l'ID de la question QCM en en-tête
+
+### Fichiers HTML
+
+Pour les exemples incluant une interface HTML :
+
+- Utiliser **Tailwind CSS via CDN** (`<script src="https://cdn.tailwindcss.com"></script>`)
+- Privilégier les classes Tailwind aux styles CSS custom
+- Conserver uniquement le CSS custom indispensable (ex: coloration syntaxique)
