@@ -1,3 +1,10 @@
+/** Utiliser ce fichier pour __collect().
+ *  La doc n'a pas prevu que l'utilisateur ait envie de l'utiliser
+ * explicitement alors il n'est pas typé.
+ */
+
+/// <reference path="../node_modules/assemblyscript/std/assembly/rt/index.d.ts" />
+
 /**
  * 04-gc - Démonstration du Garbage Collector AssemblyScript
  *
