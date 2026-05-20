@@ -18,7 +18,7 @@ const test1 = () => {
 
   // @ts-ignore
   const result = integerAdd(a, b);
-  console.log(`${a} + ${b} = ${result}`);
+  console.log(`test1: ${a} + ${b} = ${result}`);
   equal(result, a + b);
 };
 
@@ -27,7 +27,7 @@ const test2 = () => {
   const b = 8.5;
   // @ts-ignore
   const result = integerAdd(a, b);
-  console.log(`${a} + ${b} = ${result}`);
+  console.log(`test2: ${a} + ${b} = ${result}`);
   notEqual(result, a + b);
 };
 
@@ -36,7 +36,7 @@ const test3 = () => {
   const b = 2.5;
   // @ts-ignore
   const result = floatAdd(a, b);
-  console.log(`${a} + ${b} = ${result}`);
+  console.log(`test3: ${a} + ${b} = ${result}`);
   equal(result, a + b);
 };
 
@@ -45,11 +45,21 @@ const test4 = () => {
   const b = 25n;
   // @ts-ignore
   const result = integer64Add(a, b);
-  console.log(`${a} + ${b} = ${result}`);
+  console.log(`test4: ${a} + ${b} = ${result}`);
   equal(result, a + b);
+};
+
+const test5 = () => {
+  const a = 13123412341234123412341234123412341234n;
+  const b = 25n;
+  // @ts-ignore
+  const result = integer64Add(a, b);
+  console.log(`test5: ${a} + ${b} = ${result}`);
+  notEqual(result, a + b);
 };
 
 test1();
 test2();
 test3();
 test4();
+test5();
