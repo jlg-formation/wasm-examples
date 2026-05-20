@@ -33,3 +33,5 @@ const {
 console.log("tan(pi/3) = ");
 // @ts-ignore
 tan(Math.PI / 3);
+
+console.log("javascript tan(pi/3) = " + Math.tan(Math.PI / 3));
