@@ -1,5 +1,5 @@
 (module
-    ;; Here we forgot to name thee fist parameter.
+    ;; Here we forgot to name the first parameter.
     ;; The only way to reference it is by a number (parameter start at 0).
     ;; Even if the parameter is named (ex: $b) it can be referred by its index number.
     (func $integer_add (export "integerAdd") (param  i32) (param $b i32) (result i32)

@@ -25,6 +25,7 @@ try {
   divide(5, 0); // should throw an error here
   divide(5, 1);
 } catch (err) {
+  console.log("err: ", err);
   shouldBeInError = true;
 }
 
