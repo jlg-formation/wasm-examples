@@ -6,7 +6,7 @@ const CONFIG = {
 };
 
 function jsTransform(value, seed) {
-  return (((value * 1664525) + seed + 1013904223) & 0x7fffffff) | 0;
+  return ((value * 1664525 + seed + 1013904223) & 0x7fffffff) | 0;
 }
 
 function runJs(iterations, seed) {
@@ -113,7 +113,7 @@ function benchmarkScenarios({ module1, mono }, config = CONFIG) {
   for (const metric of metrics) {
     if (metric.result !== expected) {
       throw new Error(
-        `Result mismatch for ${metric.key}: ${metric.result} !== ${expected}`
+        `Result mismatch for ${metric.key}: ${metric.result} !== ${expected}`,
       );
     }
   }
@@ -129,7 +129,7 @@ function buildConclusion(metrics) {
   const doubleMetric = metrics.find((metric) => metric.key === "double-wasm");
   const monoMetric = metrics.find((metric) => metric.key === "mono-wasm");
   const jsMetric = metrics.find((metric) => metric.key === "js-pur");
-  const bridgeOverhead = ((doubleMetric.mean / monoMetric.mean) - 1) * 100;
+  const bridgeOverhead = (doubleMetric.mean / monoMetric.mean - 1) * 100;
   const wasmVsJs = jsMetric.mean / doubleMetric.mean;
 
   return [
@@ -151,7 +151,7 @@ function renderTable(metrics, config) {
           <td data-label="Min">${formatMs(metric.min)}</td>
           <td data-label="Max">${formatMs(metric.max)}</td>
           <td data-label="Ratio vs mono">${metric.ratio.toFixed(3)}x</td>
-        </tr>`
+        </tr>`,
     )
     .join("");
 
@@ -229,7 +229,8 @@ if (typeof window === "undefined") {
     status.textContent = "Echec du chargement";
     document.getElementById("summary").textContent = error.message;
     document.getElementById("results").innerHTML = "";
-    document.getElementById("notes").innerHTML = "<li>Verifiez make build puis make serve.</li>";
+    document.getElementById("notes").innerHTML =
+      "<li>Verifiez make build puis make serve.</li>";
     throw error;
   }
 }

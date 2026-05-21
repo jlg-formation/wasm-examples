@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -24,8 +24,16 @@
         font-family: Georgia, "Times New Roman", serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(180, 84, 47, 0.16), transparent 30%),
-          radial-gradient(circle at bottom right, rgba(31, 42, 48, 0.18), transparent 28%),
+          radial-gradient(
+            circle at top left,
+            rgba(180, 84, 47, 0.16),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(31, 42, 48, 0.18),
+            transparent 28%
+          ),
           linear-gradient(135deg, #f7f1e7 0%, #ebe4d9 100%);
       }
 
@@ -175,7 +183,9 @@
         monolithique equivalente et une implementation JavaScript pure.
       </p>
 
-      <div class="architecture">Chemin mesure: JS -> WASM1 -> import bridge -> WASM2</div>
+      <div class="architecture">
+        Chemin mesure: JS -> WASM1 -> import bridge -> WASM2
+      </div>
 
       <section class="grid">
         <article class="card">

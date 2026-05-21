@@ -27,7 +27,8 @@ Puis ouvrir http://localhost:3000/index.html.
 
 ## Ce que demontre l'exemple
 
-- un bridge WASM1 -> WASM2 sans logique metier JavaScript dans la boucle mesuree ;
+- un bridge WASM1 -> WASM2 sans logique metier JavaScript dans la boucle mesuree
+  ;
 - une comparaison entre `double-wasm`, `mono-wasm` et `js-pur` ;
 - un micro-benchmark visible dans la page avec moyenne, min, max et ratio.
 
