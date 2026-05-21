@@ -6,7 +6,7 @@ Cette analyse couvre tous les fichiers `01-wat/**/*.wat` du depot.
 
 La liste canonique des instructions provient de `/usr/include/wabt/opcode.def`,
 qui est disponible dans l'environnement local via WABT. Les pseudo-opcodes
- internes a l'interpreteur WABT (`Interp*`) ont ete exclus.
+internes a l'interpreteur WABT (`Interp*`) ont ete exclus.
 
 - Nombre total d'instructions WebAssembly prises en compte : **532**
 - Nombre d'instructions utilisees dans `01-wat` : **50**
