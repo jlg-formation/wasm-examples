@@ -5,19 +5,18 @@ interface Point {
   y: number;
 }
 
-interface EmscriptenInstance {
+import createModule from "./dist/bindings.js";
+import type { MainModule } from "./dist/bindings.js";
+
+type EmscriptenInstance = MainModule & {
   cwrap(
     name: string,
     returnType: string | null,
     argTypes: string[],
   ): (...args: Array<number>) => number;
-  stringToNewUTF8(value: string): number;
-  UTF8ToString(pointer: number): string;
   getValue(pointer: number, type: ValueType): number;
   setValue(pointer: number, value: number, type: ValueType): void;
-  _malloc(size: number): number;
-  _free(pointer: number): void;
-}
+};
 
 function writePoint(
   module: EmscriptenInstance,
@@ -86,9 +85,6 @@ function translatePoint(
     module._free(outputPointer);
   }
 }
-
-// @ts-expect-error The Emscripten module is generated at build time.
-import createModule from "./dist/bindings.js";
 
 function assertEqual<T>(actual: T, expected: T, message: string): void {
   if (actual !== expected) {

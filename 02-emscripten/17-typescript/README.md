@@ -7,6 +7,10 @@ pilotage côté JavaScript peut être écrit en TypeScript pour bénéficier d'u
 typage explicite sur les appels, les structures manipulées en mémoire et les
 helpers d'interopération.
 
+Le build utilise aussi `--emit-tsd` pour générer `dist/bindings.d.ts`. Ce
+fichier donne un typage TypeScript au module Emscripten lui-même (`MainModule`,
+exports `_...`, `cwrap`, `stringToNewUTF8`, etc.).
+
 ## Ce que montre cet exemple
 
 - appel d'une fonction simple sur des entiers (`add_ints`)
@@ -24,7 +28,7 @@ make run
 La commande :
 
 1. installe TypeScript localement via `npm install`
-2. compile le code C avec `emcc`
+2. compile le code C avec `emcc` et génère `dist/bindings.d.ts`
 3. transpile `wrapper.ts` en `wrapper.js`
 4. exécute la démonstration avec Node.js
 
@@ -32,6 +36,7 @@ La commande :
 
 - `interop.h` : structure `Point` et prototypes de l'API C
 - `interop.c` : implémentation des fonctions C exportées vers Emscripten
+- `dist/bindings.d.ts` : déclarations TypeScript générées par Emscripten
 - `wrapper.ts` : wrapper TypeScript qui charge le module généré
 - `tsconfig.json` : configuration de transpilation TypeScript
 - `package.json` : dépendance locale vers TypeScript
@@ -40,6 +45,7 @@ La commande :
 ## Note sur les types TypeScript
 
 Avec une API C classique exposée via `cwrap`, Emscripten ne génère pas de type
-TypeScript pour les structures C. Le type `Point` et l'interface du module sont
-donc décrits manuellement dans `wrapper.ts`, tandis que la structure réelle est
-encodée dans la mémoire linéaire WebAssembly.
+TypeScript détaillé pour les structures C. Le type `Point` reste donc décrit
+manuellement dans `wrapper.ts`, tandis que `MainModule` provient de
+`dist/bindings.d.ts` et la structure réelle est encodée dans la mémoire linéaire
+WebAssembly.
