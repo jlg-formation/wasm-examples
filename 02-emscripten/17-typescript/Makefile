@@ -3,10 +3,10 @@ NPM := $(shell which npm)
 
 EMCC_FLAGS := \
 	-O2 \
-	--bind \
 	-sMODULARIZE \
 	-sEXPORT_ES6 \
-	--emit-tsd bindings.d.ts
+	-sEXPORTED_FUNCTIONS=_add_ints,_average3,_describe_pair,_translate_point_ptr,_malloc,_free \
+	-sEXPORTED_RUNTIME_METHODS=cwrap,stringToNewUTF8,UTF8ToString,getValue,setValue
 
 build: dist/bindings.js wrapper.js
 
@@ -16,8 +16,8 @@ node_modules/typescript/bin/tsc: package.json
 dist:
 	mkdir -p dist
 
-dist/bindings.js: interop.cpp | dist
-	em++ interop.cpp -o dist/bindings.js $(EMCC_FLAGS)
+dist/bindings.js: interop.c | dist
+	emcc interop.c -o dist/bindings.js $(EMCC_FLAGS)
 
 wrapper.js: wrapper.ts tsconfig.json dist/bindings.js | node_modules/typescript/bin/tsc
 	./node_modules/.bin/tsc --project tsconfig.json

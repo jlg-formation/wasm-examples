@@ -4,17 +4,16 @@
 
 Le module WebAssembly reste compilé depuis du C via Emscripten, mais le code de
 pilotage côté JavaScript peut être écrit en TypeScript pour bénéficier d'un
-typage explicite sur les appels et les objets exposés au wrapper.
-
-Ici, l'exemple passe par **Embind** et `--emit-tsd` pour demander à Emscripten
-de générer un fichier de déclarations TypeScript à partir des bindings C++.
+typage explicite sur les appels, les structures manipulées en mémoire et les
+helpers d'interopération.
 
 ## Ce que montre cet exemple
 
 - appel d'une fonction simple sur des entiers (`add_ints`)
 - appel d'une fonction sur des flottants (`average3`)
-- passage et retour de chaînes via `std::string`
-- passage et retour d'une structure `Point` typée côté TypeScript
+- passage de chaînes C et récupération d'une chaîne allouée côté WASM
+- passage d'une structure C `Point` en mémoire et récupération d'une structure
+	résultat
 
 ## Exécution
 
@@ -25,24 +24,22 @@ make run
 La commande :
 
 1. installe TypeScript localement via `npm install`
-2. compile le code C++ avec `em++`, Embind et `--emit-tsd`
+2. compile le code C avec `emcc`
 3. transpile `wrapper.ts` en `wrapper.js`
 4. exécute la démonstration avec Node.js
 
-Le build génère aussi `dist/bindings.d.ts`, utilisé directement par TypeScript
-pour typer l'import du module Emscripten.
-
 ## Fichiers
 
-- `interop.cpp` : fonctions C++ et bindings Embind exportés vers Emscripten
+- `interop.h` : structure `Point` et prototypes de l'API C
+- `interop.c` : implémentation des fonctions C exportées vers Emscripten
 - `wrapper.ts` : wrapper TypeScript qui charge le module généré
 - `tsconfig.json` : configuration de transpilation TypeScript
 - `package.json` : dépendance locale vers TypeScript
 - `Makefile` : orchestration du build et de l'exécution
 
-## Note sur les types générés
+## Note sur les types TypeScript
 
-`--emit-tsd` ne devine pas les types C tout seul. Les déclarations TypeScript
-proviennent des bindings Embind déclarés dans `interop.cpp`. C'est ce binding
-explicite qui permet à Emscripten de générer un type `Point` exploitable côté
-TypeScript.
+Avec une API C classique exposée via `cwrap`, Emscripten ne génère pas de type
+TypeScript pour les structures C. Le type `Point` et l'interface du module sont
+donc décrits manuellement dans `wrapper.ts`, tandis que la structure réelle est
+encodée dans la mémoire linéaire WebAssembly.
