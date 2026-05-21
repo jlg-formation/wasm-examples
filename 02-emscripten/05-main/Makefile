@@ -1,3 +1,5 @@
+NODE := $(shell which node)
+
 build: mylib.c
 	mkdir -p dist
 	emcc mylib.c -o dist/mylib.mjs \

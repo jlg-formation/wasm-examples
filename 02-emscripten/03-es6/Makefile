@@ -1,3 +1,5 @@
+NODE := $(shell which node)
+
 build: add.c
 	mkdir -p dist
 	emcc add.c -o dist/add.mjs \
