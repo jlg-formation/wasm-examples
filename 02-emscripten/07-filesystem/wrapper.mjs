@@ -11,7 +11,7 @@ instance.FS.writeFile(
   FILENAME,
   `Voila
 le
-contenu`
+contenu`,
 );
 
 const test1 = () => {

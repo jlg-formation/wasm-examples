@@ -3,8 +3,7 @@ build: mylib.c
 	emcc mylib.c -o dist/mylib.mjs \
 		-sEXPORTED_FUNCTIONS=_load_file,_malloc,_free \
 		-sEXPORTED_RUNTIME_METHODS=FS,stringToNewUTF8,UTF8ToString \
-		-sEXPORT_ES6 \
-		-sMODULARIZE 
+		-sEXPORT_ES6
 
 run:
 	node wrapper.mjs

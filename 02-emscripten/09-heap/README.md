@@ -4,7 +4,7 @@
 > WASM depuis JavaScript avec Emscripten ?
 
 ## Concept clé
-
+l
 Emscripten expose la mémoire linéaire via des **vues typées** (TypedArrays) :
 
 | Vue       | Type C     | Taille   | Plage            |
