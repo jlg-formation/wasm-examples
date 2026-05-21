@@ -18,6 +18,7 @@ build:
 	emcc memory-growth.c -O2 -o dist/memory-growth.js \
 		$(EXPORTS) $(RUNTIME) \
 		$(INITIAL_MEMORY) \
+		-sABORTING_MALLOC=0 \
 		-sALLOW_MEMORY_GROWTH=1 \
 		-sMAXIMUM_MEMORY=64MB
 	@echo "✓ Compilé avec ALLOW_MEMORY_GROWTH=1"
@@ -29,11 +30,13 @@ build-fixed:
 	@mkdir -p dist
 	emcc memory-growth.c -O2 -o dist/memory-fixed.js \
 		$(EXPORTS) $(RUNTIME) \
-		-sINITIAL_MEMORY=16777216 \
+		$(INITIAL_MEMORY) \
+		-sABORTING_MALLOC=0 \
 		-sALLOW_MEMORY_GROWTH=0
-	@echo "✓ Compilé avec ALLOW_MEMORY_GROWTH=0 (mémoire fixe 16MB)"
+	@echo "✓ Compilé avec ALLOW_MEMORY_GROWTH=0 (mémoire fixe 1MB)"
 
 run:
+	$(MAKE) build build-fixed
 	$(NODE) wrapper.mjs
 
 clean:

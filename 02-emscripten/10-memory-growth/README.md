@@ -24,16 +24,23 @@ emcc -sALLOW_MEMORY_GROWTH=1 ...
 ## Exemple
 
 ```bash
-# Permettre la croissance jusqu'à 256 MB
-emcc -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=256MB app.c -o app.js
+# Build growth: mémoire initiale 1 MB, croissance autorisée jusqu'à 64 MB
+emcc -sINITIAL_MEMORY=1MB -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=64MB app.c -o app.js
 ```
 
 ## Exécution
 
 ```bash
-make build
-node wrapper.mjs
+make run
 ```
+
+Le wrapper compare deux builds avec la même mémoire initiale (1 MB) :
+
+- build `growth` : `-sALLOW_MEMORY_GROWTH=1`
+- build `fixed` : `-sALLOW_MEMORY_GROWTH=0`
+
+Il affiche explicitement le nombre de pages WASM avant et après une tentative
+d'allocation de 10 MB.
 
 ## ⚠️ Impact sur les performances
 
@@ -45,6 +52,8 @@ Quand `ALLOW_MEMORY_GROWTH=1` est activé :
 
 ## Fichiers
 
-- `memory-growth.c` : Allocations dynamiques dépassant la mémoire initiale
-- `Makefile` : Compilation avec et sans croissance mémoire
-- `wrapper.mjs` : Démonstration de la croissance
+- `memory-growth.c` : Allocation et écriture dans chaque page pour rendre la
+  croissance observable
+- `Makefile` : Compilation comparative `growth` vs `fixed` avec la même mémoire
+  initiale
+- `wrapper.mjs` : Mesure des pages WASM avant/après pour démontrer la différence
