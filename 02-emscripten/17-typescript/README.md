@@ -13,7 +13,7 @@ helpers d'interopération.
 - appel d'une fonction sur des flottants (`average3`)
 - passage de chaînes C et récupération d'une chaîne allouée côté WASM
 - passage d'une structure C `Point` en mémoire et récupération d'une structure
-	résultat
+  résultat
 
 ## Exécution
 
