@@ -21,8 +21,8 @@ addition de vecteurs en C :
 
 - une fonction de reference effectue une addition element par element ;
 - une compilation sans SIMD produit une version scalaire de comparaison ;
-- une compilation avec `-msimd128` permet au backend LLVM/WebAssembly de
-  generer des instructions SIMD lorsque la boucle s'y prete ;
+- une compilation avec `-msimd128` permet au backend LLVM/WebAssembly de generer
+  des instructions SIMD lorsque la boucle s'y prete ;
 - le wrapper JavaScript charge les deux variantes et compare resultat
   fonctionnel et comportement observable.
 
@@ -83,8 +83,8 @@ Le `Makefile` doit generer deux sorties distinctes a partir du meme code :
 - si necessaire, un niveau d'optimisation suffisant pour favoriser la
   vectorisation, par exemple `-O3`.
 
-Le plan doit rendre visible que la presence de SIMD depend autant des options
-de compilation que de la forme de la boucle source.
+Le plan doit rendre visible que la presence de SIMD depend autant des options de
+compilation que de la forme de la boucle source.
 
 ### 3. Exposer une API stable vers JavaScript
 
@@ -142,8 +142,8 @@ Le `Makefile` devrait fournir au minimum :
 - `make build` : construire les variantes scalaire et SIMD ;
 - `make run` : executer le wrapper Node.js ;
 - `make serve` : lancer un serveur HTTP local pour la demo navigateur ;
-- `make inspect` : desassembler ou inspecter le `.wasm` SIMD pour rechercher
-  les instructions attendues ;
+- `make inspect` : desassembler ou inspecter le `.wasm` SIMD pour rechercher les
+  instructions attendues ;
 - `make clean` : supprimer les artefacts generes.
 
 ## Etapes d'implementation
@@ -181,8 +181,8 @@ Le `Makefile` devrait fournir au minimum :
   stable et sans contexte.
 - Tous les environnements d'execution ne supportent pas SIMD de la meme facon ;
   la documentation doit le signaler sobrement si necessaire.
-- La comparaison scalaire/SIMD doit isoler ce qui releve des flags de build,
-  pas d'une divergence de logique metier.
+- La comparaison scalaire/SIMD doit isoler ce qui releve des flags de build, pas
+  d'une divergence de logique metier.
 
 ## Definition du succes
 
@@ -190,8 +190,8 @@ L'exemple est termine si :
 
 - il compile en deux variantes a partir du meme code C ;
 - il s'execute sous Node.js et dans le navigateur ;
-- il montre une equivalence fonctionnelle entre version scalaire et version
-  SIMD ;
+- il montre une equivalence fonctionnelle entre version scalaire et version SIMD
+  ;
 - il documente explicitement comment constater la presence d'instructions SIMD
   dans le `.wasm` ;
 - il reste pedagogique et aligne sur le formalisme des autres exemples

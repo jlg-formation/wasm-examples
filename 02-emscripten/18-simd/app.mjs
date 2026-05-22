@@ -54,7 +54,7 @@ function renderTable(results) {
           <td>${entry.stats.average.toFixed(2)} ms</td>
           <td>${entry.stats.min.toFixed(2)} ms</td>
           <td>${entry.stats.max.toFixed(2)} ms</td>
-        </tr>`
+        </tr>`,
     )
     .join("");
 }
@@ -94,20 +94,24 @@ async function main() {
   if (summary) {
     summary.textContent =
       `Les deux variantes produisent le meme checksum (ecart ${delta.toExponential(
-        2
+        2,
       )}). ` +
       `Dans ce micro-benchmark, la version SIMD est ${speedup.toFixed(2)}x plus rapide.`;
   }
 
   if (runButton) {
     runButton.disabled = false;
-    runButton.addEventListener("click", () => {
-      main().catch((error) => {
-        if (status) {
-          status.textContent = `Erreur: ${error.message}`;
-        }
-      });
-    }, { once: true });
+    runButton.addEventListener(
+      "click",
+      () => {
+        main().catch((error) => {
+          if (status) {
+            status.textContent = `Erreur: ${error.message}`;
+          }
+        });
+      },
+      { once: true },
+    );
   }
 }
 

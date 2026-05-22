@@ -57,21 +57,25 @@ console.log("=== Emscripten SIMD automatique ===\n");
 console.log(`Taille du vecteur: ${scalar.vectorLength}`);
 console.log(`Repetitions du noyau: ${repetitions}`);
 console.log("");
-console.log("| Variante  | Checksum      | Moyenne   | Min       | Max       |");
-console.log("|-----------|---------------|-----------|-----------|-----------|");
+console.log(
+  "| Variante  | Checksum      | Moyenne   | Min       | Max       |",
+);
+console.log(
+  "|-----------|---------------|-----------|-----------|-----------|",
+);
 console.log(
   `| scalaire  | ${scalar.checksum.toFixed(2).padEnd(13)} | ${formatMs(
-    scalar.stats.average
+    scalar.stats.average,
   ).padEnd(9)} | ${formatMs(scalar.stats.min).padEnd(9)} | ${formatMs(
-    scalar.stats.max
-  ).padEnd(9)} |`
+    scalar.stats.max,
+  ).padEnd(9)} |`,
 );
 console.log(
   `| simd      | ${simd.checksum.toFixed(2).padEnd(13)} | ${formatMs(
-    simd.stats.average
+    simd.stats.average,
   ).padEnd(9)} | ${formatMs(simd.stats.min).padEnd(9)} | ${formatMs(
-    simd.stats.max
-  ).padEnd(9)} |`
+    simd.stats.max,
+  ).padEnd(9)} |`,
 );
 
 console.log("");
@@ -79,6 +83,8 @@ console.log(`Ecart de checksum: ${delta.toExponential(2)}`);
 console.log(`Acceleration moyenne scalaire/simd: ${ratio.toFixed(2)}x`);
 
 if (delta > 0.001) {
-  console.error("La version SIMD ne produit pas le meme resultat que la version scalaire.");
+  console.error(
+    "La version SIMD ne produit pas le meme resultat que la version scalaire.",
+  );
   process.exitCode = 1;
 }
