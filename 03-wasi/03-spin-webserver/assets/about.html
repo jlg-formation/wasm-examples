@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Architecture Spin</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell inner-page">
+      <header class="topbar compact">
+        <a class="brand" href="/">Spin + Wasm</a>
+        <div class="nav-links">
+          <a href="/">Accueil</a>
+          <a href="/about.html" aria-current="page">Architecture</a>
+          <a href="/contact.html">Demo API</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p class="eyebrow">Lecture rapide</p>
+          <h1>Comment l'exemple est organise</h1>
+          <div class="timeline">
+            <article>
+              <h2>1. Spin recoit la requete HTTP</h2>
+              <p>
+                Le trigger HTTP de Spin envoie toutes les routes vers le meme
+                composant WebAssembly.
+              </p>
+            </article>
+            <article>
+              <h2>2. Le composant Rust choisit la reponse</h2>
+              <p>
+                Selon le chemin demande, il renvoie soit une page HTML, soit le
+                CSS, soit le JavaScript, soit l'image, soit la route JSON.
+              </p>
+            </article>
+            <article>
+              <h2>3. Le front appelle l'API locale</h2>
+              <p>
+                Le fichier JavaScript du site consomme `/api/message` avec
+                `fetch()` et injecte la reponse dans la page.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel muted">
+          <h2>Points pedagogiques</h2>
+          <ul class="feature-list">
+            <li>Un seul composant Wasm suffit pour un mini site complet.</li>
+            <li>
+              Le manifest `spin.toml` relie le trigger HTTP et le fichier Wasm.
+            </li>
+            <li>Le projet reste lisible pour un public intermediaire.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

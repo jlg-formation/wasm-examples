@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spin Web Server Example</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="topbar">
+          <a class="brand" href="/">Spin + Wasm</a>
+          <div class="nav-links">
+            <a href="/">Accueil</a>
+            <a href="/about.html">Architecture</a>
+            <a href="/contact.html">Demo API</a>
+          </div>
+        </nav>
+
+        <section class="hero-grid">
+          <div>
+            <p class="eyebrow">WASI / Spin / Rust</p>
+            <h1>Un mini site livre par un composant WebAssembly</h1>
+            <p class="lead">
+              Cette page est servie par une application Spin. Les fichiers HTML,
+              CSS, JS et image sont exposes via le composant Rust, et une route
+              API simple complete l'exemple.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="/about.html"
+                >Voir l'architecture</a
+              >
+              <button class="button secondary" id="load-message">
+                Tester /api/message
+              </button>
+            </div>
+          </div>
+          <div class="hero-art">
+            <img
+              src="/images/spin-wasm.svg"
+              alt="Illustration Spin et WebAssembly"
+            />
+          </div>
+        </section>
+      </header>
+
+      <main>
+        <section class="panel">
+          <h2>Ce que montre cet exemple</h2>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Pages statiques</h3>
+              <p>Trois pages HTML et leurs assets sont servis localement.</p>
+            </article>
+            <article class="card">
+              <h3>Composant Rust</h3>
+              <p>
+                Le routage HTTP et la route dynamique sont implementes en Rust.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Route API</h3>
+              <p>
+                `/api/message` renvoie un JSON simple appele depuis le front.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel accent">
+          <div class="panel-heading">
+            <h2>Reponse de l'API</h2>
+            <p>
+              Le bouton ci-dessus et la page de demo utilisent le meme endpoint.
+            </p>
+          </div>
+          <pre class="api-output" id="api-message">
+Cliquez sur "Tester /api/message" pour charger la reponse.</pre
+          >
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

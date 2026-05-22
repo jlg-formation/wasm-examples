@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Illustration Spin et WebAssembly</title>
+  <desc id="desc">Une composition graphique montrant un mini site pilote par Spin et WebAssembly.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10203a" />
+      <stop offset="100%" stop-color="#1f5262" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8ef" />
+      <stop offset="100%" stop-color="#ffe0cb" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" rx="36" fill="url(#bg)" />
+  <circle cx="530" cy="90" r="54" fill="#7fd1c8" opacity="0.25" />
+  <circle cx="108" cy="320" r="72" fill="#ff7a59" opacity="0.18" />
+  <rect x="68" y="72" width="504" height="276" rx="24" fill="url(#panel)" />
+  <rect x="96" y="102" width="220" height="24" rx="12" fill="#132238" opacity="0.9" />
+  <rect x="96" y="146" width="358" height="18" rx="9" fill="#35506f" opacity="0.45" />
+  <rect x="96" y="174" width="324" height="18" rx="9" fill="#35506f" opacity="0.3" />
+  <rect x="96" y="226" width="134" height="46" rx="23" fill="#ff7a59" />
+  <rect x="244" y="226" width="128" height="46" rx="23" fill="#132238" opacity="0.12" />
+  <rect x="414" y="132" width="126" height="156" rx="22" fill="#132238" opacity="0.9" />
+  <path d="M442 176c14-20 46-24 66-8 20 15 24 48 8 67-15 19-47 23-66 8l16-20c8 6 20 5 27-2 8-8 7-22-1-29-9-7-22-6-29 3z" fill="#7fd1c8" />
+  <text x="110" y="317" fill="#132238" font-family="IBM Plex Sans, Arial, sans-serif" font-size="34" font-weight="700">Spin</text>
+  <text x="214" y="317" fill="#ff7a59" font-family="IBM Plex Sans, Arial, sans-serif" font-size="34" font-weight="700">+</text>
+  <text x="252" y="317" fill="#132238" font-family="IBM Plex Sans, Arial, sans-serif" font-size="34" font-weight="700">WebAssembly</text>
+</svg>

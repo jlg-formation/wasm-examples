@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo API Spin</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell inner-page">
+      <header class="topbar compact">
+        <a class="brand" href="/">Spin + Wasm</a>
+        <div class="nav-links">
+          <a href="/">Accueil</a>
+          <a href="/about.html">Architecture</a>
+          <a href="/contact.html" aria-current="page">Demo API</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel accent">
+          <p class="eyebrow">Interaction front</p>
+          <h1>Tester la route `/api/message`</h1>
+          <p>
+            Cette page montre la partie la plus dynamique de l'exemple : une
+            page statique appelle le composant Wasm via HTTP local.
+          </p>
+          <div class="hero-actions">
+            <button class="button primary" id="refresh-message">
+              Rafraichir la reponse
+            </button>
+            <a class="button secondary" href="/api/message"
+              >Ouvrir le JSON brut</a
+            >
+          </div>
+          <pre class="api-output" id="contact-api-message">
+Chargement automatique en cours...</pre
+          >
+        </section>
+
+        <section class="panel">
+          <h2>Verification manuelle</h2>
+          <p>
+            Vous pouvez aussi appeler directement l'API avec `curl` pendant que
+            `spin up` tourne sur `http://127.0.0.1:3000`.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

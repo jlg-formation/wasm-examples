@@ -1,0 +1,15 @@
+[package]
+name = "spin-webserver-example"
+version = "0.1.0"
+edition = "2021"
+autobins = false
+
+[lib]
+name = "spin_webserver_example"
+path = "src/main.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1"
+bytes = "1"
+spin-sdk = "6"
